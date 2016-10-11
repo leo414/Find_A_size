@@ -1,0 +1,12 @@
+node_modules
+*.log
+.DS_Store
+build
+.idea
+*.sublime-project
+*.sublime-workspace
+
+# Ignore vim swap files
+*.swp
+
+.tags*
