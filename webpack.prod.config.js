@@ -34,8 +34,8 @@ module.exports = {
           loader: ExtractTextPlugin.extract("style-loader", "css-loader")
         },
         {
-          test: /\.less/,
-          loader: ExtractTextPlugin.extract("style-loader", "css-loader!less-loader")
+         test: /\.scss/,
+         loader: ExtractTextPlugin.extract("style-loader", "css-loader!sass-loader")
         },
         {
           test: /\.(png|jpg)$/,
