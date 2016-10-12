@@ -1,0 +1,11 @@
+.nav {
+  background: #282c37;
+  width: 100%;
+  height: 72px;
+  line-height: 72px;
+  color: $yellow;
+
+  .entry, .my_list {
+    display: inline-block;
+  }
+}

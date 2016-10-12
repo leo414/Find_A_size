@@ -1,9 +1,9 @@
 import React from 'react'
-import Nav from './Layout/Nav'
+import Home from './Home'
 
 const App = () => (
   <div>
-    <Nav />
+    <Home />
   </div>
 )
 
