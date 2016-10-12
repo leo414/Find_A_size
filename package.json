@@ -1,7 +1,7 @@
 {
-  "name": "webpack-dev-boilerplate",
-  "version": "1.0.2",
-  "description": "boilerplate",
+  "name": "Find_A_size",
+  "version": "0.0.1",
+  "description": "find a size from Amazon",
   "main": "app/index.jsx",
   "scripts": {
     "dev": "./node_modules/.bin/webpack-dev-server --progress",
@@ -26,7 +26,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/GuoYongfeng/webpack-dev-boilerplate.git"
+    "url": "git+"
   },
   "keywords": [
     "react",
@@ -34,17 +34,18 @@
     "es6",
     "babel"
   ],
-  "author": "guoyongfeng",
+  "author": "zaxlct",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/GuoYongfeng/webpack-dev-boilerplate/issues"
+    "url": "https://github.com/leo414/Find_A_size/issues"
   },
-  "homepage": "https://github.com/GuoYongfeng/webpack-dev-boilerplate#readme",
+  "homepage": "https://github.com/leo414/Find_A_size#readme",
   "dependencies": {
     "antd": "^2.0.1",
     "better-npm-run": "0.0.8",
+    "jquery": "^3.1.1",
     "react": "^15.1.0",
-    "react-dom": "^0.14.7",
+    "react-dom": "^15.1.0",
     "react-mixin": "^3.0.5",
     "react-router": "^2.8.1",
     "reflux": "^0.4.1"

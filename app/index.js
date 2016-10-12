@@ -2,6 +2,8 @@ import React from 'react'
 import { render } from 'react-dom'
 import { Router, Route, Link, browserHistory } from 'react-router'
 
+import './index.scss';
+
 const App = React.createClass({
   render() {
     return <div>1112</div>

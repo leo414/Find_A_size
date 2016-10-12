@@ -1,0 +1,51 @@
+*{
+  -webkit-font-smoothing: antialiased;
+  font-family: 'HanHei SC', 'PingFang SC', 'Helvetica Neue', 'Helvetica', 'STHeitiSC-Light', 'Arial', sans-serif;
+}
+
+html {
+  width: 100%;
+  font-size: 12px;
+  overflow-x: hidden !important;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 100%;
+  min-height: 100%;
+  font-size: 14px;
+  line-height: 1.7;
+  background: #f9f9f9;
+}
+
+#app {
+  min-height: 100%;
+  background: #F2F2F2;
+}
+
+
+li { list-style: none; }
+a { color: $black; }
+a:link,
+a:visited,
+a:hover,
+a:active {
+  text-decoration: none;
+}
+
+
+// @font-face {font-family: 'iconfont';
+//     src: url('iconfont.eot'); /* IE9*/
+//     src: url('iconfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+//     url('iconfont.woff') format('woff'), /* chrome、firefox */
+//     url('iconfont.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+//     url('iconfont.svg#iconfont') format('svg'); /* iOS 4.1- */
+// }
+
+i {
+  font-family:"iconfont";
+  font-size:16px;
+  font-style:normal;
+}
