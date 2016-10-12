@@ -72,8 +72,8 @@ module.exports = {
       // 按引用频度来排序 ID，以便达到减少文件大小的效果
       new webpack.optimize.OccurenceOrderPlugin(),
       new webpack.optimize.AggressiveMergingPlugin({
-      			minSizeReduce: 1.5,
-      			moveToParents: true
-      	}),
+  			minSizeReduce: 1.5,
+  			moveToParents: true
+      }),
     ]
 };

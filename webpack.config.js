@@ -82,10 +82,13 @@ module.exports = {
         title: 'your app title',
         template: './app/index.html',
       }),
-      new OpenBrowserPlugin({ url: 'http://localhost:8080' }),
+      new OpenBrowserPlugin({
+        url: 'http://localhost:8080',
+        browser: 'Google Chrome'
+      }),
       new ExtractTextPlugin("main.css", {
-          allChunks: true,
-          disable: false
+        allChunks: true,
+        disable: false
       }),
     ]
 };
