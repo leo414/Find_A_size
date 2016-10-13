@@ -14,7 +14,7 @@ body {
 }
 
 li { list-style: none; }
-a { color: $black; }
+a { color: #000; }
 a:link,
 a:visited,
 a:hover,
@@ -44,5 +44,6 @@ i {
 
 .fl { float: left; }
 .fr { float: right; }
+.tl { text-align: left; }
 
 .in_block { display: inline-block; }
