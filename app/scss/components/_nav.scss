@@ -1,11 +1,68 @@
+$nav_fsize: 20px;
+
 .nav {
   background: #282c37;
   width: 100%;
   height: 72px;
+  font-size: 0;
   line-height: 72px;
   color: $yellow;
+  font-family: 'Avenir-Book';
 
-  .entry, .my_list {
-    display: inline-block;
+  .container {
+    height: inherit;
+    padding-left: 50px;
+  }
+
+  .logo {
+    font-family: 'Avenir-HeavyOblique';
+    font-size: $nav_fsize;
+    font-weight: bold;
+    vertical-align: top;
+  }
+
+  .search {
+    position: relative;
+    margin-left: 100px;
+    margin-right: 60px;
+    width: 500px;
+    height: 38px;
+    margin-top: 18px;
+
+    input {
+      width: 500px;
+      height: 38px;
+      vertical-align: top;
+      background: #d9e1e8;
+      border: none;
+      outline: none;
+      padding-left: 10px;
+      border-radius: 5px;
+    }
+
+    i {
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+      font-size: 28px;
+      height: 43px;
+      color: #999;
+    }
+  }
+
+  .entry {
+    vertical-align: top;
+    font-size: $nav_fsize;
+    color: #fff;
+
+    a { color: inherit; }
+  }
+
+  .my_list {
+    font-size: $nav_fsize;
+
+    i {
+      font-size: 24px;
+    }
   }
 }

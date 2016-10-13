@@ -38,6 +38,11 @@ i {
 }
 
 .container {
-  width: 1440px;
-  margin: auto;;
+  width: 1100px;
+  margin: auto;
 }
+
+.fl { float: left; }
+.fr { float: right; }
+
+.in_block { display: inline-block; }
