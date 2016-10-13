@@ -1,0 +1,32 @@
+.footer {
+  padding-top: 30px;
+  padding-bottom: 20px;
+  width: 100%;
+  height: auto;
+  background: #232323;
+  font-size: 0;
+  text-align: center;
+  color: white;
+
+  a { color: inherit;}
+
+  .in_block {
+    width: 25%;
+    height: 72px;
+    vertical-align: top;
+    margin-bottom: 30px;
+  }
+
+  .logo {
+    font-size: 36px;
+    line-height: 72px;
+  }
+
+  .aside {
+    padding-top: 10px;
+    font-size: 12px;
+    line-height: 20px;
+  }
+
+  .small { opacity: .5; }
+}

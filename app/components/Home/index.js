@@ -1,11 +1,15 @@
 import React from 'react'
 import Nav from '../Layout/Nav'
-import Search from './Search.js'
+import Footer from '../Layout/Footer'
+import Search from './Search'
+import ProductList from './ProductList'
 
 const Home = () => (
   <div>
     <Nav />
     <Search />
+    <ProductList />
+    <Footer />
   </div>
 )
 
