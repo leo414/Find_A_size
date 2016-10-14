@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Button = ({buttonType, width, height, fontSize, handleSubmit, value}) => (
+const Button = ({className, width, height, fontSize, handleSubmit, value}) => (
   <a
-    className={`btn ${buttonType}`}
+    className={`btn ${className}`}
     style={{
       width,
       height,

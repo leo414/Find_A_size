@@ -21,7 +21,7 @@
     margin: auto;
     width: 800px;
     height: 70px;
-    border: 8px #9aaec9 solid;
+    border: 8px $blueness solid;
     border-radius: 10px;
 
     input {
@@ -30,7 +30,7 @@
       padding-left: 5px;
       border: none;
       outline: none;
-      border-right: 8px #9aaec9 solid;;
+      border-right: 8px $blueness solid;;
       font-size: 20px;
       vertical-align: bottom;
     }
@@ -44,7 +44,7 @@
 
       i {
         font-size: 40px;
-        color: #9aaec9;
+        color: $blueness;
       }
     }
   }
