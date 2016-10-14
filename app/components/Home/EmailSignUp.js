@@ -2,7 +2,7 @@ import React from 'react'
 import Button from '../Common/Button'
 
 const EmailSignUp = () => {
-  const onSignup = () => console.log('登录')
+  const onSignup = () => console.log('Sign Up')
 
   return (
     <section className="container email_signup">

@@ -1,15 +1,15 @@
 var path = require('path');
 var webpack = require('webpack');
-// 编译后自动打开浏览器
+// Compiler automatically opens the browser
 var OpenBrowserPlugin = require('open-browser-webpack-plugin');
-// 产出html模板
+// html template
 var HtmlWebpackPlugin = require("html-webpack-plugin");
-// 单独样式文件
+// CSS
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var node_modules = path.resolve(__dirname, 'node_modules');
 
 /**
- * 标识开发环境和生产环境
+ *  Identify the development environment and the production environment
  * @type {webpack.DefinePlugin}
  */
 var definePlugin = new webpack.DefinePlugin({
@@ -18,77 +18,76 @@ var definePlugin = new webpack.DefinePlugin({
 });
 
 module.exports = {
-    devServer: {
-      historyApiFallback: true,
-      hot: true,
-      inline: true,
-      contentBase: './build',
-      port: 8080,
-      stats: { colors: true }
-    },
-    entry: {
-      index: [
-        'webpack/hot/dev-server',
-        'webpack-dev-server/client?http://localhost:8080',
-        path.resolve(__dirname, 'app/index.js')
-      ],
-      vendor: ['react', 'react-dom']
-    },
-    output: {
-        path: path.resolve(__dirname, 'build'),
-        filename: "[name].js",
-        publicPath: '/'
-    },
-    resolve: {
-      extension: ['', '.jsx', '.js', '.json'],
-      // 提高webpack搜索的速度
-      alias: { }
-    },
-    devtool: 'source-map',
-    'display-error-details': true,
-    // 使用externals可以将react分离，然后用<script>单独将react引入
-    externals: [],
-    module: {
-      loaders: [
-        {
-          test: /\.js[x]?$/,
-          loaders: ['react-hot', 'babel'],
-          exclude: path.resolve(__dirname, 'node_modules')
-        },
-        {
-          test: /\.css/,
-          loader: ExtractTextPlugin.extract("style-loader", "css-loader")
-        },
-        {
-         test: /\.scss/,
-         loader: ExtractTextPlugin.extract("style-loader", "css-loader!sass-loader")
-        },
-        {
-          test: /\.(png|jpg)$/,
-          loader: 'url?limit=8192'
-        },
-        {
-          test: /\.(woff|woff2|ttf|svg|eot)(\?v=\d+\.\d+\.\d+)?$/,
-          loader: "url?limit=10000"
-        }
-      ]
-    },
-    plugins: [
-      new webpack.HotModuleReplacementPlugin(),
-      new webpack.NoErrorsPlugin(),
-      definePlugin,
-      new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js'),
-      new HtmlWebpackPlugin({
-        title: 'your app title',
-        template: './app/index.html',
-      }),
-      new OpenBrowserPlugin({
-        url: 'http://localhost:8080',
-        browser: 'Google Chrome'
-      }),
-      new ExtractTextPlugin("main.css", {
-        allChunks: true,
-        disable: false
-      }),
+  devServer: {
+    historyApiFallback: true,
+    hot: true,
+    inline: true,
+    contentBase: './build',
+    port: 8080,
+    stats: { colors: true }
+  },
+  entry: {
+    index: [
+      'webpack/hot/dev-server',
+      'webpack-dev-server/client?http://localhost:8080',
+      path.resolve(__dirname, 'app/index.js')
+    ],
+    vendor: ['react', 'react-dom']
+  },
+  output: {
+      path: path.resolve(__dirname, 'build'),
+      filename: "[name].js",
+      publicPath: '/'
+  },
+  resolve: {
+    extension: ['', '.jsx', '.js', '.json'],
+    // Improve webpack search speed
+    alias: { }
+  },
+  devtool: 'source-map',
+  'display-error-details': true,
+  externals: [],
+  module: {
+    loaders: [
+      {
+        test: /\.js[x]?$/,
+        loaders: ['react-hot', 'babel'],
+        exclude: path.resolve(__dirname, 'node_modules')
+      },
+      {
+        test: /\.css/,
+        loader: ExtractTextPlugin.extract("style-loader", "css-loader")
+      },
+      {
+       test: /\.scss/,
+       loader: ExtractTextPlugin.extract("style-loader", "css-loader!sass-loader")
+      },
+      {
+        test: /\.(png|jpg)$/,
+        loader: 'url?limit=8192'
+      },
+      {
+        test: /\.(woff|woff2|ttf|svg|eot)(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "url?limit=10000"
+      }
     ]
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin(),
+    definePlugin,
+    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js'),
+    new HtmlWebpackPlugin({
+      title: 'your app title',
+      template: './app/index.html',
+    }),
+    new OpenBrowserPlugin({
+      url: 'http://localhost:8080',
+      browser: 'Google Chrome'
+    }),
+    new ExtractTextPlugin("main.css", {
+      allChunks: true,
+      disable: false
+    }),
+  ]
 };
