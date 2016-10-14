@@ -32,6 +32,6 @@ $ npm run build
 * ES6
 * React
 * [Reflux](https://github.com/reflux/refluxjs)
-* React-router
+* React-Router
 * Sass
 * [Ant-design](https://github.com/ant-design/ant-design/)
