@@ -1,32 +1,11 @@
-.footer {
-  padding-top: 30px;
-  padding-bottom: 20px;
-  width: 100%;
-  height: auto;
-  background: #232323;
-  font-size: 0;
-  text-align: center;
-  color: white;
+@mixin bg-transition($color, $attr: background) {
+  transition: background .2s;
+  -moz-transition: background .2s;
+  -webkit-transition: background .2s;
+  -o-transition: background .2s;
+  -ms-transition: background .2s;
 
-  a { color: inherit;}
-
-  .in_block {
-    width: 25%;
-    height: 72px;
-    vertical-align: top;
-    margin-bottom: 30px;
+  &:hover {
+    #{$attr}: lighten($color, 10%);
   }
-
-  .logo {
-    font-size: 36px;
-    line-height: 72px;
-  }
-
-  .aside {
-    padding-top: 10px;
-    font-size: 12px;
-    line-height: 20px;
-  }
-
-  .small { opacity: .5; }
 }

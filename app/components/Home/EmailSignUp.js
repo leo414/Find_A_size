@@ -18,7 +18,7 @@ const EmailSignUp = () => {
           width="212px"
           height="50px"
           fontSize="24px"
-          buttonType="green"
+          className="green"
           handleSubmit={() => onSignup()}
           value="SIGN UP"
         />

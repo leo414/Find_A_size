@@ -7,26 +7,10 @@
 
 .btn.yellow {
   background: $yellow;
-  transition: background .2s;
-  -moz-transition: background .2s;
-  -webkit-transition: background .2s;
-  -o-transition: background .2s;
-  -ms-transition: background .2s;
-
-  &:hover {
-    background: lighten($yellow,10%);;
-  }
+  @include bg-transition($yellow);
 }
 
 .btn.green {
   background: $green;
-  transition: background .2s;
-  -moz-transition: background .2s;
-  -webkit-transition: background .2s;
-  -o-transition: background .2s;
-  -ms-transition: background .2s;
-
-  &:hover {
-    background: lighten($green,10%);
-  }
+  @include bg-transition($green)
 }

@@ -4,7 +4,7 @@ import {Link} from 'react-router'
 const Nav = () => (
   <nav className="nav">
     <div className="container">
-      <span className="logo in_block">Find-A-Size</span>
+      <Link className="logo in_block">Find-A-Size</Link>
       <div className="search in_block">
         <input type="text"/>
         <i className="sousuo-small" />
@@ -16,7 +16,7 @@ const Nav = () => (
         <Link href="#">Sign up</Link>
       </div>
 
-      <div className="my_list fr"><i className="ring" />&nbsp;My List</div>
+      <Link className="my_list fr"><i className="ring" />&nbsp;My List</Link>
     </div>
   </nav>
 )

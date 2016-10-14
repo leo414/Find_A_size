@@ -32,9 +32,14 @@ a:active {
 // }
 
 i {
-  font-family: "iconfont";
+  font-family: "iconfont" !important;;
   font-size: 16px;
-  font-style: normal;
+  font-style: normal !important;;
+}
+
+.h1 {
+  font-family: 'Avenir-Medium';
+  font-size: 34px !important;
 }
 
 .container {
@@ -42,9 +47,10 @@ i {
   margin: auto;
 }
 
-.fl { float: left; }
-.fr { float: right; }
-.tl { text-align: left; }
+.fl { float: left !important;; }
+.fr { float: right !important;; }
+.tl { text-align: left !important;; }
 .small { font-size: 12px !important; }
+.underline { text-decoration: underline !important;; }
 
-.in_block { display: inline-block; }
+.in_block { display: inline-block !important;; }
