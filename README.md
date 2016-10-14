@@ -1,32 +1,34 @@
+# A Web App for Find_A_size
+
 ## 1. start
-安装 Node，然后
+Install Node, then
 ```
 $ npm install
 ```
-因为用到了 Sass，Win 用户可能需要安装 Ruby
+Because of the use of Sass, Win users may need to install Ruby
 ## 2. dev
-### 2.1 开发调试
+### 2.1 Development and debugging
 ```
 $ npm run dev
 ```
-查看效果` http://127.0.0.1:8080`
+View the results` http://127.0.0.1:8080`
 
-### 2.2 代码检查
+### 2.2 Review
 ```
 $ npm run lint
 ```
 
-### 2.3 测试用例
+### 2.3 Test
 ```
 $ npm run test:watch
 ```
 
-### 2.4 产出资源
+### 2.4 Build
 ```
 $ npm run build
 ```
 
-## 3. 技术栈
+## 3. Technology stack
 * ES6
 * React
 * [Reflux](https://github.com/reflux/refluxjs)
