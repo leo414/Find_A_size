@@ -1,3 +1,4 @@
+// search input
 .search_input.container {
   margin-top : 60px;
   font-family: 'Avenir-Heavy';
@@ -56,9 +57,11 @@
   }
 }
 
+// search result
 $product_list_height: 200px;
+$product_list_width: 950px;
 .search_result.container {
-  width: 950px;
+  width: $product_list_width;
   font-size: 0;
 
   border: 1px #ccc solid {
@@ -148,5 +151,60 @@ $product_list_height: 200px;
     .btn { margin-top: 5px; }
 
     em { color: $blueness; }
+  }
+}
+
+.search_filter {
+  margin-top: 50px;
+  margin-bottom: 30px;
+  padding: 20px;
+  width: $product_list_width;
+  height: 200px;
+  background:rgba(239,239,245,0.39);
+  font-size: 18px;
+  line-height: 40px;
+  border: 1px #ccc solid;
+
+  .fl {
+    width: 50%;
+    height: 200px;
+  }
+
+  .fr {
+    width: 50%;
+    height: 200px;
+    padding-top: 38px;
+    line-height: 28px;
+  }
+}
+
+.search_limit {
+  margin-bottom: 15px;
+  padding-right: 15px;
+  width: $product_list_width;
+  height: 50px;
+  line-height: 50px;
+
+  h1 { font-weight: 400; }
+  span { color: $green; }
+  .sorted { font-size: 20px; }
+
+  .triangle {
+    width: 12px;
+    height: 16px;
+    vertical-align: middle;
+    position: relative;
+
+    .triangle_top {
+      @include triangle(12px, 7px, top, #000, #000);
+      position: absolute;
+      top: 0;
+    }
+
+    .triangle_bottom {
+      @include triangle(12px, 7px, bottom, #000, #000);
+      position: absolute;
+      bottom: 0;
+    }
   }
 }
