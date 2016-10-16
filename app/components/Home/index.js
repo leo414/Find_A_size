@@ -3,7 +3,7 @@ import Nav from '../Layout/Nav'
 import Footer from '../Layout/Footer'
 import ProductList from '../Layout/ProductList'
 
-import Search from './Search'
+import Search from '../Search'
 import EmailSignUp from './EmailSignUp'
 
 const Home = () => (

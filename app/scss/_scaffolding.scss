@@ -2,7 +2,6 @@
   margin: 0;
   padding: 0;
   -webkit-font-smoothing: antialiased;
-  font-family: 'HanHei SC', 'PingFang SC', 'Helvetica Neue', 'Helvetica', 'STHeitiSC-Light', 'Arial', sans-serif;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
@@ -11,6 +10,7 @@
 
 body {
   font-size: 14px;
+  font-family: 'HanHei SC', 'PingFang SC', 'Helvetica Neue', 'Helvetica', 'STHeitiSC-Light', 'Arial', sans-serif;
 }
 
 li { list-style: none; }
@@ -31,10 +31,10 @@ a:active {
 //     url('iconfont.svg#iconfont') format('svg'); /* iOS 4.1- */
 // }
 
-i {
-  font-family: "iconfont" !important;;
+i, icon-font {
+  font-family: "iconfont" !important;
   font-size: 16px;
-  font-style: normal !important;;
+  font-style: normal !important;
 }
 
 .h1 {
@@ -47,10 +47,13 @@ i {
   margin: auto;
 }
 
-.fl { float: left !important;; }
-.fr { float: right !important;; }
-.tl { text-align: left !important;; }
+.fl { float: left !important; }
+.fr { float: right !important; }
+.tl { text-align: left !important; }
 .small { font-size: 12px !important; }
-.underline { text-decoration: underline !important;; }
+.underline { text-decoration: underline !important; }
 
-.in_block { display: inline-block !important;; }
+.in_block {
+  display: inline-block !important;
+  vertical-align: top;
+}

@@ -1,11 +1,39 @@
 @mixin bg-transition($color, $attr: background) {
-  transition: background .2s;
-  -moz-transition: background .2s;
-  -webkit-transition: background .2s;
-  -o-transition: background .2s;
-  -ms-transition: background .2s;
+  transition        : $attr .2s;
+  -moz-transition   : $attr .2s;
+  -webkit-transition: $attr .2s;
+  -o-transition     : $attr .2s;
+  -ms-transition    : $attr .2s;
 
   &:hover {
     #{$attr}: lighten($color, 10%);
   }
+}
+
+/// @name text_ellipsis
+%text_ellipsis {
+  overflow        : hidden;
+  white-space     : nowrap;
+  text-overflow   : ellipsis;
+  -o-text-overflow: ellipsis;
+  word-break      : break-all;
+  //在IE9的<td>中，如果之前已经设置了word-wrap:break-word，则这里的white-space:nowrap会失效，所以要在这里加上word-wrap:normal来以防万一
+  word-wrap       : normal;
+}
+
+/// @support css-line-clamp
+@mixin text_multiLine_ellipsis($line: 2, $lineHeight: 20px) {
+  line-height       : $lineHeight;
+  overflow          : hidden;
+  height            : $lineHeight * $line;
+  display           : -webkit-box;
+  display           : -moz-box;
+  display           : box;
+  text-overflow     : ellipsis;
+  -webkit-line-clamp: $line;
+  -moz-line-clamp   : $line;
+  line-clamp        : $line;
+  -webkit-box-orient: vertical;
+  -moz-box-orient   : vertical;
+  box-orient        : vertical;
 }
