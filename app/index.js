@@ -11,5 +11,6 @@ render((
     <Route path="/" component={App}>
 
     </Route>
+    <Route path="*" component={App} />
   </Router>
 ), document.getElementById('app'))

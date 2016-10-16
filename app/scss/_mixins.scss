@@ -1,11 +1,97 @@
 @mixin bg-transition($color, $attr: background) {
-  transition: background .2s;
-  -moz-transition: background .2s;
-  -webkit-transition: background .2s;
-  -o-transition: background .2s;
-  -ms-transition: background .2s;
+  transition        : $attr .2s;
+  -moz-transition   : $attr .2s;
+  -webkit-transition: $attr .2s;
+  -o-transition     : $attr .2s;
+  -ms-transition    : $attr .2s;
 
   &:hover {
     #{$attr}: lighten($color, 10%);
   }
+}
+
+/// @name text_ellipsis
+%text_ellipsis {
+  overflow        : hidden;
+  white-space     : nowrap;
+  text-overflow   : ellipsis;
+  -o-text-overflow: ellipsis;
+  word-break      : break-all;
+  //在IE9的<td>中，如果之前已经设置了word-wrap:break-word，则这里的white-space:nowrap会失效，所以要在这里加上word-wrap:normal来以防万一
+  word-wrap       : normal;
+}
+
+/// @support css-line-clamp
+@mixin text_multiLine_ellipsis($line: 2, $lineHeight: 20px) {
+  line-height       : $lineHeight;
+  overflow          : hidden;
+  height            : $lineHeight * $line;
+  display           : -webkit-box;
+  display           : -moz-box;
+  display           : box;
+  text-overflow     : ellipsis;
+  -webkit-line-clamp: $line;
+  -moz-line-clamp   : $line;
+  line-clamp        : $line;
+  -webkit-box-orient: vertical;
+  -moz-box-orient   : vertical;
+  box-orient        : vertical;
+}
+
+
+%triangleCommonStyle {
+  display: block;
+  content: " ";
+  width: 0;
+  line-height: 0;
+  font-size: 0;
+  border-style: solid;
+  border-color: transparent;
+}
+
+/// @name triangle
+/// @param {Measure} $width
+/// @param {Measure} $height
+/// @param {String} $direction
+/// @param {Color} $borderColor
+/// @param {Color} $ie6borderColor [#f00] 
+@mixin triangle($width, $height, $direction, $borderColor, $ie6borderColor:#f00) {
+  @extend %triangleCommonStyle;
+  _border-color: $ie6borderColor;
+  _filter: chroma(color=$ie6borderColor);
+  /* top */
+  @if $direction == top {
+    border-width: $height $width / 2;
+    border-top: 0;
+    border-bottom-color: $borderColor;
+    _border-bottom-color: $borderColor;
+  }
+  /* bottom */
+  @else if $direction == bottom {
+    border-width: $height $width / 2;
+    border-bottom: 0;
+    border-top-color: $borderColor;
+    _border-top-color: $borderColor;
+  }
+  /* left */
+  @else if $direction == left {
+    border-width: $width / 2 $height ;
+    border-left: 0;
+    border-right-color: $borderColor;
+    _border-right-color: $borderColor;
+  }
+  /* right */
+  @else if $direction == right {
+    border-width: $width / 2 $height;
+    border-right: 0;
+    border-left-color: $borderColor;
+    _border-left-color: $borderColor;
+  }
+}
+
+
+@mixin calc($key, $value) {
+  #{$key}: -webkit-calc(#{$value});
+  #{$key}: -moz-calc(#{$value});
+  #{$key}: calc(#{$value});
 }

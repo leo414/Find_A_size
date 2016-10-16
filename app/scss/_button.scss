@@ -1,8 +1,12 @@
 .btn {
   color: #ffffff;
-  font-family: 'Avenir-Heavy';
+  font-family: 'Avenir-Medium';
   display: inline-block;
   text-align: center;
+
+  &:hover {
+    color: #fff; //Hack ant.css
+  }
 }
 
 .btn.yellow {

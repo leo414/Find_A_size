@@ -1,7 +1,7 @@
 import React from 'react'
 
-const Search = () => (
-  <section className="search container">
+const SearchInput = () => (
+  <section className="search_input container">
     <div className="title">
       <h1>Looking for a furniture? Never by full priced furnitures!</h1>
       <p>Watch the price drop and save on the best price ever!</p>
@@ -15,4 +15,4 @@ const Search = () => (
   </section>
 )
 
-export default Search
+export default SearchInput
