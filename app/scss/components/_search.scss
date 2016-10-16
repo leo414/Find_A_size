@@ -96,6 +96,7 @@ $product_list_width: 950px;
 
     .media_bd {
       width: 498px;
+      @include calc("width", "100% - #{202px}");
       line-height: 26px;
       font-size: 14px;
       height: inherit;
