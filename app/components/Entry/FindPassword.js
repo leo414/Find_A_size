@@ -1,5 +1,5 @@
-import FindPassword from 'react'
+import React from 'react'
 
-const Signup = () => <div>FindPassword</div>
+const FindPassword = () => <div>FindPassword</div>
 
 export default FindPassword
