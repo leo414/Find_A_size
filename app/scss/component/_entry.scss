@@ -1,0 +1,10 @@
+.login_page {
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  z-index: $zindex_login_page;
+  margin-left: -400px;
+  width: 800px;
+  height: 800px;
+  text-align: center;
+}
