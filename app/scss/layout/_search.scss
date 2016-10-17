@@ -199,12 +199,14 @@ $product_list_width: 950px;
     .triangle_top {
       @include triangle(12px, 7px, top, #000, #000);
       position: absolute;
+      z-index: $zindex_base;
       top: 0;
     }
 
     .triangle_bottom {
       @include triangle(12px, 7px, bottom, #000, #000);
       position: absolute;
+      z-index: $zindex_base;
       bottom: 0;
     }
   }

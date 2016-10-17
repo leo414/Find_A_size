@@ -1,12 +1,14 @@
 @import "./scss/variables";
 @import "./scss/mixins";
 @import "./scss/scaffolding";
-
-@import "./scss/button";
-@import "./scss/slide";
 @import "./scss/antdesign_hack";
 
-@import "./scss/components/layout";
-@import "./scss/components/search";
-@import "./scss/components/email_signup";
-@import "./scss/components/productList_home";
+@import "./scss/component/button";
+@import "./scss/component/mask";
+
+@import "./scss/layout/layout";
+@import "./scss/layout/search";
+@import "./scss/layout/email_signup";
+@import "./scss/layout/productList_home";
+@import "./scss/layout/entry";
+@import "./scss/layout/slide";

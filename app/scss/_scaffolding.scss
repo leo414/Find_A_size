@@ -53,7 +53,15 @@ i, icon-font {
 .small { font-size: 12px !important; }
 .underline { text-decoration: underline !important; }
 
+.color_yellow { color: $yellow; }
+.color_green { color: $green; }
+.color_blueness { color: $blueness; }
+.color_red { color: $red; }
+.color_deongaree { color: $deongaree; }
+
 .in_block {
   display: inline-block !important;
   vertical-align: top;
 }
+
+.hidden { display: none; }
