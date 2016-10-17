@@ -58,3 +58,14 @@
     a { text-decoration: underline; }
   }
 }
+
+.find_password {
+  @extend .login_page;
+  top: 22%;
+  height: 320px;
+
+  form {
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+}
