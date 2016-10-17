@@ -24,7 +24,6 @@ class Home extends React.Component {
         <Nav />
         <Search />
 
-        <Login />
 
         <hr style={{height: '1px', border: 'none', borderTop: '1px solid #ccc', margin: '50px 0'}} />
 

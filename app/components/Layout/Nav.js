@@ -1,10 +1,10 @@
 import React from 'react'
-import {Link} from 'react-router'
+import {Link, IndexLink} from 'react-router'
 
 const Nav = () => (
   <nav className="nav">
     <div className="container">
-      <Link className="logo in_block">Find-A-Size</Link>
+      <IndexLink to="/" className="logo in_block">Find-A-Size</IndexLink>
       <div className="search in_block">
         <input type="text"/>
         <i className="sousuo-small" />
