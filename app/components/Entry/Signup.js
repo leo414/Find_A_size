@@ -1,58 +1,72 @@
 import React from 'react'
+import { RouteTransition, presets } from 'react-router-transition'
+import { Link } from 'react-router'
+import classnames from 'classnames'
+
 import Button from '../Common/Button'
+import Mask from './Mask'
 
-const Signup = () => (
-  <section className="sign_up_page hidden">
-    <p className="h1 color_green">Create a free account</p>
+const Signup = props => {
+  const cls = classnames({
+    hidden: props.location.pathname !== '/sign_up'
+  });
 
-    <Button
-      width="320px"
-      height="44px"
-      fontSize="22px"
-      className="red"
-      handleSubmit={() => onSignup()}
-      value="Sign up with Google"
-    />
+  return (
+    <div className={cls}>
+      <Mask pathname="/sign_up" />
+      <RouteTransition { ...presets.pop } className="sign_up_page" pathname="/sign_up">
+        <p className="h1 color_green">Create a free account</p>
 
-    <br/>
-    <br/>
+        <Button
+          width="320px"
+          height="44px"
+          fontSize="22px"
+          className="red"
+          handleSubmit={() => onSignup()}
+          value="Sign up with Google"
+        />
 
-    <Button
-      width="320px"
-      height="44px"
-      fontSize="22px"
-      className="deongaree"
-      handleSubmit={() => onSignup()}
-      value="Sign up with Facebook"
-    />
+        <br/>
+        <br/>
 
-    <p className="subtitle">Already have an account? &nbsp;&nbsp;&nbsp;&nbsp;<a><strong className="color_green">LOG IN</strong></a></p>
+        <Button
+          width="320px"
+          height="44px"
+          fontSize="22px"
+          className="deongaree"
+          handleSubmit={() => onSignup()}
+          value="Sign up with Facebook"
+        />
 
-    <hr style={{height: '1px', border: 'none', borderTop: '1px solid #eee', marginTop: '40px'}} />
-    <p className="h1 color_green or">OR</p>
+        <p className="subtitle">Already have an account? &nbsp;&nbsp;&nbsp;&nbsp;<Link to="/login"><strong className="color_green">LOG IN</strong></Link></p>
 
-    <form>
-      <input type="text" placeholder="Username" /> <br/>
-      <input type="email" placeholder="Email Address" />  <br/>
-      <input type="password" placeholder="Password" />
-      <input type="password" placeholder="Confirm Password" />
-    </form>
+        <hr style={{height: '1px', border: 'none', borderTop: '1px solid #eee', marginTop: '40px'}} />
+        <p className="h1 color_green or">OR</p>
 
-    <Button
-      width="250px"
-      height="38px"
-      fontSize="18px"
-      className="green"
-      handleSubmit={() => onSignup()}
-      value="Sign up"
-    />
+        <form>
+          <input type="text" placeholder="Username" /> <br/>
+          <input type="email" placeholder="Email Address" />  <br/>
+          <input type="password" placeholder="Password" />
+          <input type="password" placeholder="Confirm Password" />
+        </form>
 
-    <br/>
+        <Button
+          width="250px"
+          height="38px"
+          fontSize="18px"
+          className="green"
+          handleSubmit={() => onSignup()}
+          value="Sign up"
+        />
 
-    <small className="aside color_blueness in_block">
-      By creating an account, you agree to Find-A-Size’s <a>Terms of Services</a> and <a>Privacy Policy</a>.
-    </small>
-  </section>
-)
+        <br/>
+
+        <small className="aside color_blueness in_block">
+          By creating an account, you agree to Find-A-Size’s <a>Terms of Services</a> and <a>Privacy Policy</a>.
+        </small>
+      </RouteTransition>
+    </div>
+  )
+}
 
 export default Signup
