@@ -58,7 +58,7 @@ const Login = props => {
           value="LOG IN"
         />
 
-        <p className="subtitle"><Link to="find_password">Forgot your password?</Link></p>
+        <p className="subtitle"><Link to="/find_password">Forgot your password?</Link></p>
       </RouteTransition>
     </div>
   )
