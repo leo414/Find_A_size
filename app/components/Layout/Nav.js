@@ -11,9 +11,9 @@ const Nav = () => (
       </div>
 
       <div className="entry in_block">
-        <Link href="#">Log in</Link>
+        <Link href="login">Log in</Link>
         &nbsp;|&nbsp;
-        <Link href="#">Sign up</Link>
+        <Link href="sign_up">Sign up</Link>
       </div>
 
       <Link className="my_list fr"><i className="ring" />&nbsp;My List</Link>

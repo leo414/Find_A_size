@@ -11,16 +11,12 @@ import Search from '../Search'
 import EmailSignUp from './EmailSignUp'
 
 class Home extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      open: false,
-    }
-  }
+  // constructor(props) {
+  //   super(props)
+  // }
   render() {
     return (
       <div>
-        <Mask open={this.state.open} />
         <Nav />
         <Search />
 
