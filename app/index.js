@@ -10,6 +10,8 @@ import Login from './components/Entry/Login'
 import Signup from './components/Entry/Signup'
 import FindPassword from './components/Entry/FindPassword'
 
+import Account from './components/Account'
+
 const App = ({children}) => <div> <Home /> {children}</div>
 
 render((
@@ -20,6 +22,7 @@ render((
       <Route path="sign_up" component={Signup} />
       <Route path="find_password" component={FindPassword} />
     </Route>
+    <Route path="/account" component={Account}></Route>
   </Router>
 ), document.getElementById('app'))
 
