@@ -44,13 +44,22 @@ const Login = props => {
         <p className="h1 color_green or">OR</p>
 
         <form>
-          <input type="text" placeholder="Username" /> <br/>
-          <input type="email" placeholder="Email Address" />  <br/>
-          <input type="password" placeholder="Password" />
+          <div className="input_box">
+            <span className="fl color_blueness">Username</span>
+            <input type="text" className="fr" />
+          </div>
+          <div className="input_box">
+            <span className="fl color_blueness">Email Address</span>
+            <input type="email" className="fr" />  <br/>
+          </div>
+          <div className="input_box">
+            <span className="fl color_blueness">Password</span>
+            <input type="password" className="fr" />
+          </div>
         </form>
 
         <Button
-          width="250px"
+          width="280px"
           height="38px"
           fontSize="18px"
           className="green"

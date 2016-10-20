@@ -30,16 +30,29 @@
     background: #fff;
   }
 
-  input {
-    width: 380px;
+  .input_box {
+    display: inline-block;
+    width: 420px;
     height: 50px;
     margin-bottom: 5px;
-    padding-left: 5px;
     padding-top: 20px;
     border: none;
     border-bottom: 1px $green solid;
     font-size: 18px;
-    outline: none;
+
+    .fl {
+      width: 40%;
+      text-align: left;
+    }
+
+    .fr { width: 60%; }
+
+    input {
+      height: 30px;
+      outline: none;
+      border: none;
+      border-bottom: 1px $green solid;
+    }
 
     &:last-child {
       margin-bottom: 30px;
