@@ -78,7 +78,7 @@ class AccoutSetting extends React.Component {
           <strong>Social Account:</strong>
           <Button
             width="340px"
-            height="70px"
+            height="60px"
             fontSize="20px"
             className="deongaree"
             handleSubmit={() => onSignup()}
