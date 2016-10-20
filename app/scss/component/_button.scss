@@ -29,3 +29,10 @@
   background: $deongaree;
   @include bg-transition($deongaree)
 }
+
+.btn.white{
+  color: $green;
+  border-color: #000;
+  background: #fff;
+  border: 1px #3a3a3a solid;
+}

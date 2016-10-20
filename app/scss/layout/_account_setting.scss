@@ -1,0 +1,68 @@
+.accout_setting {
+  margin: 40px auto;
+  width: $product_list_width + 70;
+  height: 470px;
+  font-size: 20px;
+  line-height: 60px;
+
+  .title {
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    vertical-align: middle;
+
+    .btn {
+      margin-right: 20px;
+      margin-top: 10px;
+    }
+  }
+
+  .fl {
+    width: 50%;
+
+    strong {
+      display: inline-block;
+      width: 180px;
+    }
+  }
+
+  .fr {
+    width: 50%;
+    height: 240px;
+
+    .ant-radio-inner {
+      width: 20px;
+      height: 20px;
+
+      &:after {
+        width: 10px;
+        height: 10px;
+        left: 4px;
+        top: 4px;
+        background-color: $yellow;
+      }
+    }
+
+    .ant-radio-group {
+      padding-left: 20px;
+      line-height: 0;
+    }
+
+
+    span {
+      font-size: 20px;
+      font-weight: bold;
+    }
+  }
+
+  .account_connect {
+    margin-top: 50px;
+    margin-bottom: 40px;
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+
+    .btn { margin: 0 30px; }
+    .link { text-decoration: underline; }
+  }
+}
