@@ -11,6 +11,7 @@
 body {
   font-size: 14px;
   font-family: 'HanHei SC', 'PingFang SC', 'Helvetica Neue', 'Helvetica', 'STHeitiSC-Light', 'Arial', sans-serif;
+  color: #000 !important;
 }
 
 li { list-style: none; }
@@ -49,6 +50,12 @@ i, icon-font {
 
 .fl { float: left !important; }
 .fr { float: right !important; }
+
+.clear_both {
+  height: 0;
+  clear: both;
+}
+
 .tl { text-align: left !important; }
 .small { font-size: 12px !important; }
 .underline { text-decoration: underline !important; }
