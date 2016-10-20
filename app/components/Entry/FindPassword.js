@@ -18,11 +18,14 @@ const FindPassword = props => {
         <p className="h1 color_green">Forgot your Password?</p>
 
         <form>
-          <input type="email" placeholder="Email Address" />  <br/>
+          <div className="input_box">
+            <span className="fl color_blueness">Email Address</span>
+            <input type="email" className="fr" />  <br/>
+          </div>
         </form>
 
         <Button
-          width="250px"
+          width="280px"
           height="38px"
           fontSize="18px"
           className="green"
