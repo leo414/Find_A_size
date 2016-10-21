@@ -10,7 +10,7 @@ import $ from 'jquery'
 
 import { message } from 'antd'
 message.config({
-  top: 300,
+  top: 200,
   duration: 2,
 })
 
