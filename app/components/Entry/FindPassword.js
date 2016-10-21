@@ -6,10 +6,25 @@ import classnames from 'classnames'
 import Button from '../Common/Button'
 import Mask from './Mask'
 
+import $ from 'jquery'
+import { message } from 'antd'
+
 const FindPassword = props => {
   const cls = classnames({
     hidden: props.location.pathname !== '/find_password'
   });
+
+  const onSubmit = (e, email) => {
+    e.stopPropagation()
+    console.log(email)
+    if(!email) error()
+  }
+
+  const error = () => {
+    message.error('This is a message of error')
+  }
+
+  let email = ''
 
   return (
     <div className={cls}>
@@ -19,8 +34,8 @@ const FindPassword = props => {
 
         <form>
           <div className="input_box">
-            <span className="fl color_blueness">Email Address</span>
-            <input type="email" className="fr" />  <br/>
+            <span className="fl color_blueness" onClick={event => $(event.target).next('input').focus()}>Email Address</span>
+            <input type="email" className="fsr" onChange={event => email = event.target.value.trim()} /> <br/>
           </div>
         </form>
 
@@ -29,7 +44,7 @@ const FindPassword = props => {
           height="38px"
           fontSize="18px"
           className="green"
-          handleSubmit={() => onSignup()}
+          handleSubmit={e => onSubmit(e, email)}
           value="Reset Password"
         />
 
