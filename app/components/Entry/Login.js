@@ -6,10 +6,32 @@ import classnames from 'classnames'
 import Button from '../Common/Button'
 import Mask from './Mask'
 
+import $ from 'jquery'
+
+import { message } from 'antd'
+message.config({
+  top: 300,
+  duration: 2,
+})
+
 const Login = props => {
   const cls = classnames({
     hidden: props.location.pathname !== '/login'
-  });
+  })
+
+  const onSubmit = (e, userName, email, password) => {
+    e.stopPropagation()
+    console.log(userName, email, password)
+    if(!userName) error()
+  }
+
+  const error = () => {
+    message.error('This is a message of error')
+  }
+
+  let userName = '',
+      email = '',
+      password = ''
 
   return (
     <div className={cls}>
@@ -45,16 +67,16 @@ const Login = props => {
 
         <form>
           <div className="input_box">
-            <span className="fl color_blueness">Username</span>
-            <input type="text" className="fr" />
+            <span className="fl color_blueness" onClick={event => $(event.target).next('input').focus()}>Username</span>
+            <input type="text" className="fr" onChange={event => userName = event.target.value.trim()} />
           </div>
           <div className="input_box">
-            <span className="fl color_blueness">Email Address</span>
-            <input type="email" className="fr" />  <br/>
+            <span className="fl color_blueness" onClick={event => $(event.target).next('input').focus()}>Email Address</span>
+            <input type="email" className="fsr" onChange={event => email = event.target.value.trim()} /> <br/>
           </div>
           <div className="input_box">
-            <span className="fl color_blueness">Password</span>
-            <input type="password" className="fr" />
+            <span className="fl color_blueness" onClick={event => $(event.target).next('input').focus()}>Password</span>
+            <input type="password" className="fr" onChange={event => password = event.target.value.trim()} />
           </div>
         </form>
 
@@ -63,7 +85,7 @@ const Login = props => {
           height="38px"
           fontSize="18px"
           className="green"
-          handleSubmit={() => onSignup()}
+          handleSubmit={e => onSubmit(e, userName, email, password)}
           value="LOG IN"
         />
 
