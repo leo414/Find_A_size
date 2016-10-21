@@ -5,7 +5,7 @@ Install Node, then
 ```
 $ npm install
 ```
-Because of the use of Sass, Win users may need to install Ruby
+
 ## 2. dev
 ### 2.1 Development and debugging
 ```
