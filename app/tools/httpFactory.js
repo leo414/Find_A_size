@@ -1,21 +1,21 @@
 import $ from 'jquery'
 
 const HttpFactory = {
-  post : function (url,data,success,failed) {
+  post: function (url,data,success,failed) {
     //json post
     $.ajax({
-      url : url,
+      url,
       type : 'POST',
       dataType : 'json',
-      data : data,
+      data,
       timeout : 5000,
       crossDomain : true,
       xhrFields:{
         withCredentials : true
       },
-      success : success,
-      error : failed
     })
+    .done(success)
+    .fail(failed)
   }
 }
 
