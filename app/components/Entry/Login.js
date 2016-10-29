@@ -29,8 +29,7 @@ const Login = props => {
     message.error('This is a message of error')
   }
 
-  let userName = '',
-      email = '',
+  let email = '',
       password = ''
 
   return (
@@ -66,10 +65,6 @@ const Login = props => {
         <p className="h1 color_green or">OR</p>
 
         <form>
-          <div className="input_box">
-            <span className="fl color_blueness" onClick={event => $(event.target).next('input').focus()}>Username</span>
-            <input type="text" className="fr" onChange={event => userName = event.target.value.trim()} />
-          </div>
           <div className="input_box">
             <span className="fl color_blueness" onClick={event => $(event.target).next('input').focus()}>Email Address</span>
             <input type="email" className="fsr" onChange={event => email = event.target.value.trim()} /> <br/>
