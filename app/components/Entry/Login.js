@@ -67,7 +67,7 @@ const Login = props => {
         <form>
           <div className="input_box">
             <span className="fl color_blueness" onClick={event => $(event.target).next('input').focus()}>Email Address</span>
-            <input type="email" className="fsr" onChange={event => email = event.target.value.trim()} /> <br/>
+            <input type="email" className="fr" onChange={event => email = event.target.value.trim()} /> <br/>
           </div>
           <div className="input_box">
             <span className="fl color_blueness" onClick={event => $(event.target).next('input').focus()}>Password</span>
