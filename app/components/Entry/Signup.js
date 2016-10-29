@@ -25,8 +25,7 @@ const Signup = props => {
     message.error('This is a message of error')
   }
 
-  let userName = '',
-      email = '',
+  let email = '',
       password = '',
       passwordRepeat = ''
 
@@ -64,12 +63,8 @@ const Signup = props => {
 
         <form>
           <div className="input_box">
-            <span className="fl color_blueness" onClick={event => $(event.target).next('input').focus()}>Username</span>
-            <input type="text" className="fr" onChange={event => userName = event.target.value.trim()} />
-          </div>
-          <div className="input_box">
             <span className="fl color_blueness" onClick={event => $(event.target).next('input').focus()}>Email Address</span>
-            <input type="email" className="fsr" onChange={event => email = event.target.value.trim()} /> <br/>
+            <input type="email" className="fr" onChange={event => email = event.target.value.trim()} /> <br/>
           </div>
           <div className="input_box">
             <span className="fl color_blueness" onClick={event => $(event.target).next('input').focus()}>Password</span>

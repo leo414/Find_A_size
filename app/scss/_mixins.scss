@@ -17,7 +17,6 @@
   text-overflow   : ellipsis;
   -o-text-overflow: ellipsis;
   word-break      : break-all;
-  //在IE9的<td>中，如果之前已经设置了word-wrap:break-word，则这里的white-space:nowrap会失效，所以要在这里加上word-wrap:normal来以防万一
   word-wrap       : normal;
 }
 
@@ -54,7 +53,7 @@
 /// @param {Measure} $height
 /// @param {String} $direction
 /// @param {Color} $borderColor
-/// @param {Color} $ie6borderColor [#f00] 
+/// @param {Color} $ie6borderColor [#f00]
 @mixin triangle($width, $height, $direction, $borderColor, $ie6borderColor:#f00) {
   @extend %triangleCommonStyle;
   _border-color: $ie6borderColor;
@@ -88,7 +87,6 @@
     _border-left-color: $borderColor;
   }
 }
-
 
 @mixin calc($key, $value) {
   #{$key}: -webkit-calc(#{$value});

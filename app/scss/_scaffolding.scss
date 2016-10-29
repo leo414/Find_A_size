@@ -23,6 +23,10 @@ a:active {
   text-decoration: none;
 }
 
+a:hover {
+  cursor: default !important;
+}
+
 
 // @font-face {font-family: 'iconfont';
 //     src: url('iconfont.eot'); /* IE9*/
