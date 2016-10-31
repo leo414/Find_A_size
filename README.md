@@ -6,10 +6,10 @@ Install Node, then
 $ npm install
 ```
 
-## 2. dev
+## 2. start
 ### 2.1 Development and debugging
 ```
-$ npm run dev
+$ npm start
 ```
 View the results` http://127.0.0.1:8080`
 
