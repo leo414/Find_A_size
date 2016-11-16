@@ -1,56 +1,61 @@
 .login_page {
-  position: fixed;
-  top: 10%;
-  left: 50%;
-  z-index: $zindex_login_page;
+  position   : fixed;
+  top        : 10%;
+  left       : 50%;
+  z-index    : $zindex_login_page;
   margin-left: -350px;
   padding-top: 30px;
-  width: 700px;
-  height: 650px;
-  background: #fff;
-  text-align: center;
+  width      : 700px;
+  height     : 650px;
+  background : #fff;
+  text-align : center;
 
   .h1 {
     margin-bottom: 20px;
-    font-size: 28px !important;
+    font-size    : 28px !important;
   }
 
   .subtitle {
     margin-top: 20px;
-    font-size: 20px;
-    a { color: #000; }
+    font-size : 20px;
+
+    a {
+      color: #000;
+    }
   }
 
   .or {
-    display: inline-block;
-    margin-top: -20px;
+    display       : inline-block;
+    margin-top    : -20px;
     vertical-align: middle;
-    width: 60px;
-    height: 40px;
-    background: #fff;
+    width         : 60px;
+    height        : 40px;
+    background    : #fff;
   }
 
   .input_box {
-    display: inline-block;
-    width: 420px;
-    height: 50px;
+    display      : inline-block;
+    width        : 420px;
+    height       : 50px;
     margin-bottom: 5px;
-    padding-top: 20px;
-    border: none;
+    padding-top  : 20px;
+    border       : none;
     border-bottom: 1px $green solid;
-    font-size: 18px;
+    font-size    : 18px;
 
     .fl {
-      width: 40%;
+      width     : 40%;
       text-align: left;
     }
 
-    .fr { width: 60%; }
+    .fr {
+      width: 60%;
+    }
 
     input {
-      height: 30px;
-      outline: none;
-      border: none;
+      height       : 30px;
+      outline      : none;
+      border       : none;
       border-bottom: 1px $green solid;
     }
 
@@ -60,25 +65,44 @@
   }
 }
 
+.google_facebook_btn {
+  width        : 320px;
+  height       : 44px;
+  font-size    : 22px;
+  line-height  : 44px;
+  color        : #ffffff;
+  font-family  : 'Avenir-Medium';
+  display      : inline-block;
+  text-align   : center;
+  border-radius: 5px;
+  border: none;
+  box-shadow: none;
+}
+
+.color_facebook { background: #3b5998; }
+.color_google { background: rgb(209, 72, 54); }
+
 .sign_up_page {
   @extend .login_page;
-  top: 8%;
+  top   : 8%;
   height: 680px;
 
   .aside {
     margin-top: 30px;
 
-    a { text-decoration: underline; }
+    a {
+      text-decoration: underline;
+    }
   }
 }
 
 .find_password {
   @extend .login_page;
-  top: 22%;
+  top   : 22%;
   height: 320px;
 
   form {
-    margin-top: 30px;
+    margin-top   : 30px;
     margin-bottom: 30px;
   }
 }
