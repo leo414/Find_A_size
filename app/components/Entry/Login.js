@@ -3,6 +3,9 @@ import { RouteTransition, presets } from 'react-router-transition'
 import { Link } from 'react-router'
 import classnames from 'classnames'
 
+import FacebookLogin from 'react-facebook-login'
+import GoogleLogin from 'react-google-login'
+
 import Button from '../Common/Button'
 import Mask from './Mask'
 
@@ -29,6 +32,18 @@ const Login = props => {
     message.error('This is a message of error')
   }
 
+  const responseFacebook = response => {
+    console.log(response);
+  }
+
+  const responseGoogle = response => {
+    console.log(response)
+  }
+
+  const responseGoogleFail = response => {
+    console.log(response)
+  }
+
   let email = '',
       password = ''
 
@@ -38,26 +53,25 @@ const Login = props => {
       <RouteTransition { ...presets.pop } className="login_page" pathname="/login">
         <p className="h1 color_green">WELCOME BACK!</p>
 
-        <Button
-          width="320px"
-          height="44px"
-          fontSize="22px"
-          className="red"
-          handleSubmit={() => onSignup()}
-          value="Log in with Google"
+        <FacebookLogin
+          appId="1165695376849717"
+          autoLoad={true}
+          fields="name,email,picture"
+          scope="public_profile,user_friends,user_actions.books,email"
+          callback={responseFacebook}
+          cssClass="google_facebook_btn color_facebook"
         />
 
         <br/>
         <br/>
 
-        <Button
-          width="320px"
-          height="44px"
-          fontSize="22px"
-          className="deongaree"
-          handleSubmit={() => onSignup()}
-          value="Log in with Facebook"
-        />
+        <GoogleLogin
+         clientId="786601869556-smbn7sppb9b8msi562292dm4fq0flgdo.apps.googleusercontent.com"
+         buttonText="Log in with Google"
+         onSuccess={responseGoogle}
+         onFailure={responseGoogleFail}
+         className="google_facebook_btn color_google"
+       />
 
         <p className="subtitle">Don’t have an account? &nbsp;&nbsp;&nbsp;&nbsp;<Link to="/sign_up"><strong className="color_green">SIGN UP</strong></Link></p>
 
@@ -66,7 +80,7 @@ const Login = props => {
 
         <form>
           <div className="input_box">
-            <span className="fl color_blueness" onClick={event => $(event.target).next('input').focus()}>Email Address</span>
+            <span className="fl color_blueness" onClick={event => $(event.target).next('input').focus()}>Email or Phone</span>
             <input type="email" className="fr" onChange={event => email = event.target.value.trim()} /> <br/>
           </div>
           <div className="input_box">

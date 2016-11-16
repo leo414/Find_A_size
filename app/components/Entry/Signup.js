@@ -63,7 +63,7 @@ const Signup = props => {
 
         <form>
           <div className="input_box">
-            <span className="fl color_blueness" onClick={event => $(event.target).next('input').focus()}>Email Address</span>
+            <span className="fl color_blueness" onClick={event => $(event.target).next('input').focus()}>Email or Phone</span>
             <input type="email" className="fr" onChange={event => email = event.target.value.trim()} /> <br/>
           </div>
           <div className="input_box">
