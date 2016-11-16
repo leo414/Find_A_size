@@ -1,5 +1,5 @@
 import React from 'react'
-import { browserHistory } from 'react-router'
+import { hashHistory } from 'react-router'
 import { RouteTransition, presets } from 'react-router-transition'
 
 import { Modal } from 'antd'
@@ -13,7 +13,7 @@ class Mask extends React.Component {
       okText: 'OK',
       cancelText: 'Cancel',
       onOk() {
-        browserHistory.push('/')
+        hashHistory.push('/')
       },
       onCancel() {},
     })
