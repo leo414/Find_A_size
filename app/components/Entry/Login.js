@@ -9,6 +9,9 @@ import GoogleLogin from 'react-google-login'
 import Button from '../Common/Button'
 import Mask from './Mask'
 
+import UserAction from '../../actions/UserAction'
+UserAction.SendSignUpMail('zaxlct@foxmail.com', 'dwadwad1212')
+
 import $ from 'jquery'
 
 import { message } from 'antd'
@@ -66,7 +69,7 @@ const Login = props => {
         <br/>
 
         <GoogleLogin
-         clientId="786601869556-smbn7sppb9b8msi562292dm4fq0flgdo.apps.googleusercontent.com"
+         clientId="1079426487628-kr12vvcob66p2p5fm8r1n0kf7qqnbi26.apps.googleusercontent.com"
          buttonText="Log in with Google"
          onSuccess={responseGoogle}
          onFailure={responseGoogleFail}

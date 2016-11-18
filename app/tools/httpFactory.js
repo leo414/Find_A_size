@@ -1,18 +1,15 @@
 import $ from 'jquery'
 
 const HttpFactory = {
-  post: function (url,data,success,failed) {
-    //json post
+  get(url, data, success, failed) {
     $.ajax({
       url,
-      type : 'POST',
-      dataType : 'json',
+      cache: true,
+      type : 'GET',
+      jsonp: 'callback',
       data,
-      timeout : 5000,
-      crossDomain : true,
-      xhrFields:{
-        withCredentials : true
-      },
+      dataType : 'jsonp',
+      crossDomain: true,
     })
     .done(success)
     .fail(failed)
