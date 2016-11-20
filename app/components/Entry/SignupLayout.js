@@ -5,30 +5,25 @@ import classnames from 'classnames'
 
 import FacebookLogin from 'react-facebook-login'
 import GoogleLogin from 'react-google-login'
+import API from '../../API'
 
 import Button from '../Common/Button'
 import Mask from './Mask'
 
-import UserAction from '../../actions/UserAction'
-UserAction.SendSignUpMail('zaxlct@foxmail.com', 'dwadwad1212')
-
 import $ from 'jquery'
+import UserAction from '../../actions/UserAction'
 
 import { message } from 'antd'
-message.config({
-  top: 200,
-  duration: 2,
-})
 
-const Login = props => {
+const SignupLayout = props => {
   const cls = classnames({
-    hidden: props.location.pathname !== '/login'
+    hidden: props.pathname !== '/sign_up'
   })
 
-  const onSubmit = (e, userName, email, password) => {
+  const onSubmit = (e, userName, email, password, passwordRepeat) => {
     e.stopPropagation()
-    console.log(userName, email, password)
-    if(!userName) error()
+    console.log(userName, email, password, passwordRepeat)
+    // UserAction.()
   }
 
   const error = () => {
@@ -36,11 +31,15 @@ const Login = props => {
   }
 
   const responseFacebook = response => {
-    console.log(response);
+    if(response.accessToken) {
+      UserAction.FacebookSignIn(response.accessToken)
+    }
   }
 
   const responseGoogle = response => {
-    console.log(response)
+    if(response.accessToken) {
+      UserAction.GoogleSignIn(response.accessToken)
+    }
   }
 
   const responseGoogleFail = response => {
@@ -48,16 +47,17 @@ const Login = props => {
   }
 
   let email = '',
-      password = ''
+      password = '',
+      passwordRepeat = ''
 
   return (
     <div className={cls}>
-      <Mask pathname="/login" />
-      <RouteTransition { ...presets.pop } className="login_page" pathname="/login">
-        <p className="h1 color_green">WELCOME BACK!</p>
+      <Mask pathname="/sign_up" />
+      <RouteTransition { ...presets.pop } className="sign_up_page" pathname="/sign_up">
+        <p className="h1 color_green">Create a free account</p>
 
         <FacebookLogin
-          appId="1165695376849717"
+          appId={API.FACEBOOK_APPID}
           autoLoad={true}
           fields="name,email,picture"
           scope="public_profile,user_friends,user_actions.books,email"
@@ -69,14 +69,14 @@ const Login = props => {
         <br/>
 
         <GoogleLogin
-         clientId="1079426487628-kr12vvcob66p2p5fm8r1n0kf7qqnbi26.apps.googleusercontent.com"
+         clientId={API.GOOGLE_CLIENTID}
          buttonText="Log in with Google"
          onSuccess={responseGoogle}
          onFailure={responseGoogleFail}
          className="google_facebook_btn color_google"
        />
 
-        <p className="subtitle">Don’t have an account? &nbsp;&nbsp;&nbsp;&nbsp;<Link to="/sign_up"><strong className="color_green">SIGN UP</strong></Link></p>
+        <p className="subtitle">Already have an account? &nbsp;&nbsp;&nbsp;&nbsp;<Link to="/login"><strong className="color_green">LOG IN</strong></Link></p>
 
         <hr style={{height: '1px', border: 'none', borderTop: '1px solid #eee', marginTop: '40px'}} />
         <p className="h1 color_green or">OR</p>
@@ -90,6 +90,10 @@ const Login = props => {
             <span className="fl color_blueness" onClick={event => $(event.target).next('input').focus()}>Password</span>
             <input type="password" className="fr" onChange={event => password = event.target.value.trim()} />
           </div>
+          <div className="input_box">
+            <span className="fl color_blueness" onClick={event => $(event.target).next('input').focus()}>Confirm Password</span>
+            <input type="password" className="fr" onChange={event => passwordRepeat = event.target.value.trim()} />
+          </div>
         </form>
 
         <Button
@@ -97,14 +101,18 @@ const Login = props => {
           height="38px"
           fontSize="18px"
           className="green"
-          handleSubmit={e => onSubmit(e, userName, email, password)}
-          value="LOG IN"
+          handleSubmit={e => onSubmit(e, userName, email, password, passwordRepeat)}
+          value="Sign up"
         />
 
-        <p className="subtitle"><Link to="/find_password">Forgot your password?</Link></p>
+        <br/>
+
+        <small className="aside color_blueness in_block">
+          By creating an account, you agree to Find-A-Size’s <a>Terms of Services</a> and <a>Privacy Policy</a>.
+        </small>
       </RouteTransition>
     </div>
   )
 }
 
-export default Login
+export default SignupLayout
