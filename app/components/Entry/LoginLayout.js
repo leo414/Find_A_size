@@ -2,7 +2,6 @@ import React from 'react'
 import { RouteTransition, presets } from 'react-router-transition'
 import { Link } from 'react-router'
 import classnames from 'classnames'
-import MD5 from 'blueimp-md5'
 
 import FacebookLogin from 'react-facebook-login'
 import GoogleLogin from 'react-google-login'
