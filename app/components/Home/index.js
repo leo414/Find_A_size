@@ -5,8 +5,6 @@ import ProductList from '../Layout/ProductList'
 
 import Mask from '../Common/Mask'
 
-import Login from '../Entry/Login'
-
 import Search from '../Search'
 import EmailSignUp from './EmailSignUp'
 
