@@ -15,7 +15,15 @@ import LoginSuccess from './components/Entry/LoginSuccess'
 
 import Account from './components/Account'
 
-const App = ({children}) => <div> <Home /> {children}</div>
+const App = props => {
+  let isLogin
+  try {
+    isLogin = props.location.state.isLogin
+  } catch(err) {
+    isLogin = false
+  }
+  return <div> <Home isLogin={isLogin} /> {props.children}</div>
+}
 
 render((
   <Router history={hashHistory}>

@@ -20,10 +20,14 @@ const SignupLayout = props => {
     hidden: props.pathname !== '/sign_up'
   })
 
-  const onSubmit = (e, userName, email, password, passwordRepeat) => {
+  const onSubmit = (e, userName, password, passwordRepeat) => {
     e.stopPropagation()
-    console.log(userName, email, password, passwordRepeat)
-    // UserAction.()
+    console.log(userName, password, passwordRepeat)
+    // if userName is email
+    UserAction.SendSignUpMail()
+
+    // if userName is phone
+
   }
 
   const error = () => {
@@ -46,7 +50,9 @@ const SignupLayout = props => {
     console.log(response)
   }
 
-  let email = '',
+  const onClickLogin = {}
+
+  let userName = '',
       password = '',
       passwordRepeat = ''
 
@@ -60,6 +66,7 @@ const SignupLayout = props => {
           appId={API.FACEBOOK_APPID}
           autoLoad={true}
           fields="name,email,picture"
+          textButton="Sign up with Facebook"
           scope="public_profile,user_friends,user_actions.books,email"
           callback={responseFacebook}
           cssClass="google_facebook_btn color_facebook"
@@ -70,7 +77,7 @@ const SignupLayout = props => {
 
         <GoogleLogin
          clientId={API.GOOGLE_CLIENTID}
-         buttonText="Log in with Google"
+         buttonText="Sign up with Google"
          onSuccess={responseGoogle}
          onFailure={responseGoogleFail}
          className="google_facebook_btn color_google"
@@ -84,7 +91,7 @@ const SignupLayout = props => {
         <form>
           <div className="input_box">
             <span className="fl color_blueness" onClick={event => $(event.target).next('input').focus()}>Email or Phone</span>
-            <input type="email" className="fr" onChange={event => email = event.target.value.trim()} /> <br/>
+            <input type="text" className="fr" onChange={event => userName = event.target.value.trim()} /> <br/>
           </div>
           <div className="input_box">
             <span className="fl color_blueness" onClick={event => $(event.target).next('input').focus()}>Password</span>

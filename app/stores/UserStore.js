@@ -8,33 +8,25 @@ const UserStore = Reflux.createStore({
 
   init() {
     this.data =  {
-      info: {
-        cityName: '',
-        marks: '',
-        nickName: '',
-        signature: '',
-        totalAlbums: '',
-        views: '',
-        avatar: '',
-        tags: [],
+      openUserLogin: {
+        facebookLoginSuccess: false,
+        googleLoginSuccess: false,
+        hintMessage: '',
+        flag:'',
       },
-      markState: undefined,
-      hintMessage: '',
-      flag: '',
     }
   },
 
   onFacebookSignInCompleted(res){
     console.log(res)
     if(res.Success){
-
+      this.openUserLogin.facebookLoginSuccess = true
     }else{
       this.data.hintMessage = res.ErrorMsg
     }
-    this.data.flag = 'FacebookSignIn'
+    this.data.flag = 'openUserLogin'
     this.trigger(this.data)
   },
-
   onGetInfoFailed(res){
     HttpErrorCallBack(res)
   },
@@ -42,17 +34,24 @@ const UserStore = Reflux.createStore({
   onGoogleSignInCompleted(res){
     console.log(res)
     if(res.Success){
-
+      this.openUserLogin.googleLoginSuccess = true
     }else{
       this.data.hintMessage = res.ErrorMsg
     }
-    this.data.flag = 'FacebookSignIn'
+    this.data.flag = 'openUserLogin'
     this.trigger(this.data)
   },
-
   onGoogleFailed(res){
     HttpErrorCallBack(res)
   },
+
+  onSendSignUpMailCompleted(res){
+
+  },
+  onSendSignUpMailFailed(res){
+    HttpErrorCallBack(res)
+  },
+
 })
 
 export default UserStore
