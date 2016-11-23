@@ -10,39 +10,21 @@ import Button from '../Common/Button'
 import Mask from './Mask'
 
 import $ from 'jquery'
-import UserAction from '../../actions/UserAction'
+
 
 import { message } from 'antd'
 
-const SignupWithPhone = props => {
+const SignupWithPhone =
+  ({sendSmsSuccess, phoneSignupSuccess, pathname, getCode, onSubmitSignup, isClickGetCode}) => {
   const cls = classnames({
-    hidden: props.pathname !== '/sign_up_phone'
+    hidden: pathname !== '/sign_up_phone'
   })
-
-  const onSubmit = (e, phone, code, password, passwordRepeat) => {
-    e.stopPropagation()
-    console.log(phone, password, passwordRepeat)
-    // if userName is email
-    UserAction.SendSignUpMail()
-
-    // if userName is phone
-
-  }
 
   const error = () => {
     message.error('This is a message of error')
   }
 
   const onClickLogin = {}
-
-  const getCode = (e, phone) => {
-    e.stopPropagation()
-    if(phone) {
-      UserAction.RedceiveSignUpSms(86, 15542203979)
-    } else {
-      //TODO
-    }
-  }
 
   let phone = '',
       code = '',
@@ -63,22 +45,25 @@ const SignupWithPhone = props => {
         <form>
           <div className="input_box phone_number">
             <span className="fl color_blueness" onClick={event => $(event.target).next('input').focus()}>Phone Number</span>
-            <input type="phone" className="fr" onChange={event => phone = event.target.value.trim()} /> <br/>
-
-            <Button
-              width="70px"
-              height="24px"
-              fontSize="12px"
-              className="green get_code"
-              handleSubmit={e => getCode(e, phone)}
-              value="Get code"
-            />
+            <input type="number" className="fr" onChange={event => phone = event.target.value.trim()} /> <br/>
+            {
+              isClickGetCode ?
+              <sapn className="get_code_msg">xxxxxxxxxx</sapn>
+              :
+              <Button
+                width="70px"
+                height="24px"
+                fontSize="12px"
+                className="green get_code"
+                handleSubmit={() => getCode(phone)}
+                value="Get code"
+              />
+            }
           </div>
 
           <div className="input_box code_number">
             <span className="fl color_blueness" onClick={event => $(event.target).next('input').focus()}>Code</span>
             <input type="number" className="fr" onChange={event => code = event.target.value.trim()} /> <br/>
-            <span className="msg">plz 得得 AD </span>
           </div>
           <div className="input_box">
             <span className="fl color_blueness" onClick={event => $(event.target).next('input').focus()}>Password</span>
@@ -95,7 +80,7 @@ const SignupWithPhone = props => {
           height="38px"
           fontSize="18px"
           className="green"
-          handleSubmit={e => onSubmit(e, phone, code, password, passwordRepeat)}
+          handleSubmit={() => onSubmitSignup(phone, code, password, passwordRepeat)}
           value="Sign up"
         />
 

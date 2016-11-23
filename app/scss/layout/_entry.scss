@@ -127,6 +127,11 @@
       right: 0;
     }
 
+    .get_code_msg {
+      @extend .get_code;
+      right: -20px;
+    }
+
     .msg {
       position: absolute;
       top: 20px;

@@ -4,17 +4,20 @@ import SignupPhoneLayout from './SignupPhoneLayout'
 import Reflux from 'reflux'
 import ReactMixin from 'react-mixin'
 import UserStore from '../../stores/UserStore'
+import UserAction from '../../actions/UserAction'
 
+let self;
 class SignupPhoneContainer extends React.Component {
   constructor(props){
     super(props)
     this.state = ({
       sendSmsSuccess: false,
       phoneSignupSuccess: false,
+      isClickGetCode: false,
     })
+    self = this
   }
   onUserStoreChange(data) {
-    console.log(data)
     if(data.sendSmsCode.flag === 'sendSms'){
       this.setState({
         sendSmsSuccess: data.sendSmsCode.sendSmsSuccess
@@ -26,14 +29,35 @@ class SignupPhoneContainer extends React.Component {
     }
   }
 
+  getCode(phone){
+    if(!phone) return
+    self.setState({isClickGetCode: true})
+    setTimeout(() => self.setState({sendSmsSuccess: false}), 6000)
+
+    UserAction.ReceiveSignUpSms(86, phone)
+  }
+
+  onSubmitSignup(phone, code, password, passwordRepeat) {
+    console.log(phone, password, passwordRepeat)
+    // if userName is email
+    // UserAction.SendSignUpMail()
+
+    // if userName is phone
+  }
+
   render() {
-    const {sendSmsSuccess, phoneSignupSuccess} = this.state
-    return
+    const {sendSmsSuccess, phoneSignupSuccess, isClickGetCode} = this.state
+    // console.log(this.setState)
+    return (
       <SignupPhoneLayout
         sendSmsSuccess={sendSmsSuccess}
         phoneSignupSuccess={phoneSignupSuccess}
         pathname={this.props.location.pathname}
+        getCode={this.getCode}
+        onSubmitSignup={this.onSubmitSignup}
+        isClickGetCode={isClickGetCode}
       />
+    )
   }
 }
 
