@@ -11,9 +11,22 @@ const UserStore = Reflux.createStore({
       openUserLogin: {
         facebookLoginSuccess: false,
         googleLoginSuccess: false,
-        hintMessage: '',
         flag:'',
       },
+      mailSignup: {
+        sendMailSuccess: false,
+        flag: '',
+      },
+      sendSmsCode: {
+        sendSmsSuccess: false,
+        flag: '',
+      },
+      phoneSignup: {
+        phoneSignupSuccess: false,
+        flag: '',
+      },
+
+      hintMessage: '',
     }
   },
 
@@ -24,7 +37,7 @@ const UserStore = Reflux.createStore({
     }else{
       this.data.hintMessage = res.ErrorMsg
     }
-    this.data.flag = 'openUserLogin'
+    this.data.openUserLogin.flag = 'openUserLogin'
     this.trigger(this.data)
   },
   onGetInfoFailed(res){
@@ -38,7 +51,7 @@ const UserStore = Reflux.createStore({
     }else{
       this.data.hintMessage = res.ErrorMsg
     }
-    this.data.flag = 'openUserLogin'
+    this.data.openUserLogin.flag = 'openUserLogin'
     this.trigger(this.data)
   },
   onGoogleFailed(res){
@@ -46,9 +59,44 @@ const UserStore = Reflux.createStore({
   },
 
   onSendSignUpMailCompleted(res){
-
+    console.log(res)
+    if(res.Success){
+      this.mailSignup.sendMailSuccess = true
+    }else{
+      this.data.hintMessage = res.ErrorMsg
+    }
+    this.data.mailSignup.flag = 'sendMail'
+    this.trigger(this.data)
   },
   onSendSignUpMailFailed(res){
+    HttpErrorCallBack(res)
+  },
+
+  onSendSignUpSmsCompleted(res){
+    console.log(res)
+    if(res.Success){
+      this.sendSmsCode.sendSmsSuccess = true
+    }else{
+      this.data.hintMessage = res.ErrorMsg
+    }
+    this.data.sendSmsCode.flag = 'sendSms'
+    this.trigger(this.data)
+  },
+  onSendSignUpSmsFailed(res){
+    HttpErrorCallBack(res)
+  },
+
+  onReceiveSignUpSmsCompleted(res){
+    console.log(res)
+    if(res.Success){
+      this.phoneSignup.phoneSignupSuccess = true
+    }else{
+      this.data.hintMessage = res.ErrorMsg
+    }
+    this.data.phoneSignup.flag = 'phoneSignup'
+    this.trigger(this.data)
+  },
+  onReceiveSignUpSmsFailed(res){
     HttpErrorCallBack(res)
   },
 

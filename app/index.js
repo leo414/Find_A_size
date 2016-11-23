@@ -9,6 +9,7 @@ import Home from './components/Home'
 // Entry
 import LoginContainer from './components/Entry/LoginContainer'
 import SignupContainer from './components/Entry/SignupContainer'
+import SignupPhoneContainer from './components/Entry/SignupPhoneContainer'
 import FindPassword from './components/Entry/FindPassword'
 import LoginFail from './components/Entry/LoginFail'
 import LoginSuccess from './components/Entry/LoginSuccess'
@@ -31,6 +32,7 @@ render((
       <IndexRoute component={LoginContainer}/>
       <Route path="login" component={LoginContainer} />
       <Route path="sign_up" component={SignupContainer} />
+      <Route path="sign_up_phone" component={SignupPhoneContainer} />
       <Route path="find_password" component={FindPassword} />
     </Route>
 

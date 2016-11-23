@@ -4,9 +4,31 @@ import API from '../API'
 const { USER } = API
 
 const UserAction = Reflux.createActions({
+  SendSignUpSms: {asyncResult: true},
+  ReceiveSignUpSms: {asyncResult: true},
   SendSignUpMail: {asyncResult: true},
+
   FacebookSignIn: {asyncResult: true},
   GoogleSignIn: {asyncResult: true},
+})
+
+UserAction.SendSignUpSms.listen(function(Phone, Code, Password){
+  let data = {
+    Phone,
+    Code,
+    Password,
+  }
+
+  HttpFactory.fetch(USER.SendSignUpSms, data, this.completed, this.failed)
+})
+
+UserAction.ReceiveSignUpSms.listen(function(Prefix, Phone){
+  let data = {
+    Prefix,
+    Phone,
+  }
+
+  HttpFactory.fetch(USER.ReceiveSignUpSms, data, this.completed, this.failed)
 })
 
 UserAction.SendSignUpMail.listen(function(Email, Password){

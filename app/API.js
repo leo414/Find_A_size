@@ -7,8 +7,10 @@ const API = {
   FACEBOOK_APPID,
   GOOGLE_CLIENTID,
   USER: {
+    SendSignUpSms: URL + 'User.SendSignUpSms',
     ReceiveSignUpSms: URL + 'User.ReceiveSignUpSms',
     SendSignUpMail: URL + 'User.SendSignUpMail',
+
     FacebookSignIn: URL + 'User.FacebookSignIn',
     GoogleSignIn: URL + 'User.GoogleSignIn',
   },

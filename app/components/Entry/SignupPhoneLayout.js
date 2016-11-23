@@ -5,7 +5,6 @@ import classnames from 'classnames'
 
 import FacebookLogin from 'react-facebook-login'
 import GoogleLogin from 'react-google-login'
-import API from '../../API'
 
 import Button from '../Common/Button'
 import Mask from './Mask'
@@ -15,80 +14,71 @@ import UserAction from '../../actions/UserAction'
 
 import { message } from 'antd'
 
-const SignupLayout = props => {
+const SignupWithPhone = props => {
   const cls = classnames({
-    hidden: props.pathname !== '/sign_up'
+    hidden: props.pathname !== '/sign_up_phone'
   })
 
-  const onSubmit = (e, email, password, passwordRepeat) => {
+  const onSubmit = (e, phone, code, password, passwordRepeat) => {
     e.stopPropagation()
-    console.log(email, password, passwordRepeat)
+    console.log(phone, password, passwordRepeat)
     // if userName is email
     UserAction.SendSignUpMail()
+
+    // if userName is phone
+
   }
 
   const error = () => {
     message.error('This is a message of error')
   }
 
-  const responseFacebook = response => {
-    if(response.accessToken) {
-      UserAction.FacebookSignIn(response.accessToken)
-    }
-  }
-
-  const responseGoogle = response => {
-    if(response.accessToken) {
-      UserAction.GoogleSignIn(response.accessToken)
-    }
-  }
-
-  const responseGoogleFail = response => {
-    console.log(response)
-  }
-
   const onClickLogin = {}
 
-  let email = '',
+  const getCode = (e, phone) => {
+    e.stopPropagation()
+    if(phone) {
+      UserAction.RedceiveSignUpSms(86, 15542203979)
+    } else {
+      //TODO
+    }
+  }
+
+  let phone = '',
+      code = '',
       password = '',
       passwordRepeat = ''
 
   return (
     <div className={cls}>
-      <Mask pathname="/sign_up" />
-      <RouteTransition { ...presets.pop } className="sign_up_page" pathname="/sign_up">
+      <Mask pathname="/sign_up_phone" />
+      <RouteTransition { ...presets.pop } className="sign_up_phone" pathname="/sign_up_phone">
         <p className="h1 color_green">Create a free account</p>
-
-        <FacebookLogin
-          appId={API.FACEBOOK_APPID}
-          autoLoad={true}
-          fields="name,email,picture"
-          textButton="Sign up with Facebook"
-          scope="public_profile,user_friends,user_actions.books,email"
-          callback={responseFacebook}
-          cssClass="google_facebook_btn color_facebook"
-        />
-
-        <br/>
-        <br/>
-
-        <GoogleLogin
-         clientId={API.GOOGLE_CLIENTID}
-         buttonText="Sign up with Google"
-         onSuccess={responseGoogle}
-         onFailure={responseGoogleFail}
-         className="google_facebook_btn color_google"
-       />
 
         <p className="subtitle">Already have an account? &nbsp;&nbsp;&nbsp;&nbsp;<Link to="/login"><strong className="color_green">LOG IN</strong></Link></p>
 
         <hr style={{height: '1px', border: 'none', borderTop: '1px solid #eee', marginTop: '40px'}} />
         <p className="h1 color_green or">OR</p><br/>
-        <Link className="phone_signup" to="/sign_up_phone">(You can also signup with phone)</Link>
+        <Link className="phone_signup" to="/sign_up">(You can also signup with email)</Link>
         <form>
-          <div className="input_box">
-            <span className="fl color_blueness" onClick={event => $(event.target).next('input').focus()}>Email Address</span>
-            <input type="email" className="fr" onChange={event => email = event.target.value.trim()} /> <br/>
+          <div className="input_box phone_number">
+            <span className="fl color_blueness" onClick={event => $(event.target).next('input').focus()}>Phone Number</span>
+            <input type="phone" className="fr" onChange={event => phone = event.target.value.trim()} /> <br/>
+
+            <Button
+              width="70px"
+              height="24px"
+              fontSize="12px"
+              className="green get_code"
+              handleSubmit={e => getCode(e, phone)}
+              value="Get code"
+            />
+          </div>
+
+          <div className="input_box code_number">
+            <span className="fl color_blueness" onClick={event => $(event.target).next('input').focus()}>Code</span>
+            <input type="number" className="fr" onChange={event => code = event.target.value.trim()} /> <br/>
+            <span className="msg">plz 得得 AD </span>
           </div>
           <div className="input_box">
             <span className="fl color_blueness" onClick={event => $(event.target).next('input').focus()}>Password</span>
@@ -105,7 +95,7 @@ const SignupLayout = props => {
           height="38px"
           fontSize="18px"
           className="green"
-          handleSubmit={e => onSubmit(e, email, password, passwordRepeat)}
+          handleSubmit={e => onSubmit(e, phone, code, password, passwordRepeat)}
           value="Sign up"
         />
 
@@ -119,4 +109,4 @@ const SignupLayout = props => {
   )
 }
 
-export default SignupLayout
+export default SignupWithPhone
