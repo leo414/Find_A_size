@@ -11,43 +11,26 @@ import Button from '../Common/Button'
 import Mask from './Mask'
 
 import $ from 'jquery'
-import UserAction from '../../actions/UserAction'
+
 
 import { message } from 'antd'
 
-const SignupLayout = props => {
+const SignupLayout = ({pathname, onSignup, onFacebookSignup, onGoogleSignup}) => {
   const cls = classnames({
-    hidden: props.pathname !== '/sign_up'
+    hidden: pathname !== '/sign_up'
   })
-
-  const onSubmit = (e, email, password, passwordRepeat) => {
-    e.stopPropagation()
-    console.log(email, password, passwordRepeat)
-    // if userName is email
-    UserAction.SendSignUpMail()
-  }
-
-  const error = () => {
-    message.error('This is a message of error')
-  }
 
   const responseFacebook = response => {
     if(response.accessToken) {
-      UserAction.FacebookSignIn(response.accessToken)
+      onFacebookSignup(response.accessToken)
     }
   }
 
   const responseGoogle = response => {
     if(response.accessToken) {
-      UserAction.GoogleSignIn(response.accessToken)
+      onGoogleSignup(response.accessToken)
     }
   }
-
-  const responseGoogleFail = response => {
-    console.log(response)
-  }
-
-  const onClickLogin = {}
 
   let email = '',
       password = '',
@@ -76,7 +59,6 @@ const SignupLayout = props => {
          clientId={API.GOOGLE_CLIENTID}
          buttonText="Sign up with Google"
          onSuccess={responseGoogle}
-         onFailure={responseGoogleFail}
          className="google_facebook_btn color_google"
        />
 
@@ -105,7 +87,7 @@ const SignupLayout = props => {
           height="38px"
           fontSize="18px"
           className="green"
-          handleSubmit={e => onSubmit(e, email, password, passwordRepeat)}
+          handleSubmit={() => onSignup(email, password, passwordRepeat)}
           value="Sign up"
         />
 

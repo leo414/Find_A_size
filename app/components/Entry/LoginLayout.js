@@ -23,19 +23,15 @@ const LoginLayout = ({pathname, onFaceBookLogin, onGoogleLogin, onLogin}) => {
   })
 
   const responseFacebook = response => {
-    if(response) {
+    if(response.accessToken) {
       onFaceBookLogin(response.accessToken)
     }
   }
 
   const responseGoogle = response => {
-    if(response) {
+    if(response.accessToken) {
       onGoogleLogin(response.accessToken)
     }
-  }
-
-  const responseGoogleFail = response => {
-
   }
 
   let userName = '',
@@ -63,7 +59,6 @@ const LoginLayout = ({pathname, onFaceBookLogin, onGoogleLogin, onLogin}) => {
           clientId={API.GOOGLE_CLIENTID}
           buttonText="Log in with Google"
           onSuccess={responseGoogle}
-          onFailure={responseGoogleFail}
           className="google_facebook_btn color_google"
        />
 
