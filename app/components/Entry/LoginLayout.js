@@ -9,9 +9,6 @@ import API from '../../API'
 
 import Button from '../Common/Button'
 import Mask from './Mask'
-
-import UserAction from '../../actions/UserAction'
-
 import $ from 'jquery'
 
 import { message } from 'antd'
@@ -20,38 +17,24 @@ message.config({
   duration: 2,
 })
 
-const LoginLayout = props => {
+const LoginLayout = ({pathname, onFaceBookLogin, onGoogleLogin, onLogin}) => {
   const cls = classnames({
-    hidden: props.pathname !== '/login'
+    hidden: pathname !== '/login'
   })
-
-  const onSubmit = (e, userName, email, password) => {
-    e.stopPropagation()
-    console.log(userName, email, password)
-    if(!userName) error()
-  }
-
-  const error = () => {
-    message.error('This is a message of error')
-  }
 
   const responseFacebook = response => {
     if(response.accessToken) {
-      UserAction.FacebookSignIn(response.accessToken)
+      onFaceBookLogin(response.accessToken)
     }
   }
 
   const responseGoogle = response => {
     if(response.accessToken) {
-      UserAction.GoogleSignIn(response.accessToken)
+      onGoogleLogin(response.accessToken)
     }
   }
 
-  const responseGoogleFail = response => {
-    console.log(response)
-  }
-
-  let email = '',
+  let userName = '',
       password = ''
 
   return (
@@ -73,11 +56,10 @@ const LoginLayout = props => {
         <br/>
 
         <GoogleLogin
-         clientId={API.GOOGLE_CLIENTID}
-         buttonText="Log in with Google"
-         onSuccess={responseGoogle}
-         onFailure={responseGoogleFail}
-         className="google_facebook_btn color_google"
+          clientId={API.GOOGLE_CLIENTID}
+          buttonText="Log in with Google"
+          onSuccess={responseGoogle}
+          className="google_facebook_btn color_google"
        />
 
         <p className="subtitle">Don’t have an account? &nbsp;&nbsp;&nbsp;&nbsp;<Link to="/sign_up"><strong className="color_green">SIGN UP</strong></Link></p>
@@ -88,7 +70,7 @@ const LoginLayout = props => {
         <form>
           <div className="input_box">
             <span className="fl color_blueness" onClick={event => $(event.target).next('input').focus()}>Email or Phone</span>
-            <input type="email" className="fr" onChange={event => email = event.target.value.trim()} /> <br/>
+            <input type="text" className="fr" onChange={event => userName = event.target.value.trim()} /> <br/>
           </div>
           <div className="input_box">
             <span className="fl color_blueness" onClick={event => $(event.target).next('input').focus()}>Password</span>
@@ -101,7 +83,7 @@ const LoginLayout = props => {
           height="38px"
           fontSize="18px"
           className="green"
-          handleSubmit={e => onSubmit(e, userName, email, password)}
+          handleSubmit={() => onLogin(userName, password)}
           value="LOG IN"
         />
 

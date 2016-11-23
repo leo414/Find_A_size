@@ -9,13 +9,22 @@ import Home from './components/Home'
 // Entry
 import LoginContainer from './components/Entry/LoginContainer'
 import SignupContainer from './components/Entry/SignupContainer'
-import FindPassword from './components/Entry/FindPassword'
+import SignupPhoneContainer from './components/Entry/SignupPhoneContainer'
+import FindPasswordContainer from './components/Entry/FindPasswordContainer'
 import LoginFail from './components/Entry/LoginFail'
 import LoginSuccess from './components/Entry/LoginSuccess'
 
 import Account from './components/Account'
 
-const App = ({children}) => <div> <Home /> {children}</div>
+const App = props => {
+  let isLogin
+  try {
+    isLogin = props.location.state.isLogin
+  } catch(err) {
+    isLogin = false
+  }
+  return <div> <Home isLogin={isLogin} /> {props.children}</div>
+}
 
 render((
   <Router history={hashHistory}>
@@ -23,7 +32,8 @@ render((
       <IndexRoute component={LoginContainer}/>
       <Route path="login" component={LoginContainer} />
       <Route path="sign_up" component={SignupContainer} />
-      <Route path="find_password" component={FindPassword} />
+      <Route path="sign_up_phone" component={SignupPhoneContainer} />
+      <Route path="find_password" component={FindPasswordContainer} />
     </Route>
 
     <Route path="/login_success" component={LoginSuccess}></Route>

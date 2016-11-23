@@ -1,5 +1,4 @@
 import React from 'react'
-
 import { Radio } from 'antd'
 const RadioGroup = Radio.Group
 
@@ -12,7 +11,6 @@ class AccoutSetting extends React.Component {
        valueOne: 1,
        valueTwo: 2,
     })
-
     this.onChangeFirst = this.onChangeFirst.bind(this)
     this.onChangeTwo = this.onChangeTwo.bind(this)
   }

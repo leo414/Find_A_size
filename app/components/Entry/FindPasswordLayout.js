@@ -9,20 +9,10 @@ import Mask from './Mask'
 import $ from 'jquery'
 import { message } from 'antd'
 
-const FindPassword = props => {
+const FindPassword = ({pathname, onSubmit}) => {
   const cls = classnames({
-    hidden: props.location.pathname !== '/find_password'
+    hidden: pathname !== '/find_password'
   });
-
-  const onSubmit = (e, email) => {
-    e.stopPropagation()
-    console.log(email)
-    if(!email) error()
-  }
-
-  const error = () => {
-    message.error('This is a message of error')
-  }
 
   let email = ''
 
@@ -44,7 +34,7 @@ const FindPassword = props => {
           height="38px"
           fontSize="18px"
           className="green"
-          handleSubmit={e => onSubmit(e, email)}
+          handleSubmit={() => onSubmit(email)}
           value="Reset Password"
         />
 

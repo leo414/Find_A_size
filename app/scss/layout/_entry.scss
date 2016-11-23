@@ -87,6 +87,11 @@
   top   : 8%;
   height: 680px;
 
+  .phone_signup {
+    margin-top: -40px;
+    font-size: 20px;
+  }
+
   .aside {
     margin-top: 30px;
 
@@ -104,5 +109,33 @@
   form {
     margin-top   : 30px;
     margin-bottom: 30px;
+  }
+}
+
+.sign_up_phone {
+  @extend .sign_up_page;
+  height: 620px;
+
+  .code_number, .phone_number {
+    position: relative;
+    left: 0;
+    top: 0;
+
+    .get_code {
+      position: absolute;
+      top: 20px;
+      right: 0;
+    }
+
+    .get_code_msg {
+      @extend .get_code;
+      right: -20px;
+    }
+
+    .msg {
+      position: absolute;
+      top: 20px;
+      right: 0;
+    }
   }
 }

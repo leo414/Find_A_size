@@ -1,10 +1,10 @@
 import React from 'react'
+import { hashHistory } from 'react-router'
 import Nav from '../Layout/Nav'
 import Footer from '../Layout/Footer'
 import ProductList from '../Layout/ProductList'
 
 import Mask from '../Common/Mask'
-
 import Search from '../Search'
 import EmailSignUp from './EmailSignUp'
 
@@ -15,9 +15,8 @@ class Home extends React.Component {
   render() {
     return (
       <div>
-        <Nav />
+        <Nav isLogin={this.props.isLogin} />
         <Search />
-
 
         <hr style={{height: '1px', border: 'none', borderTop: '1px solid #ccc', margin: '50px 0'}} />
 
