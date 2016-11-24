@@ -7,6 +7,7 @@ import UserStore from '../../../stores/UserStore'
 import UserAction from '../../../actions/UserAction'
 
 let self;
+let timeOut;
 class SignupPhoneContainer extends React.Component {
   constructor(props){
     super(props)
@@ -32,14 +33,19 @@ class SignupPhoneContainer extends React.Component {
   getCode(phone){
     if(!phone) return
     self.setState({isClickGetCode: true})
-    setTimeout(() => self.setState({sendSmsSuccess: false}), 6000)
+    timeOut = setTimeout(() => self.setState({sendSmsSuccess: false}), 6000)
 
-    UserAction.SendSignUpSms(86, phone)
+    // UserAction.SendSignUpSms(86, phone)
   }
 
   onSubmitSignup(phone, code, password, passwordRepeat) {
     console.log(phone, code, password, passwordRepeat)
-    UserAction.ReceiveSignUpSms(phone, code, password)
+    // UserAction.ReceiveSignUpSms(phone, code, password)
+  }
+
+  componentWillUnmount(){
+    timeOut && clearInterval(timeOut)
+    timeOut = false
   }
 
   render() {
