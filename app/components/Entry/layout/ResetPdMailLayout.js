@@ -9,17 +9,17 @@ import Mask from '../Mask'
 import $ from 'jquery'
 import { message } from 'antd'
 
-const FindPasswordLayout = ({pathname, onSubmit}) => {
+const ResetPdMailLayout = ({pathname, onSubmit}) => {
   const cls = classnames({
-    hidden: pathname !== '/find_password'
+    hidden: pathname !== '/reset_pd_mail'
   });
 
   let email = ''
 
   return (
     <div className={cls}>
-      <Mask pathname="/find_password" />
-      <RouteTransition { ...presets.pop } className="find_password" pathname="/find_password">
+      <Mask pathname="/reset_pd_mail" />
+      <RouteTransition { ...presets.pop } className="find_password" pathname="/reset_pd_mail">
         <p className="h1 color_green">Forgot your Password?</p>
 
         <form>
@@ -44,4 +44,4 @@ const FindPasswordLayout = ({pathname, onSubmit}) => {
   )
 }
 
-export default FindPasswordLayout
+export default ResetPdMailLayout

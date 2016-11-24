@@ -1,14 +1,14 @@
 import React from 'react'
-import FindPasswordLayout from '../layout/FindPasswordLayout'
+import ResetPdPhoneLayout from '../layout/ResetPdPhoneLayout'
 
-class FindPasswordContainer extends React.Component {
+class ResetPdPhoneContainer extends React.Component {
   onSubmit(password){
     console.log(password)
   }
 
   render() {
     return (
-      <FindPasswordLayout
+      <ResetPdPhoneLayout
         pathname={this.props.location.pathname}
         onSubmit={this.onSubmit}
       />
@@ -16,4 +16,4 @@ class FindPasswordContainer extends React.Component {
   }
 }
 
-export default FindPasswordContainer
+export default ResetPdPhoneContainer
