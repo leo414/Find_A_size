@@ -1,14 +1,14 @@
 import React from 'react'
-import FindPasswordLayout from './FindPasswordLayout'
+import BindMailLayout from '../layout/BindMailLayout'
 
-class FindPasswordContainer extends React.Component {
+class BindMailContainer extends React.Component {
   onSubmit(password){
     console.log(password)
   }
 
   render() {
     return (
-      <FindPasswordLayout
+      <BindMailLayout
         pathname={this.props.location.pathname}
         onSubmit={this.onSubmit}
       />
@@ -16,4 +16,4 @@ class FindPasswordContainer extends React.Component {
   }
 }
 
-export default FindPasswordContainer
+export default BindMailContainer

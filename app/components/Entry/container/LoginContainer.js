@@ -1,11 +1,11 @@
 import React from 'react'
 import { hashHistory } from 'react-router'
-import LoginLayout from './LoginLayout'
+import LoginLayout from '../layout/LoginLayout'
 
 import Reflux from 'reflux'
 import ReactMixin from 'react-mixin'
-import UserStore from '../../stores/UserStore'
-import UserAction from '../../actions/UserAction'
+import UserStore from '../../../stores/UserStore'
+import UserAction from '../../../actions/UserAction'
 
 class LoginContainer extends React.Component {
   onGetUserInfo(data) {

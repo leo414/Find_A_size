@@ -1,10 +1,10 @@
 import React from 'react'
-import SignupPhoneLayout from './SignupPhoneLayout'
+import SignupPhoneLayout from '../layout/SignupPhoneLayout'
 
 import Reflux from 'reflux'
 import ReactMixin from 'react-mixin'
-import UserStore from '../../stores/UserStore'
-import UserAction from '../../actions/UserAction'
+import UserStore from '../../../stores/UserStore'
+import UserAction from '../../../actions/UserAction'
 
 let self;
 class SignupPhoneContainer extends React.Component {
@@ -34,15 +34,12 @@ class SignupPhoneContainer extends React.Component {
     self.setState({isClickGetCode: true})
     setTimeout(() => self.setState({sendSmsSuccess: false}), 6000)
 
-    UserAction.ReceiveSignUpSms(86, phone)
+    UserAction.SendSignUpSms(86, phone)
   }
 
   onSubmitSignup(phone, code, password, passwordRepeat) {
-    console.log(phone, password, passwordRepeat)
-    // if userName is email
-    // UserAction.SendSignUpMail()
-
-    // if userName is phone
+    console.log(phone, code, password, passwordRepeat)
+    UserAction.ReceiveSignUpSms(phone, code, password)
   }
 
   render() {

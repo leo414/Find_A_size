@@ -12,20 +12,20 @@ const UserAction = Reflux.createActions({
   GoogleSignIn: {asyncResult: true},
 })
 
-UserAction.SendSignUpSms.listen(function(Phone, Code, Password){
+UserAction.SendSignUpSms.listen(function(Prefix, Phone){
   let data = {
+    Prefix,
     Phone,
-    Code,
-    Password,
   }
 
   HttpFactory.fetch(USER.SendSignUpSms, data, this.completed, this.failed)
 })
 
-UserAction.ReceiveSignUpSms.listen(function(Prefix, Phone){
+UserAction.ReceiveSignUpSms.listen(function(Phone, Code, Password){
   let data = {
-    Prefix,
     Phone,
+    Code,
+    Password,
   }
 
   HttpFactory.fetch(USER.ReceiveSignUpSms, data, this.completed, this.failed)
