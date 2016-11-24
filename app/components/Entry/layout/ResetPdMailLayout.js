@@ -12,20 +12,20 @@ import { message } from 'antd'
 const ResetPdMailLayout = ({pathname, onSubmit}) => {
   const cls = classnames({
     hidden: pathname !== '/reset_pd_mail'
-  });
+  })
 
-  let email = ''
+  let password = ''
 
   return (
     <div className={cls}>
       <Mask pathname="/reset_pd_mail" />
       <RouteTransition { ...presets.pop } className="find_password" pathname="/reset_pd_mail">
-        <p className="h1 color_green">Forgot your Password?</p>
+        <p className="h1 color_green">Reset your Password</p>
 
         <form>
           <div className="input_box">
-            <span className="fl color_blueness" onClick={event => $(event.target).next('input').focus()}>Email Address</span>
-            <input type="email" className="fr" onChange={event => email = event.target.value.trim()} /> <br/>
+            <span className="fl color_blueness" onClick={event => $(event.target).next('input').focus()}>New Password</span>
+            <input type="password" className="fr" onChange={event => password = event.target.value.trim()} /> <br/>
           </div>
         </form>
 
@@ -34,7 +34,7 @@ const ResetPdMailLayout = ({pathname, onSubmit}) => {
           height="38px"
           fontSize="18px"
           className="green"
-          handleSubmit={() => onSubmit(email)}
+          handleSubmit={() => onSubmit(password)}
           value="Reset Password"
         />
 

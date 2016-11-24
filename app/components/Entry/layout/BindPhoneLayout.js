@@ -20,7 +20,7 @@ const BindPhoneLayout = ({pathname, onSubmit}) => {
     <div className={cls}>
       <Mask pathname="/bind_phone" />
       <RouteTransition { ...presets.pop } className="find_password" pathname="/bind_phone">
-        <p className="h1 color_green">Forgot your Password?</p>
+        <p className="h1 color_green">CONNECT WITH PHONE NUMBER</p>
 
         <form>
           <div className="input_box">

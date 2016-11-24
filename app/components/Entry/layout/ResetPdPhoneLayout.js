@@ -37,7 +37,7 @@ const ResetPdPhoneLayout = props => {
     <div className={cls}>
       <Mask pathname="/reset_pd_phone" />
       <RouteTransition { ...presets.pop } className="sign_up_phone" style={{height: '500px', top: '12%'}} pathname="/reset_pd_phone">
-        <p className="h1 color_green">Find password</p>
+        <p className="h1 color_green">FORGOT YOUR PASSWORD?</p>
         <hr style={{height: '1px', border: 'none', borderTop: '1px solid #eee', marginTop: '40px'}} />
         <form>
           <div className="input_box phone_number">
@@ -87,6 +87,7 @@ const ResetPdPhoneLayout = props => {
           handleSubmit={() => {console.log(phone); onSubmitSignup(phone, code, password, passwordRepeat)}}
           value="Sign up"
         />
+        <p className="subtitle">Know your password? &nbsp;&nbsp;&nbsp;&nbsp;<Link to="/login"><strong className="color_green">LOG IN</strong></Link></p>
       </RouteTransition>
     </div>
   )

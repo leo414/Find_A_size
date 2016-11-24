@@ -20,7 +20,7 @@ const BindMailLayout = ({pathname, onSubmit}) => {
     <div className={cls}>
       <Mask pathname="/bind_mail" />
       <RouteTransition { ...presets.pop } className="find_password" pathname="/bind_mail">
-        <p className="h1 color_green">Forgot your Password?</p>
+        <p className="h1 color_green">CONNECT WITH MAIL</p>
 
         <form>
           <div className="input_box">

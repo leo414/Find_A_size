@@ -14,18 +14,24 @@ const ChangePasswordLayout = ({pathname, onSubmit}) => {
     hidden: pathname !== '/change_password'
   });
 
-  let email = ''
+  let rawPassword = '',
+      newPassword = ''
 
   return (
     <div className={cls}>
       <Mask pathname="/change_password" />
-      <RouteTransition { ...presets.pop } className="find_password" pathname="/change_password">
-        <p className="h1 color_green">Forgot your Password?</p>
+      <RouteTransition { ...presets.pop } style={{height: '350px'}} className="find_password" pathname="/change_password">
+        <p className="h1 color_green">CHANGE YOUR PASSWORD</p>
 
         <form>
           <div className="input_box">
-            <span className="fl color_blueness" onClick={event => $(event.target).next('input').focus()}>Email Address</span>
-            <input type="email" className="fr" onChange={event => email = event.target.value.trim()} /> <br/>
+            <span className="fl color_blueness" onClick={event => $(event.target).next('input').focus()}>Raw Password</span>
+            <input type="password" className="fr" onChange={event => rawPassword = event.target.value.trim()} /> <br/>
+          </div>
+
+          <div className="input_box">
+            <span className="fl color_blueness" onClick={event => $(event.target).next('input').focus()}>New Password</span>
+            <input type="password" className="fr" onChange={event => newPassword = event.target.value.trim()} /> <br/>
           </div>
         </form>
 
@@ -34,11 +40,9 @@ const ChangePasswordLayout = ({pathname, onSubmit}) => {
           height="38px"
           fontSize="18px"
           className="green"
-          handleSubmit={() => onSubmit(email)}
+          handleSubmit={() => onSubmit(rawPassword, newPassword)}
           value="Reset Password"
         />
-
-        <p className="subtitle">Know your password? &nbsp;&nbsp;&nbsp;&nbsp;<Link to="/login"><strong className="color_green">LOG IN</strong></Link></p>
       </RouteTransition>
     </div>
   )

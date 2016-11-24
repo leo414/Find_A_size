@@ -20,7 +20,7 @@ const SendFindPdMailLayout = ({pathname, onSubmit}) => {
     <div className={cls}>
       <Mask pathname="/send_find_pd_mail" />
       <RouteTransition { ...presets.pop } className="find_password" pathname="/send_find_pd_mail">
-        <p className="h1 color_green">Forgot your Password?</p>
+        <p className="h1 color_green">FORGOT YOUR PASSWORD?</p>
 
         <form>
           <div className="input_box">
@@ -35,7 +35,7 @@ const SendFindPdMailLayout = ({pathname, onSubmit}) => {
           fontSize="18px"
           className="green"
           handleSubmit={() => onSubmit(email)}
-          value="Reset Password"
+          value="Submit"
         />
 
         <p className="subtitle">Know your password? &nbsp;&nbsp;&nbsp;&nbsp;<Link to="/login"><strong className="color_green">LOG IN</strong></Link></p>
