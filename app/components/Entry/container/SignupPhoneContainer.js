@@ -12,8 +12,6 @@ class SignupPhoneContainer extends React.Component {
   constructor(props){
     super(props)
     this.state = ({
-      sendSmsSuccess: false,
-      phoneSignupSuccess: false,
       isClickGetCode: false,
       phone: '',
       password: '',
@@ -22,13 +20,13 @@ class SignupPhoneContainer extends React.Component {
   }
   onUserStoreChange(data) {
     if(data.sendSmsCode.flag === 'sendSms'){
-      this.setState({
-        sendSmsSuccess: data.sendSmsCode.sendSmsSuccess
-      })
+      if(data.sendSmsCode.sendSmsSuccess) {
+        // do sth
+      }
     } else if(data.phoneSignup.falg === 'phoneSignup') {
-      this.setState({
-        phoneSignupSuccess: data.phoneSignup.phoneSignupSuccess
-      })
+      if(data.phoneSignup.phoneSignupSuccess) {
+        // do sth
+      }
     }
   }
 
@@ -60,12 +58,10 @@ class SignupPhoneContainer extends React.Component {
   }
 
   render() {
-    const {sendSmsSuccess, phoneSignupSuccess, isClickGetCode} = this.state
+    const { isClickGetCode } = this.state
     self = this
     return (
       <SignupPhoneLayout
-        sendSmsSuccess={sendSmsSuccess}
-        phoneSignupSuccess={phoneSignupSuccess}
         pathname={this.props.location.pathname}
         getCode={this.getCode}
         onSubmitSignup={this.onSubmitSignup}

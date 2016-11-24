@@ -10,14 +10,10 @@ import Button from '../../Common/Button'
 import Mask from '../Mask'
 
 import $ from 'jquery'
-
-
 import { message } from 'antd'
 
 const ResetPdPhoneLayout = props => {
   const {
-    sendSmsSuccess,
-    phoneSignupSuccess,
     pathname,
     getCode,
     onSubmitSignup,

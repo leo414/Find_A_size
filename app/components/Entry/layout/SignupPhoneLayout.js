@@ -11,13 +11,10 @@ import Mask from '../Mask'
 
 import $ from 'jquery'
 
-
 import { message } from 'antd'
 
 const SignupWithPhone = props => {
   const{
-    sendSmsSuccess,
-    phoneSignupSuccess,
     pathname,
     getCode,
     onSubmitSignup,
