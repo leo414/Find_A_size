@@ -13,6 +13,7 @@ const UserStore = Reflux.createStore({
         googleLoginSuccess: false,
         flag:'',
       },
+
       sendSmsCode: {
         sendSmsSuccess: false,
         flag: '',
@@ -21,6 +22,16 @@ const UserStore = Reflux.createStore({
         phoneSignupSuccess: false,
         flag: '',
       },
+
+      sendResetSmsCode: {
+        sendSmsSuccess: false,
+        flag: '',
+      },
+      phoneResetPassword: {
+        resetPasswordSuccess: false,
+        flag: '',
+      },
+
       mailSignup: {
         sendMailSuccess: false,
         flag: '',
@@ -88,13 +99,40 @@ const UserStore = Reflux.createStore({
 
   onReceiveSignUpSmsCompleted(res){
     console.log(res)
-
     if(res.Success){
       this.data.phoneSignup.phoneSignupSuccess = true
     }else{
       this.data.hintMessage = res.ErrorMsg
     }
     this.data.phoneSignup.flag = 'phoneSignup'
+    this.trigger(this.data)
+  },
+  onReceiveSignUpSmsFailed(res){
+    HttpErrorCallBack(res)
+  },
+
+  onSendSignUpSmsCompleted(res){
+    console.log(res)
+    if(res.Success){
+      this.data.sendResetSmsCode.sendSmsSuccess = true
+    }else{
+      this.data.hintMessage = res.ErrorMsg
+    }
+    this.data.sendResetSmsCode.flag = 'sendSms'
+    this.trigger(this.data)
+  },
+  onSendSignUpSmsFailed(res){
+    HttpErrorCallBack(res)
+  },
+
+  onReceiveSignUpSmsCompleted(res){
+    console.log(res)
+    if(res.Success){
+      this.data.phoneResetPassword.resetPasswordSuccess = true
+    }else{
+      this.data.hintMessage = res.ErrorMsg
+    }
+    this.data.phoneResetPassword.flag = 'resetPassword'
     this.trigger(this.data)
   },
   onReceiveSignUpSmsFailed(res){
