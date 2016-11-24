@@ -14,8 +14,16 @@ import $ from 'jquery'
 
 import { message } from 'antd'
 
-const SignupWithPhone =
-  ({sendSmsSuccess, phoneSignupSuccess, pathname, getCode, onSubmitSignup, isClickGetCode}) => {
+const SignupWithPhone = props => {
+  const{
+    sendSmsSuccess,
+    phoneSignupSuccess,
+    pathname,
+    getCode,
+    onSubmitSignup,
+    isClickGetCode,
+  } = props
+
   const cls = classnames({
     hidden: pathname !== '/sign_up_phone'
   })
@@ -39,7 +47,14 @@ const SignupWithPhone =
         <form>
           <div className="input_box phone_number">
             <span className="fl color_blueness" onClick={event => $(event.target).next('input').focus()}>Phone Number</span>
-            <input type="number" className="fr" onChange={event => phone = event.target.value.trim()} /> <br/>
+            <input
+              type="number"
+              readOnly={isClickGetCode ? "readOnly" : ''}
+              className="fr"
+              onChange={event => phone = event.target.value.trim()}
+            />
+
+            <br/>
             {
               isClickGetCode ?
               <sapn className="get_code_msg">xxxxxxxxxx</sapn>
@@ -49,7 +64,7 @@ const SignupWithPhone =
                 height="24px"
                 fontSize="12px"
                 className="green get_code"
-                handleSubmit={() => getCode(phone)}
+                handleSubmit={() => getCode(phone, password, passwordRepeat)}
                 value="Get code"
               />
             }

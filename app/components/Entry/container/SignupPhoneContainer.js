@@ -15,8 +15,10 @@ class SignupPhoneContainer extends React.Component {
       sendSmsSuccess: false,
       phoneSignupSuccess: false,
       isClickGetCode: false,
+      phone: '',
+      password: '',
+      passwordRepeat: '',
     })
-    self = this
   }
   onUserStoreChange(data) {
     if(data.sendSmsCode.flag === 'sendSms'){
@@ -32,14 +34,23 @@ class SignupPhoneContainer extends React.Component {
 
   getCode(phone){
     if(!phone) return
-    self.setState({isClickGetCode: true})
-    timeOut = setTimeout(() => self.setState({sendSmsSuccess: false}), 6000)
+    self.setState({
+      isClickGetCode: true,
+      phone,
+      password,
+      passwordRepeat,
+    })
+    timeOut = setTimeout(() => self.setState({isClickGetCode: false}), 60000)
 
     // UserAction.SendSignUpSms(86, phone)
   }
 
   onSubmitSignup(phone, code, password, passwordRepeat) {
     console.log(phone, code, password, passwordRepeat)
+    phone = phone || self.state.phone
+    password = password || self.state.password
+    passwordRepeat = passwordRepeat || self.state.passwordRepeat
+    console.log(phone, password, passwordRepeat)
     // UserAction.ReceiveSignUpSms(phone, code, password)
   }
 
@@ -50,7 +61,7 @@ class SignupPhoneContainer extends React.Component {
 
   render() {
     const {sendSmsSuccess, phoneSignupSuccess, isClickGetCode} = this.state
-    // console.log(this.setState)
+    self = this
     return (
       <SignupPhoneLayout
         sendSmsSuccess={sendSmsSuccess}
