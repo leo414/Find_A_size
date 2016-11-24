@@ -7,15 +7,11 @@ const UserStore = Reflux.createStore({
   listenables: UserAction,
 
   init() {
-    this.data =  {
+    this.data = {
       openUserLogin: {
         facebookLoginSuccess: false,
         googleLoginSuccess: false,
         flag:'',
-      },
-      mailSignup: {
-        sendMailSuccess: false,
-        flag: '',
       },
       sendSmsCode: {
         sendSmsSuccess: false,
@@ -23,6 +19,10 @@ const UserStore = Reflux.createStore({
       },
       phoneSignup: {
         phoneSignupSuccess: false,
+        flag: '',
+      },
+      mailSignup: {
+        sendMailSuccess: false,
         flag: '',
       },
 
@@ -33,7 +33,7 @@ const UserStore = Reflux.createStore({
   onFacebookSignInCompleted(res){
     console.log(res)
     if(res.Success){
-      this.openUserLogin.facebookLoginSuccess = true
+      this.data.openUserLogin.facebookLoginSuccess = true
     }else{
       this.data.hintMessage = res.ErrorMsg
     }
@@ -47,7 +47,7 @@ const UserStore = Reflux.createStore({
   onGoogleSignInCompleted(res){
     console.log(res)
     if(res.Success){
-      this.openUserLogin.googleLoginSuccess = true
+      this.data.openUserLogin.googleLoginSuccess = true
     }else{
       this.data.hintMessage = res.ErrorMsg
     }
@@ -75,7 +75,7 @@ const UserStore = Reflux.createStore({
   onSendSignUpSmsCompleted(res){
     console.log(res)
     if(res.Success){
-      this.sendSmsCode.sendSmsSuccess = true
+      this.data.sendSmsCode.sendSmsSuccess = true
     }else{
       this.data.hintMessage = res.ErrorMsg
     }
@@ -88,8 +88,9 @@ const UserStore = Reflux.createStore({
 
   onReceiveSignUpSmsCompleted(res){
     console.log(res)
+
     if(res.Success){
-      this.phoneSignup.phoneSignupSuccess = true
+      this.data.phoneSignup.phoneSignupSuccess = true
     }else{
       this.data.hintMessage = res.ErrorMsg
     }

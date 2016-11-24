@@ -1,10 +1,10 @@
 import React from 'react'
-import SignupLayout from './SignupLayout'
+import SignupLayout from '../layout/SignupLayout'
 
 import Reflux from 'reflux'
 import ReactMixin from 'react-mixin'
-import UserStore from '../../stores/UserStore'
-import UserAction from '../../actions/UserAction'
+import UserStore from '../../../stores/UserStore'
+import UserAction from '../../../actions/UserAction'
 
 class SignupContainer extends React.Component {
   onGetUserInfo(data) {

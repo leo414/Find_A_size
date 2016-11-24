@@ -5,10 +5,10 @@ import classnames from 'classnames'
 
 import FacebookLogin from 'react-facebook-login'
 import GoogleLogin from 'react-google-login'
-import API from '../../API'
+import API from '../../../API'
 
-import Button from '../Common/Button'
-import Mask from './Mask'
+import Button from '../../Common/Button'
+import Mask from '../Mask'
 import $ from 'jquery'
 
 import { message } from 'antd'
