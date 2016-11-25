@@ -12,8 +12,6 @@ class ResetPdPhoneContainer extends React.Component {
   constructor(props){
     super(props)
     this.state = ({
-      sendSmsSuccess: false,
-      phoneSignupSuccess: false,
       isClickGetCode: false,
       phone: '',
       password: '',
@@ -22,13 +20,13 @@ class ResetPdPhoneContainer extends React.Component {
   }
   onUserStoreChange(data) {
     if(data.sendResetSmsCode.flag === 'sendSms'){
-      this.setState({
-        sendSmsSuccess: data.sendResetSmsCode.sendSmsSuccess
-      })
+      if(data.sendSmsCode.sendSmsSuccess) {
+        // do sth
+      }
     } else if(data.phoneResetPassword.falg === 'resetPassword') {
-      this.setState({
-        phoneSignupSuccess: data.phoneResetPassword.resetPasswordSuccess
-      })
+      if(data.phoneSignup.phoneSignupSuccess) {
+        // do sth
+      }
     }
   }
 
@@ -42,7 +40,7 @@ class ResetPdPhoneContainer extends React.Component {
       passwordRepeat,
     })
     timeOut = setTimeout(() => self.setState({isClickGetCode: false}), 60000)
-    // UserAction.SendResetPasswordSms(86, phone)
+    UserAction.SendResetPasswordSms(86, phone)
   }
 
   onSubmitSignup(phone, code, password, passwordRepeat) {
@@ -51,7 +49,7 @@ class ResetPdPhoneContainer extends React.Component {
     password = password || self.state.password
     passwordRepeat = passwordRepeat || self.state.passwordRepeat
     console.log(phone, password, passwordRepeat)
-    // UserAction.ReceiveResetPasswordSms(phone, code, password)
+    UserAction.ReceiveResetPasswordSms(phone, code, password)
   }
 
   componentWillUnmount(){
@@ -60,12 +58,10 @@ class ResetPdPhoneContainer extends React.Component {
   }
 
   render() {
-    const {sendSmsSuccess, phoneSignupSuccess, isClickGetCode} = this.state
+    const { isClickGetCode } = this.state
     self = this
     return (
       <ResetPdPhoneLayout
-        sendSmsSuccess={sendSmsSuccess}
-        phoneSignupSuccess={phoneSignupSuccess}
         pathname={this.props.location.pathname}
         getCode={this.getCode}
         onSubmitSignup={this.onSubmitSignup}

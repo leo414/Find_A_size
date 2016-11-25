@@ -37,6 +37,16 @@ const UserStore = Reflux.createStore({
         flag: '',
       },
 
+      userTicket: {
+        salt: '',
+        flag: '',
+      },
+
+      userLogin: {
+        loginSuccess: false,
+        flag: '',
+      },
+
       hintMessage: '',
     }
   },
@@ -136,6 +146,34 @@ const UserStore = Reflux.createStore({
     this.trigger(this.data)
   },
   onReceiveSignUpSmsFailed(res){
+    HttpErrorCallBack(res)
+  },
+
+  onGetTicketCompleted(res){
+    console.log(res)
+    if(res.Success){
+      this.data.userTicket.salt = res.Salt
+    }else{
+      this.data.hintMessage = res.ErrorMsg
+    }
+    this.data.userTicket.flag = 'getTicket'
+    this.trigger(this.data)
+  },
+  onGetTicketFailed(res){
+    HttpErrorCallBack(res)
+  },
+
+  onUserLoginCompleted(res){
+    console.log(res)
+    if(res.Success){
+      this.data.userLogin.loginSuccess = res.Success
+    }else{
+      this.data.hintMessage = res.ErrorMsg
+    }
+    this.data.userLogin.flag = 'userLogin'
+    this.trigger(this.data)
+  },
+  onUserLoginFailed(res){
     HttpErrorCallBack(res)
   },
 

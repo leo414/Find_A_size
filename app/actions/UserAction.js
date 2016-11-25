@@ -14,6 +14,9 @@ const UserAction = Reflux.createActions({
 
   FacebookSignIn: {asyncResult: true},
   GoogleSignIn: {asyncResult: true},
+
+  GetTicket: {asyncResult: true},
+  UserLogin: {asyncResult: true},
 })
 
 UserAction.SendResetPasswordSms.listen(function(Prefix, Phone){
@@ -76,6 +79,22 @@ UserAction.GoogleSignIn.listen(function(AccessToken){
     AccessToken
   }
   HttpFactory.fetch(USER.GoogleSignIn, data, this.completed, this.failed)
+})
+
+UserAction.GetTicket.listen(function(UserName){
+  let data = {
+    UserName
+  }
+  HttpFactory.fetch(USER.GetTicket, data, this.completed, this.failed)
+})
+
+UserAction.UserLogin.listen(function(UserName, Password, Timestamp){
+  let data = {
+    UserName,
+    Password,
+    Timestamp,
+  }
+  HttpFactory.fetch(USER.UserLogin, data, this.completed, this.failed)
 })
 
 export default UserAction
