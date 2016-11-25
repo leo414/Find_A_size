@@ -60,6 +60,7 @@ const SignupLayout = ({pathname, onSignup, onFacebookSignup, onGoogleSignup}) =>
          buttonText="Sign up with Google"
          onSuccess={responseGoogle}
          className="google_facebook_btn color_google"
+         onFailure={responseGoogle}
        />
 
         <p className="subtitle">Already have an account? &nbsp;&nbsp;&nbsp;&nbsp;<Link to="/login"><strong className="color_green">LOG IN</strong></Link></p>

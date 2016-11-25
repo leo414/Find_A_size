@@ -60,6 +60,7 @@ const LoginLayout = ({pathname, onFaceBookLogin, onGoogleLogin, onLogin}) => {
           buttonText="Log in with Google"
           onSuccess={responseGoogle}
           className="google_facebook_btn color_google"
+          onFailure={responseGoogle}
        />
 
         <p className="subtitle">Don’t have an account? &nbsp;&nbsp;&nbsp;&nbsp;<Link to="/sign_up"><strong className="color_green">SIGN UP</strong></Link></p>
