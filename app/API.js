@@ -17,6 +17,9 @@ const API = {
 
     FacebookSignIn: URL + 'User.FacebookSignIn',
     GoogleSignIn: URL + 'User.GoogleSignIn',
+
+    GetTicket: URL + 'User.GetTicket',
+    UserLogin: URL + 'User.SignIn',
   },
 }
 
