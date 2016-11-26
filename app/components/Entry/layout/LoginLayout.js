@@ -86,7 +86,7 @@ const LoginLayout = props => {
           LOG IN
         </Button>
 
-        <p className="subtitle"><Link to="/send_find_pd_mail">Forgot your password?</Link></p>
+        <p className="subtitle"><Link to="/send_pd_mail">Forgot your password?</Link></p>
       </RouteTransition>
     </div>
   )
