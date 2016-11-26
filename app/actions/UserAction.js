@@ -41,14 +41,14 @@ UserAction.ReceiveResetPasswordSms.listen(function(Phone, Code, Password){
   HttpFactory.fetch(USER.ReceiveResetPasswordSms, data, this.completed, this.failed)
 })
 
-UserAction.SendResetPasswordMail.listen(function(email){
+UserAction.SendResetPasswordMail.listen(function(Email){
   let data = {
     Email
   }
 
   HttpFactory.fetch(USER.SendResetPasswordMail, data, this.completed, this.failed)
 })
-UserAction.ReceiveResetPasswordMail.listen(function(email){
+UserAction.ReceiveResetPasswordMail.listen(function(Email){
   let data = {
     Email,
     Code,
