@@ -10,20 +10,41 @@ import UserAction from '../../../actions/UserAction'
 import pbkdf2 from 'pbkdf2-sha256'
 import getNowFormatDate from '../../../tools/getNowFormatDate'
 
-let self;
+import { message } from 'antd'
+
+let self
+let loginOnce = false
 class LoginContainer extends React.Component {
   constructor(props){
     super(props)
     this.state = ({
       userName: '',
       password: '',
+      loading: false,
     })
   }
 
   onGetUserInfo(data) {
+    console.log(data)
     if(data.openUserLogin.flag === 'openUserLogin') {
       if(data.openUserLogin.googleLoginSuccess || data.openUserLogin.facebookLoginSuccess) {
-        hashHistory.push({pathname: '/', query: null, state: {isLogin: true}})
+        localStorage.isLogin = true
+        message.success('Login success')
+        // setTimeout(() => hashHistory.push({pathname: '/', query: null, state: {isLogin: true}}), 2000)
+        setTimeout(() => hashHistory.push('/'), 2000)
+      }
+    }
+
+    if(data.userLogin.flag === 'userLogin') {
+      if(data.userLogin.loginSuccess === true) {
+        localStorage.isLogin = true
+        message.success('Login success')
+        this.setState({loading: false})
+        // setTimeout(() => hashHistory.push({pathname: '/', query: null, state: {isLogin: true}}), 2000)
+        setTimeout(() => hashHistory.push('/'), 2000)
+      } else if(data.userLogin.loginSuccess === 'loginFail') {
+        message.error('Unknown user name or bad password!', 2)
+        this.setState({loading: false})
       }
     }
 
@@ -31,17 +52,14 @@ class LoginContainer extends React.Component {
       const { salt } = data.userTicket
       const { userName,  password } = this.state
       if(salt && userName && password) {
+        if(!loginOnce) return
+        loginOnce = false
         const timestamp = getNowFormatDate()
-        const pbkdf2Password_1 = pbkdf2(password, salt, 1000, 24).toString('hex') + timestamp
+        const pbkdf2Password_1 = pbkdf2(password || this.state.password, salt, 1000, 24).toString('hex') + timestamp
         const pbkdf2Password_2 = pbkdf2(pbkdf2Password_1, salt, 1000, 24).toString('hex')
-        UserAction.UserLogin(userName, pbkdf2Password_2, timestamp)
+        UserAction.UserLogin(userName || this.state.password, pbkdf2Password_2, timestamp)
       }
     }
-
-    if(data.userLogin.flag === 'userLogin') {
-      if(data.userLogin.loginSuccess) console.log('登录成功！')
-    }
-
   }
 
   onFaceBookLogin(accessToken){
@@ -57,8 +75,10 @@ class LoginContainer extends React.Component {
     self.setState({
       userName,
       password,
+      loading: true,
     })
-    UserAction.GetTicket(userName)
+    loginOnce = true
+    UserAction.GetTicket(userName || self.state.userName)
   }
 
   render() {
@@ -69,6 +89,7 @@ class LoginContainer extends React.Component {
        onFaceBookLogin={this.FaceBookLogin}
        onGoogleLogin={this.GoogleLogin}
        onLogin={this.onLogin}
+       loading={this.state.loading}
       />
     )
   }

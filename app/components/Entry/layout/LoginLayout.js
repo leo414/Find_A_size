@@ -7,7 +7,8 @@ import FacebookLogin from 'react-facebook-login'
 import GoogleLogin from 'react-google-login'
 import API from '../../../API'
 
-import Button from '../../Common/Button'
+// import Button from '../../Common/Button'
+import { Button } from 'antd'
 import Mask from '../Mask'
 import $ from 'jquery'
 
@@ -17,7 +18,9 @@ message.config({
   duration: 2,
 })
 
-const LoginLayout = ({pathname, onFaceBookLogin, onGoogleLogin, onLogin}) => {
+const LoginLayout = props => {
+  const { pathname, onFaceBookLogin, onGoogleLogin, onLogin, loading } = props
+
   const cls = classnames({
     hidden: pathname !== '/login'
   })
@@ -32,6 +35,13 @@ const LoginLayout = ({pathname, onFaceBookLogin, onGoogleLogin, onLogin}) => {
     if(response.accessToken) {
       onGoogleLogin(response.accessToken)
     }
+  }
+
+  const buttonStyle = {
+    width: '280px',
+    height: '38px',
+    fontSize: "18px",
+    backgroundColor: '#146eb4',
   }
 
   let userName = '',
@@ -79,14 +89,9 @@ const LoginLayout = ({pathname, onFaceBookLogin, onGoogleLogin, onLogin}) => {
           </div>
         </form>
 
-        <Button
-          width="280px"
-          height="38px"
-          fontSize="18px"
-          className="green"
-          handleSubmit={() => onLogin(userName, password)}
-          value="LOG IN"
-        />
+        <Button onClick={() => onLogin(userName, password)} type="primary" loading={loading} style={buttonStyle}>
+          LOG IN
+       </Button>
 
         <p className="subtitle"><Link to="/send_find_pd_mail">Forgot your password?</Link></p>
       </RouteTransition>

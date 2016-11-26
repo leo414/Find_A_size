@@ -168,6 +168,7 @@ const UserStore = Reflux.createStore({
     if(res.Success){
       this.data.userLogin.loginSuccess = res.Success
     }else{
+      this.data.userLogin.loginSuccess = 'loginFail'
       this.data.hintMessage = res.ErrorMsg
     }
     this.data.userLogin.flag = 'userLogin'
