@@ -82,8 +82,9 @@ const UserStore = Reflux.createStore({
   onSendSignUpMailCompleted(res){
     console.log(res)
     if(res.Success){
-      this.mailSignup.sendMailSuccess = true
+      this.data.mailSignup.sendMailSuccess = true
     }else{
+      this.data.mailSignup.sendMailSuccess = 'sendFail'
       this.data.hintMessage = res.ErrorMsg
     }
     this.data.mailSignup.flag = 'sendMail'
