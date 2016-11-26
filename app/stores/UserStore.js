@@ -32,6 +32,15 @@ const UserStore = Reflux.createStore({
         flag: '',
       },
 
+      mailResetPassword: {
+        sendMilSuccess: false,
+        flag: '',
+      },
+      receiveMailPassword: {
+        resetPasswordSuccess: false,
+        flag: '',
+      },
+
       mailSignup: {
         sendMailSuccess: false,
         flag: '',
@@ -151,6 +160,35 @@ const UserStore = Reflux.createStore({
     this.trigger(this.data)
   },
   onReceiveResetPasswordSmsFailed(res){
+    HttpErrorCallBack(res)
+  },
+
+  onSendResetPasswordMailCompleted(res){
+    console.log(res)
+    if(res.Success){
+      this.data.mailResetPassword.sendMilSuccess = true
+    }else{
+      this.data.mailResetPassword.sendMilSuccess = 'resetFail'
+      this.data.hintMessage = res.ErrorMsg
+    }
+    this.data.mailResetPassword.flag = 'resetPassword'
+    this.trigger(this.data)
+  },
+  onSendResetPasswordMailFailed(res){
+    HttpErrorCallBack(res)
+  },
+  onReceiveResetPasswordMailCompleted(res){
+    console.log(res)
+    if(res.Success){
+      this.data.receiveMailPassword.resetPasswordSuccess = true
+    }else{
+      this.data.receiveMailPassword.resetPasswordSuccess = 'resetFail'
+      this.data.hintMessage = res.ErrorMsg
+    }
+    this.data.mailResetPassword.flag = 'resetPassword'
+    this.trigger(this.data)
+  },
+  onReceiveResetPasswordMailFailed(res){
     HttpErrorCallBack(res)
   },
 

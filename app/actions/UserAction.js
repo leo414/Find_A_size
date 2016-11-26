@@ -7,6 +7,9 @@ const UserAction = Reflux.createActions({
   SendResetPasswordSms: {asyncResult: true},
   ReceiveResetPasswordSms: {asyncResult: true},
 
+  SendResetPasswordMail: {asyncResult: true},
+  ReceiveResetPasswordMail: {asyncResult: true},
+
   SendSignUpSms: {asyncResult: true},
   ReceiveSignUpSms: {asyncResult: true},
 
@@ -36,6 +39,23 @@ UserAction.ReceiveResetPasswordSms.listen(function(Phone, Code, Password){
   }
 
   HttpFactory.fetch(USER.ReceiveResetPasswordSms, data, this.completed, this.failed)
+})
+
+UserAction.SendResetPasswordMail.listen(function(email){
+  let data = {
+    Email
+  }
+
+  HttpFactory.fetch(USER.SendResetPasswordMail, data, this.completed, this.failed)
+})
+UserAction.ReceiveResetPasswordMail.listen(function(email){
+  let data = {
+    Email,
+    Code,
+    Password,
+  }
+
+  HttpFactory.fetch(USER.ReceiveResetPasswordMail, data, this.completed, this.failed)
 })
 
 UserAction.SendSignUpSms.listen(function(Prefix, Phone){
