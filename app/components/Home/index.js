@@ -13,9 +13,9 @@ class Home extends React.Component {
   //   super(props)
   // }
   render() {
-    let isLogin = true
-    if(localStorage.isLogin === 'false') {
-      isLogin = false
+    let isLogin = false
+    if(localStorage.isLogin === 'true') {
+      isLogin = true
     }
     return (
       <div>

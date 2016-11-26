@@ -6,23 +6,31 @@ import classnames from 'classnames'
 import FacebookLogin from 'react-facebook-login'
 import GoogleLogin from 'react-google-login'
 
-import Button from '../../Common/Button'
+import { Button } from 'antd'
+import ButtonSelf from '../../Common/Button'
 import Mask from '../Mask'
 
 import $ from 'jquery'
-import { message } from 'antd'
 
 const ResetPdPhoneLayout = props => {
   const {
     pathname,
     getCode,
-    onSubmitSignup,
+    onResetPssword,
     isClickGetCode,
+    loading,
   } = props
 
   const cls = classnames({
     hidden: pathname !== '/reset_pd_phone'
   })
+
+  const buttonStyle = {
+    width: '280px',
+    height: '38px',
+    fontSize: "18px",
+    backgroundColor: '#146eb4',
+  }
 
   let phone = '',
       code = '',
@@ -50,7 +58,7 @@ const ResetPdPhoneLayout = props => {
               isClickGetCode ?
               <sapn className="get_code_msg">xxxxxxxxxx</sapn>
               :
-              <Button
+              <ButtonSelf
                 width="70px"
                 height="24px"
                 fontSize="12px"
@@ -75,14 +83,9 @@ const ResetPdPhoneLayout = props => {
           </div>
         </form>
 
-        <Button
-          width="280px"
-          height="38px"
-          fontSize="18px"
-          className="green"
-          handleSubmit={() => {console.log(phone); onSubmitSignup(phone, code, password, passwordRepeat)}}
-          value="Sign up"
-        />
+        <Button onClick={() => onResetPssword(phone, code, password, passwordRepeat)} type="primary" loading={loading} style={buttonStyle}>
+          Reset
+        </Button>
         <p className="subtitle">Know your password? &nbsp;&nbsp;&nbsp;&nbsp;<Link to="/login"><strong className="color_green">LOG IN</strong></Link></p>
       </RouteTransition>
     </div>
