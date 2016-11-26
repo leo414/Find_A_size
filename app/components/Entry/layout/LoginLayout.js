@@ -7,16 +7,9 @@ import FacebookLogin from 'react-facebook-login'
 import GoogleLogin from 'react-google-login'
 import API from '../../../API'
 
-// import Button from '../../Common/Button'
 import { Button } from 'antd'
 import Mask from '../Mask'
 import $ from 'jquery'
-
-import { message } from 'antd'
-message.config({
-  top: 200,
-  duration: 2,
-})
 
 const LoginLayout = props => {
   const { pathname, onFaceBookLogin, onGoogleLogin, onLogin, loading } = props
@@ -91,7 +84,7 @@ const LoginLayout = props => {
 
         <Button onClick={() => onLogin(userName, password)} type="primary" loading={loading} style={buttonStyle}>
           LOG IN
-       </Button>
+        </Button>
 
         <p className="subtitle"><Link to="/send_find_pd_mail">Forgot your password?</Link></p>
       </RouteTransition>

@@ -98,6 +98,7 @@ const UserStore = Reflux.createStore({
     if(res.Success){
       this.data.sendSmsCode.sendSmsSuccess = true
     }else{
+      this.data.sendSmsCode.sendSmsSuccess = 'sendFail'
       this.data.hintMessage = res.ErrorMsg
     }
     this.data.sendSmsCode.flag = 'sendSms'
@@ -112,6 +113,7 @@ const UserStore = Reflux.createStore({
     if(res.Success){
       this.data.phoneSignup.phoneSignupSuccess = true
     }else{
+      this.data.phoneSignup.phoneSignupSuccess = 'signFail'
       this.data.hintMessage = res.ErrorMsg
     }
     this.data.phoneSignup.flag = 'phoneSignup'
@@ -121,31 +123,33 @@ const UserStore = Reflux.createStore({
     HttpErrorCallBack(res)
   },
 
-  onSendSignUpSmsCompleted(res){
+  onSendResetPasswordSmsCompleted(res){
     console.log(res)
     if(res.Success){
       this.data.sendResetSmsCode.sendSmsSuccess = true
     }else{
+      this.data.sendResetSmsCode.sendSmsSuccess = 'sendFail'
       this.data.hintMessage = res.ErrorMsg
     }
     this.data.sendResetSmsCode.flag = 'sendSms'
     this.trigger(this.data)
   },
-  onSendSignUpSmsFailed(res){
+  onSendResetPasswordSmsFailed(res){
     HttpErrorCallBack(res)
   },
 
-  onReceiveSignUpSmsCompleted(res){
+  onReceiveResetPasswordSmsCompleted(res){
     console.log(res)
     if(res.Success){
       this.data.phoneResetPassword.resetPasswordSuccess = true
     }else{
+      this.data.phoneResetPassword.resetPasswordSuccess = 'resetFail'
       this.data.hintMessage = res.ErrorMsg
     }
     this.data.phoneResetPassword.flag = 'resetPassword'
     this.trigger(this.data)
   },
-  onReceiveSignUpSmsFailed(res){
+  onReceiveResetPasswordSmsFailed(res){
     HttpErrorCallBack(res)
   },
 

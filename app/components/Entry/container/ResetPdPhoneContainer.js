@@ -1,10 +1,13 @@
 import React from 'react'
 import ResetPdPhoneLayout from '../layout/ResetPdPhoneLayout'
+import { hashHistory } from 'react-router'
 
 import Reflux from 'reflux'
 import ReactMixin from 'react-mixin'
 import UserStore from '../../../stores/UserStore'
 import UserAction from '../../../actions/UserAction'
+
+import { message } from 'antd'
 
 let self;
 let timeOut;
@@ -16,23 +19,38 @@ class ResetPdPhoneContainer extends React.Component {
       phone: '',
       password: '',
       passwordRepeat: '',
+      loading: false,
     })
   }
   onUserStoreChange(data) {
+    console.log(data)
+    if(data.phoneResetPassword.flag === 'resetPassword') {
+      if(data.phoneResetPassword.resetPasswordSuccess === true) {
+        localStorage.isLogin = true
+        message.success('Reset password success')
+        this.setState({loading: false})
+        setTimeout(() => hashHistory.push('/account'), 2000)
+        return
+      } else if (data.phoneResetPassword.resetPasswordSuccess === 'resetFail'){
+        this.setState({loading: false})
+        message.error('Verification Code Error!', 2.5)
+        return
+      }
+    }
+
     if(data.sendResetSmsCode.flag === 'sendSms'){
-      if(data.sendSmsCode.sendSmsSuccess) {
-        // do sth
+      if(data.sendResetSmsCode.sendSmsSuccess === true) {
+        message.success('Send sms code success!')
+      } else if(data.sendResetSmsCode.sendSmsSuccess === 'sendFail') {
+        message.error('Phone Number Already Exists', 2.5)
       }
-    } else if(data.phoneResetPassword.falg === 'resetPassword') {
-      if(data.phoneSignup.phoneSignupSuccess) {
-        // do sth
-      }
+
     }
   }
 
   getCode(phone, password, passwordRepeat){
     console.log(phone)
-    if(!phone) return
+    if(!phone && !self.state.phone) return
     self.setState({
       isClickGetCode: true,
       phone,
@@ -40,11 +58,18 @@ class ResetPdPhoneContainer extends React.Component {
       passwordRepeat,
     })
     timeOut = setTimeout(() => self.setState({isClickGetCode: false}), 60000)
-    UserAction.SendResetPasswordSms(86, phone)
+    UserAction.SendResetPasswordSms(86, phone || self.state.phone)
   }
 
-  onSubmitSignup(phone, code, password, passwordRepeat) {
+  onResetPssword(phone, code, password, passwordRepeat) {
     console.log(phone, code, password, passwordRepeat)
+    self.setState({
+      phone,
+      code,
+      password,
+      passwordRepeat,
+      loading: true,
+    })
     phone = phone || self.state.phone
     password = password || self.state.password
     passwordRepeat = passwordRepeat || self.state.passwordRepeat
@@ -64,8 +89,9 @@ class ResetPdPhoneContainer extends React.Component {
       <ResetPdPhoneLayout
         pathname={this.props.location.pathname}
         getCode={this.getCode}
-        onSubmitSignup={this.onSubmitSignup}
+        onResetPssword={this.onResetPssword}
         isClickGetCode={isClickGetCode}
+        loading={this.state.loading}
       />
     )
   }

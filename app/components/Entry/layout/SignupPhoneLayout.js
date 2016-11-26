@@ -6,12 +6,11 @@ import classnames from 'classnames'
 import FacebookLogin from 'react-facebook-login'
 import GoogleLogin from 'react-google-login'
 
-import Button from '../../Common/Button'
+import { Button } from 'antd'
+import ButtonSelf from '../../Common/Button'
 import Mask from '../Mask'
 
 import $ from 'jquery'
-
-import { message } from 'antd'
 
 const SignupWithPhone = props => {
   const{
@@ -19,11 +18,19 @@ const SignupWithPhone = props => {
     getCode,
     onSubmitSignup,
     isClickGetCode,
+    loading,
   } = props
 
   const cls = classnames({
     hidden: pathname !== '/sign_up_phone'
   })
+
+  const buttonStyle = {
+    width: '280px',
+    height: '38px',
+    fontSize: "18px",
+    backgroundColor: '#146eb4',
+  }
 
   let phone = '',
       code = '',
@@ -56,7 +63,7 @@ const SignupWithPhone = props => {
               isClickGetCode ?
               <sapn className="get_code_msg">xxxxxxxxxx</sapn>
               :
-              <Button
+              <ButtonSelf
                 width="70px"
                 height="24px"
                 fontSize="12px"
@@ -81,14 +88,9 @@ const SignupWithPhone = props => {
           </div>
         </form>
 
-        <Button
-          width="280px"
-          height="38px"
-          fontSize="18px"
-          className="green"
-          handleSubmit={() => onSubmitSignup(phone, code, password, passwordRepeat)}
-          value="Sign up"
-        />
+        <Button onClick={() => onSubmitSignup(phone, code, password, passwordRepeat)} type="primary" loading={loading} style={buttonStyle}>
+          Sign up
+        </Button>
 
         <br/>
 
