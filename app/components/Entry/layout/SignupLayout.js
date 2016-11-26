@@ -7,7 +7,7 @@ import FacebookLogin from 'react-facebook-login'
 import GoogleLogin from 'react-google-login'
 import API from '../../../API'
 
-import Button from '../../Common/Button'
+import { Button } from 'antd'
 import Mask from '../Mask'
 
 import $ from 'jquery'
@@ -15,7 +15,7 @@ import $ from 'jquery'
 
 import { message } from 'antd'
 
-const SignupLayout = ({pathname, onSignup, onFacebookSignup, onGoogleSignup}) => {
+const SignupLayout = ({pathname, onSignup, onFacebookSignup, onGoogleSignup, loading}) => {
   const cls = classnames({
     hidden: pathname !== '/sign_up'
   })
@@ -30,6 +30,13 @@ const SignupLayout = ({pathname, onSignup, onFacebookSignup, onGoogleSignup}) =>
     if(response.accessToken) {
       onGoogleSignup(response.accessToken)
     }
+  }
+
+  const buttonStyle = {
+    width: '280px',
+    height: '38px',
+    fontSize: "18px",
+    backgroundColor: '#146eb4',
   }
 
   let email = '',
@@ -82,15 +89,10 @@ const SignupLayout = ({pathname, onSignup, onFacebookSignup, onGoogleSignup}) =>
             <input type="password" className="fr" onChange={event => passwordRepeat = event.target.value.trim()} />
           </div>
         </form>
-
-        <Button
-          width="280px"
-          height="38px"
-          fontSize="18px"
-          className="green"
-          handleSubmit={() => onSignup(email, password, passwordRepeat)}
-          value="Sign up"
-        />
+        
+        <Button onClick={() => onSignup(email, password, passwordRepeat)} type="primary" loading={loading} style={buttonStyle}>
+          Sign up
+        </Button>
 
         <br/>
 
