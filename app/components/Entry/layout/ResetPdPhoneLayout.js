@@ -10,11 +10,10 @@ import Button from '../../Common/Button'
 import Mask from '../Mask'
 
 import $ from 'jquery'
-
 import { message } from 'antd'
 
-const SignupWithPhone = props => {
-  const{
+const ResetPdPhoneLayout = props => {
+  const {
     pathname,
     getCode,
     onSubmitSignup,
@@ -22,7 +21,7 @@ const SignupWithPhone = props => {
   } = props
 
   const cls = classnames({
-    hidden: pathname !== '/sign_up_phone'
+    hidden: pathname !== '/reset_pd_phone'
   })
 
   let phone = '',
@@ -32,15 +31,10 @@ const SignupWithPhone = props => {
 
   return (
     <div className={cls}>
-      <Mask pathname="/sign_up_phone" />
-      <RouteTransition { ...presets.pop } className="sign_up_phone" pathname="/sign_up_phone">
-        <p className="h1 color_green">Create a free account</p>
-
-        <p className="subtitle">Already have an account? &nbsp;&nbsp;&nbsp;&nbsp;<Link to="/login"><strong className="color_green">LOG IN</strong></Link></p>
-
+      <Mask pathname="/reset_pd_phone" />
+      <RouteTransition { ...presets.pop } className="sign_up_phone" style={{height: '500px', top: '12%'}} pathname="/reset_pd_phone">
+        <p className="h1 color_green">FORGOT YOUR PASSWORD?</p>
         <hr style={{height: '1px', border: 'none', borderTop: '1px solid #eee', marginTop: '40px'}} />
-        <p className="h1 color_green or">OR</p><br/>
-        <Link className="phone_signup" to="/sign_up">(You can also signup with email)</Link>
         <form>
           <div className="input_box phone_number">
             <span className="fl color_blueness" onClick={event => $(event.target).next('input').focus()}>Phone Number</span>
@@ -86,18 +80,13 @@ const SignupWithPhone = props => {
           height="38px"
           fontSize="18px"
           className="green"
-          handleSubmit={() => onSubmitSignup(phone, code, password, passwordRepeat)}
+          handleSubmit={() => {console.log(phone); onSubmitSignup(phone, code, password, passwordRepeat)}}
           value="Sign up"
         />
-
-        <br/>
-
-        <small className="aside color_blueness in_block">
-          By creating an account, you agree to Find-A-Size’s <a>Terms of Services</a> and <a>Privacy Policy</a>.
-        </small>
+        <p className="subtitle">Know your password? &nbsp;&nbsp;&nbsp;&nbsp;<Link to="/login"><strong className="color_green">LOG IN</strong></Link></p>
       </RouteTransition>
     </div>
   )
 }
 
-export default SignupWithPhone
+export default ResetPdPhoneLayout

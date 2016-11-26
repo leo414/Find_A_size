@@ -1,5 +1,5 @@
 import React from 'react'
-import SignupPhoneLayout from '../layout/SignupPhoneLayout'
+import ResetPdPhoneLayout from '../layout/ResetPdPhoneLayout'
 
 import Reflux from 'reflux'
 import ReactMixin from 'react-mixin'
@@ -8,7 +8,7 @@ import UserAction from '../../../actions/UserAction'
 
 let self;
 let timeOut;
-class SignupPhoneContainer extends React.Component {
+class ResetPdPhoneContainer extends React.Component {
   constructor(props){
     super(props)
     this.state = ({
@@ -19,18 +19,19 @@ class SignupPhoneContainer extends React.Component {
     })
   }
   onUserStoreChange(data) {
-    if(data.sendSmsCode.flag === 'sendSms'){
+    if(data.sendResetSmsCode.flag === 'sendSms'){
       if(data.sendSmsCode.sendSmsSuccess) {
         // do sth
       }
-    } else if(data.phoneSignup.falg === 'phoneSignup') {
+    } else if(data.phoneResetPassword.falg === 'resetPassword') {
       if(data.phoneSignup.phoneSignupSuccess) {
         // do sth
       }
     }
   }
 
-  getCode(phone){
+  getCode(phone, password, passwordRepeat){
+    console.log(phone)
     if(!phone) return
     self.setState({
       isClickGetCode: true,
@@ -39,8 +40,7 @@ class SignupPhoneContainer extends React.Component {
       passwordRepeat,
     })
     timeOut = setTimeout(() => self.setState({isClickGetCode: false}), 60000)
-
-    // UserAction.SendSignUpSms(86, phone)
+    UserAction.SendResetPasswordSms(86, phone)
   }
 
   onSubmitSignup(phone, code, password, passwordRepeat) {
@@ -49,7 +49,7 @@ class SignupPhoneContainer extends React.Component {
     password = password || self.state.password
     passwordRepeat = passwordRepeat || self.state.passwordRepeat
     console.log(phone, password, passwordRepeat)
-    // UserAction.ReceiveSignUpSms(phone, code, password)
+    UserAction.ReceiveResetPasswordSms(phone, code, password)
   }
 
   componentWillUnmount(){
@@ -61,7 +61,7 @@ class SignupPhoneContainer extends React.Component {
     const { isClickGetCode } = this.state
     self = this
     return (
-      <SignupPhoneLayout
+      <ResetPdPhoneLayout
         pathname={this.props.location.pathname}
         getCode={this.getCode}
         onSubmitSignup={this.onSubmitSignup}
@@ -71,5 +71,5 @@ class SignupPhoneContainer extends React.Component {
   }
 }
 
-ReactMixin.onClass(SignupPhoneContainer, Reflux.listenTo(UserStore, 'onUserStoreChange'))
-export default SignupPhoneContainer
+ReactMixin.onClass(ResetPdPhoneContainer, Reflux.listenTo(UserStore, 'onUserStoreChange'))
+export default ResetPdPhoneContainer

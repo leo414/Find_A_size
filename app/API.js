@@ -7,12 +7,19 @@ const API = {
   FACEBOOK_APPID,
   GOOGLE_CLIENTID,
   USER: {
+    SendResetPasswordSms: URL + 'User.SendResetPasswordSms',
+    ReceiveResetPasswordSms: URL + 'User.ReceiveResetPasswordSms',
+
     SendSignUpSms: URL + 'User.SendSignUpSms',
     ReceiveSignUpSms: URL + 'User.ReceiveSignUpSms',
+
     SendSignUpMail: URL + 'User.SendSignUpMail',
 
     FacebookSignIn: URL + 'User.FacebookSignIn',
     GoogleSignIn: URL + 'User.GoogleSignIn',
+
+    GetTicket: URL + 'User.GetTicket',
+    UserLogin: URL + 'User.SignIn',
   },
 }
 

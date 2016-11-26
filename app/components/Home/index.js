@@ -13,9 +13,13 @@ class Home extends React.Component {
   //   super(props)
   // }
   render() {
+    let isLogin = true
+    if(localStorage.isLogin === 'false') {
+      isLogin = false
+    }
     return (
       <div>
-        <Nav isLogin={this.props.isLogin} />
+        <Nav isLogin={isLogin} />
         <Search />
 
         <hr style={{height: '1px', border: 'none', borderTop: '1px solid #ccc', margin: '50px 0'}} />

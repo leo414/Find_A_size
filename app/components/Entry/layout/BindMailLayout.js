@@ -9,7 +9,12 @@ import Mask from '../Mask'
 import $ from 'jquery'
 import { message } from 'antd'
 
-const BindMailLayout = ({pathname, onSubmit}) => {
+const BindMailLayout = props => {
+  const {
+    pathname,
+    onSubmit,
+  } = props
+
   const cls = classnames({
     hidden: pathname !== '/bind_mail'
   });
@@ -19,8 +24,8 @@ const BindMailLayout = ({pathname, onSubmit}) => {
   return (
     <div className={cls}>
       <Mask pathname="/bind_mail" />
-      <RouteTransition { ...presets.pop } className="find_password" pathname="/bind_mail">
-        <p className="h1 color_green">Forgot your Password?</p>
+      <RouteTransition { ...presets.pop } style={{height: '290px'}} className="find_password" pathname="/bind_mail">
+        <p className="h1 color_green">CONNECT WITH MAIL</p>
 
         <form>
           <div className="input_box">
@@ -37,8 +42,6 @@ const BindMailLayout = ({pathname, onSubmit}) => {
           handleSubmit={() => onSubmit(email)}
           value="Reset Password"
         />
-
-        <p className="subtitle">Know your password? &nbsp;&nbsp;&nbsp;&nbsp;<Link to="/login"><strong className="color_green">LOG IN</strong></Link></p>
       </RouteTransition>
     </div>
   )
