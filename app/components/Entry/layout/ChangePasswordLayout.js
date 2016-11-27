@@ -3,16 +3,23 @@ import { RouteTransition, presets } from 'react-router-transition'
 import { Link } from 'react-router'
 import classnames from 'classnames'
 
-import Button from '../../Common/Button'
+import { Button } from 'antd'
 import Mask from '../Mask'
 
 import $ from 'jquery'
 import { message } from 'antd'
 
-const ChangePasswordLayout = ({pathname, onSubmit}) => {
+const ChangePasswordLayout = ({pathname, onSubmit, loading}) => {
   const cls = classnames({
     hidden: pathname !== '/change_password'
-  });
+  })
+
+  const buttonStyle = {
+    width: '280px',
+    height: '38px',
+    fontSize: "18px",
+    backgroundColor: '#146eb4',
+  }
 
   let rawPassword = '',
       newPassword = ''
@@ -35,14 +42,9 @@ const ChangePasswordLayout = ({pathname, onSubmit}) => {
           </div>
         </form>
 
-        <Button
-          width="280px"
-          height="38px"
-          fontSize="18px"
-          className="green"
-          handleSubmit={() => onSubmit(rawPassword, newPassword)}
-          value="Reset Password"
-        />
+        <Button onClick={() => onSubmit(rawPassword, newPassword)} type="primary" loading={loading} style={buttonStyle}>
+          Reset Password
+        </Button>
       </RouteTransition>
     </div>
   )

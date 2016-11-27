@@ -27,6 +27,8 @@ const API = {
     SendBindingMail: URL + 'User.SendBindingMail',
     SendBindingSms: URL + 'User.SendBindingSms',
     ReceiveBindingSms: URL + 'User.ReceiveBindingSms',
+
+    ChangePassword: URL + 'User.ChangePassword',
   },
 }
 

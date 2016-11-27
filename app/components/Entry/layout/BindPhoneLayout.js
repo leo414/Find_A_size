@@ -22,9 +22,12 @@ const BindPhoneLayout = props => {
     hidden: pathname !== '/bind_phone'
   })
 
-  const cls = classnames({
-    hidden: pathname !== '/reset_pd_phone'
-  })
+  const buttonStyle = {
+    width: '280px',
+    height: '38px',
+    fontSize: "18px",
+    backgroundColor: '#146eb4',
+  }
 
   let phone = '',
       code = '';

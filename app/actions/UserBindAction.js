@@ -7,6 +7,8 @@ const UserBindAction = Reflux.createActions({
   SendBindingMail: {asyncResult: true},
   SendBindingSms: {asyncResult: true},
   ReceiveBindingSms: {asyncResult: true},
+
+  ChangePassword: {asyncResult: true},
 })
 
 UserAction.SendBindingMail.listen(function(Email){
@@ -33,6 +35,15 @@ UserAction.ReceiveBindingSms.listen(function(Phone, Code){
   }
 
   HttpFactory.fetch(USER.ReceiveBindingSms, data, this.completed, this.failed)
+})
+
+UserAction.ChangePassword.listen(function(RawPassword, NewPassword){
+  let data = {
+    RawPassword,
+    NewPassword,
+  }
+
+  HttpFactory.fetch(USER.ChangePassword, data, this.completed, this.failed)
 })
 
 export default UserBindAction
