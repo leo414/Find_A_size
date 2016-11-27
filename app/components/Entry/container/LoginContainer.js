@@ -86,8 +86,8 @@ class LoginContainer extends React.Component {
     return (
       <LoginLayout
        pathname={this.props.location.pathname}
-       onFaceBookLogin={this.FaceBookLogin}
-       onGoogleLogin={this.GoogleLogin}
+       onFaceBookLogin={this.onFaceBookLogin}
+       onGoogleLogin={this.onGoogleLogin}
        onLogin={this.onLogin}
        loading={this.state.loading}
       />
