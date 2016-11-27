@@ -23,11 +23,11 @@ class ResetPdMailContainer extends React.Component {
   onUserStoreChange(data){
     console.log(data)
     if(data.mailResetPassword.flag !== 'resetPassword') return
-    if(data.mailResetPassword.resetPasswordSuccess === true) {
+    if(data.mailResetPassword.sendMilSuccess === true) {
       this.setState({loading: false})
       message.success('Send email success!')
       setTimeout(() => hashHistory.push('/'), 2000)
-    } else if(data.mailResetPassword.resetPasswordSuccess === 'resetFail') {
+    } else if(data.mailResetPassword.sendMilSuccess === 'resetFail') {
       this.setState({loading: false})
       message.error('Email address does not exist', 2.5)
     }

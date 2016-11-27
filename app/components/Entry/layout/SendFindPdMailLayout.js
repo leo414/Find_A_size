@@ -3,42 +3,48 @@ import { RouteTransition, presets } from 'react-router-transition'
 import { Link } from 'react-router'
 import classnames from 'classnames'
 
-import Button from '../../Common/Button'
+import { Button } from 'antd'
 import Mask from '../Mask'
 
 import $ from 'jquery'
 import { message } from 'antd'
 
-const SendFindPdMailLayout = ({pathname, onSubmit}) => {
+const SendFindPdMailLayout = ({pathname, onSubmit, loading}) => {
   const cls = classnames({
-    hidden: pathname !== '/send_find_pd_mail'
-  });
+    hidden: pathname !== '/reset_pd_mail'
+  })
 
-  let email = ''
+  const buttonStyle = {
+    width: '280px',
+    height: '38px',
+    fontSize: "18px",
+    backgroundColor: '#146eb4',
+  }
+
+  let password = '',
+      passwordRepeat = ''
 
   return (
     <div className={cls}>
-      <Mask pathname="/send_find_pd_mail" />
-      <RouteTransition { ...presets.pop } className="find_password" pathname="/send_find_pd_mail">
-        <p className="h1 color_green">FORGOT YOUR PASSWORD?</p>
+      <Mask pathname="/reset_pd_mail" />
+      <RouteTransition { ...presets.pop } className="find_password" pathname="/reset_pd_mail">
+        <p className="h1 color_green">Reset your Password</p>
 
         <form>
           <div className="input_box">
-            <span className="fl color_blueness" onClick={event => $(event.target).next('input').focus()}>Email Address</span>
-            <input type="email" className="fr" onChange={event => email = event.target.value.trim()} /> <br/>
+            <span className="fl color_blueness" onClick={event => $(event.target).next('input').focus()}>Password</span>
+            <input type="password" className="fr" onChange={event => password = event.target.value.trim()} /> <br/>
+          </div>
+
+          <div className="input_box">
+            <span className="fl color_blueness" onClick={event => $(event.target).next('input').focus()}>Confirm Password</span>
+            <input type="passwordRepeat" className="fr" onChange={event => passwordRepeat = event.target.value.trim()} /> <br/>
           </div>
         </form>
 
-        <Button
-          width="280px"
-          height="38px"
-          fontSize="18px"
-          className="green"
-          handleSubmit={() => onSubmit(email)}
-          value="Submit"
-        />
-
-        <p className="subtitle">Know your password? &nbsp;&nbsp;&nbsp;&nbsp;<Link to="/login"><strong className="color_green">LOG IN</strong></Link></p>
+        <Button onClick={() => onSubmit(password, passwordRepeat)} type="primary" loading={loading} style={buttonStyle}>
+          Reset password
+        </Button>
       </RouteTransition>
     </div>
   )
