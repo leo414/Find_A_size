@@ -1,10 +1,13 @@
 import React from 'react'
 import BindPhoneLayout from '../layout/BindPhoneLayout'
+import { hashHistory } from 'react-router'
 
 import Reflux from 'reflux'
 import ReactMixin from 'react-mixin'
-import UserStore from '../../../stores/UserStore'
-import UserAction from '../../../actions/UserAction'
+import UserBindStore from '../../../stores/UserBindStore'
+import UserBindAction from '../../../actions/UserBindAction'
+
+import { message } from 'antd'
 
 let self;
 let timeOut;
@@ -14,36 +17,55 @@ class BindPhoneContainer extends React.Component {
     this.state = ({
       isClickGetCode: false,
       phone: '',
+      loading: false,
     })
   }
-
   onUserStoreChange(data) {
-    // if(data.sendResetSmsCode.flag === 'sendSms'){
-    //   if(data.sendSmsCode.sendSmsSuccess) {
-    //     // do sth
-    //   }
-    // } else if(data.phoneResetPassword.falg === 'resetPassword') {
-    //   if(data.phoneSignup.phoneSignupSuccess) {
-    //     // do sth
-    //   }
-    // }
+    console.log(data)
+    if(data.receiveSms.flag === 'receiveSms') {
+      if(data.receiveSms.success === true) {
+        message.success('Bind phone success')
+        this.setState({loading: false})
+        setTimeout(() => hashHistory.push('/account'), 2000)
+        return
+      } else if (data.receiveSms.success === false){
+        this.setState({loading: false})
+        message.error('Verification Code Error!', 2.5)
+        return
+      }
+    }
+
+    if(data.sendBindSms.flag === 'sendBindSms'){
+      if(data.sendBindSms.success === true) {
+        message.success('Send sms code success!')
+      } else if(data.sendBindSms.success === false) {
+        message.error('Phone Number Already Exists', 2.5)
+      }
+
+    }
   }
 
   getCode(phone){
     console.log(phone)
-    if(!phone) return
+    if(!phone && !self.state.phone) return
     self.setState({
       isClickGetCode: true,
       phone,
     })
     timeOut = setTimeout(() => self.setState({isClickGetCode: false}), 60000)
-    // UserAction.SendResetPasswordSms(86, phone)
+    UserBindAction.SendBindingSms(86, phone || self.state.phone)
   }
 
-  onSubmit(phone, code){
+  onResetPssword(phone, code) {
     console.log(phone, code)
+    self.setState({
+      phone,
+      code,
+      loading: true,
+    })
     phone = phone || self.state.phone
-    // UserAction.ReceiveResetPasswordSms(phone, code)
+    console.log(phone)
+    UserBindAction.ReceiveBindingSms(phone, code)
   }
 
   componentWillUnmount(){
@@ -58,11 +80,13 @@ class BindPhoneContainer extends React.Component {
       <BindPhoneLayout
         pathname={this.props.location.pathname}
         getCode={this.getCode}
+        onResetPssword={this.onResetPssword}
         isClickGetCode={isClickGetCode}
-        onSubmit={this.onSubmit}
+        loading={this.state.loading}
       />
     )
   }
 }
 
+ReactMixin.onClass(BindPhoneContainer, Reflux.listenTo(UserBindStore, 'onUserStoreChange'))
 export default BindPhoneContainer

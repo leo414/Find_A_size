@@ -11,6 +11,15 @@ const UserBindStore = Reflux.createStore({
         success: '',
         flag:'',
       },
+
+      sendBindSms:{
+        success: '',
+        flag:'',
+      },
+      receiveSms: {
+        success: '',
+        flag:'',
+      },
       hintMessage: '',
     }
   },
@@ -27,6 +36,36 @@ const UserBindStore = Reflux.createStore({
     this.trigger(this.data)
   },
   onSendBindingMailFailed(res){
+    HttpErrorCallBack(res)
+  },
+
+  onSendBindingSmsCompleted(res){
+    console.log(res)
+    if(res.Success){
+      this.data.sendBindSms.success = true
+    }else{
+      this.data.sendBindSms.success = false
+      this.data.hintMessage = res.ErrorMsg
+    }
+    this.data.sendBindSms.flag = 'sendBindSms'
+    this.trigger(this.data)
+  },
+  onSendBindingSmsFailed(res){
+    HttpErrorCallBack(res)
+  },
+
+  onReceiveBindingSmsCompleted(res){
+    console.log(res)
+    if(res.Success){
+      this.data.receiveSms.success = true
+    }else{
+      this.data.receiveSms.success = false
+      this.data.hintMessage = res.ErrorMsg
+    }
+    this.data.receiveSms.flag = 'receiveSms'
+    this.trigger(this.data)
+  },
+  onReceiveBindingSmsFailed(res){
     HttpErrorCallBack(res)
   },
 })

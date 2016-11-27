@@ -3,7 +3,7 @@ import { RouteTransition, presets } from 'react-router-transition'
 import { Link } from 'react-router'
 import classnames from 'classnames'
 
-import Button from '../../Common/Button'
+import { Button } from 'antd'
 import Mask from '../Mask'
 
 import $ from 'jquery'
@@ -14,12 +14,17 @@ const BindPhoneLayout = props => {
     pathname,
     getCode,
     onSubmit,
+    loading,
     isClickGetCode,
   } = props
 
   const cls = classnames({
     hidden: pathname !== '/bind_phone'
-  });
+  })
+
+  const cls = classnames({
+    hidden: pathname !== '/reset_pd_phone'
+  })
 
   let phone = '',
       code = '';
@@ -62,14 +67,9 @@ const BindPhoneLayout = props => {
           </div>
         </form>
 
-        <Button
-          width="280px"
-          height="38px"
-          fontSize="18px"
-          className="green"
-          handleSubmit={() => onSubmit(phone, code)}
-          value="Connect"
-        />
+        <Button onClick={() => onSubmit(phone, code)} type="primary" loading={loading} style={buttonStyle}>
+          Connect
+        </Button>
       </RouteTransition>
     </div>
   )
