@@ -4,8 +4,8 @@ import { hashHistory } from 'react-router'
 
 import Reflux from 'reflux'
 import ReactMixin from 'react-mixin'
-import UserStore from '../../../stores/UserBindStore'
-import UserAction from '../../../actions/UserBindAction'
+import UserBindStore from '../../../stores/UserBindStore'
+import UserBindAction from '../../../actions/UserBindAction'
 
 import { message } from 'antd'
 
@@ -39,7 +39,7 @@ class BindMailContainer extends React.Component {
       email,
       loading: true,
     })
-    UserAction.SendBindingMail(email || self.state.email)
+    UserBindAction.SendBindingMail(email || self.state.email)
   }
 
   render() {
