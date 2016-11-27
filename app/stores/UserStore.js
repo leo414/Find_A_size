@@ -1,4 +1,3 @@
-
 import Reflux from 'reflux'
 import UserAction from '../actions/UserAction'
 import HttpErrorCallBack from '../tools/HttpErrorCallBack'

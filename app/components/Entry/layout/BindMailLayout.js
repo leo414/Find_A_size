@@ -3,7 +3,7 @@ import { RouteTransition, presets } from 'react-router-transition'
 import { Link } from 'react-router'
 import classnames from 'classnames'
 
-import Button from '../../Common/Button'
+import { Button } from 'antd'
 import Mask from '../Mask'
 
 import $ from 'jquery'
@@ -13,11 +13,19 @@ const BindMailLayout = props => {
   const {
     pathname,
     onSubmit,
+    loading,
   } = props
 
   const cls = classnames({
     hidden: pathname !== '/bind_mail'
-  });
+  })
+
+  const buttonStyle = {
+    width: '280px',
+    height: '38px',
+    fontSize: "18px",
+    backgroundColor: '#146eb4',
+  }
 
   let email = ''
 
@@ -34,14 +42,9 @@ const BindMailLayout = props => {
           </div>
         </form>
 
-        <Button
-          width="280px"
-          height="38px"
-          fontSize="18px"
-          className="green"
-          handleSubmit={() => onSubmit(email)}
-          value="Reset Password"
-        />
+        <Button onClick={() => onSubmit(email)} type="primary" loading={loading} style={buttonStyle}>
+          Send Email
+        </Button>
       </RouteTransition>
     </div>
   )

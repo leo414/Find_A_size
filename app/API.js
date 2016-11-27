@@ -23,6 +23,8 @@ const API = {
 
     GetTicket: URL + 'User.GetTicket',
     UserLogin: URL + 'User.SignIn',
+
+    SendBindingMail: URL + 'User.SendBindingMail',
   },
 }
 
