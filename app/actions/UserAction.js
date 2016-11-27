@@ -22,9 +22,9 @@ const UserAction = Reflux.createActions({
   UserLogin: {asyncResult: true},
 })
 
-UserAction.SendResetPasswordSms.listen(function(Prefix, Phone){
+UserAction.SendResetPasswordSms.listen(function(Phone){
   let data = {
-    Prefix,
+    Prefix: 86,
     Phone,
   }
 
@@ -58,9 +58,9 @@ UserAction.ReceiveResetPasswordMail.listen(function(Email){
   HttpFactory.fetch(USER.ReceiveResetPasswordMail, data, this.completed, this.failed)
 })
 
-UserAction.SendSignUpSms.listen(function(Prefix, Phone){
+UserAction.SendSignUpSms.listen(function(Phone){
   let data = {
-    Prefix,
+    Prefix: 86,
     Phone,
   }
 

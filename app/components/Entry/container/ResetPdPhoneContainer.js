@@ -58,7 +58,7 @@ class ResetPdPhoneContainer extends React.Component {
       passwordRepeat,
     })
     timeOut = setTimeout(() => self.setState({isClickGetCode: false}), 60000)
-    UserAction.SendResetPasswordSms(86, phone || self.state.phone)
+    UserAction.SendResetPasswordSms(phone || self.state.phone)
   }
 
   onResetPssword(phone, code, password, passwordRepeat) {

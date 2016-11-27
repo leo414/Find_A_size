@@ -53,7 +53,7 @@ class BindPhoneContainer extends React.Component {
       phone,
     })
     timeOut = setTimeout(() => self.setState({isClickGetCode: false}), 60000)
-    UserBindAction.SendBindingSms(86, phone || self.state.phone)
+    UserBindAction.SendBindingSms(phone || self.state.phone)
   }
 
   onResetPssword(phone, code) {

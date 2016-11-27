@@ -57,7 +57,7 @@ class SignupPhoneContainer extends React.Component {
     })
     timeOut = setTimeout(() => self.setState({isClickGetCode: false}), 60000)
 
-    UserAction.SendSignUpSms(86, phone || self.state.phone)
+    UserAction.SendSignUpSms(phone || self.state.phone)
   }
 
   onSubmitSignup(phone, code, password, passwordRepeat) {
