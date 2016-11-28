@@ -30,6 +30,11 @@ const UserBindStore = Reflux.createStore({
         success: '',
         flag: '',
       },
+
+      signOut: {
+        success: '',
+        flag: '',
+      },
       hintMessage: '',
     }
   },
@@ -106,6 +111,21 @@ const UserBindStore = Reflux.createStore({
     this.trigger(this.data)
   },
   onUserCurrentFailed(res){
+    HttpErrorCallBack(res)
+  },
+
+  onSignOutCompleted(res){
+    console.log(res)
+    if(res.Success){
+      this.data.signOut.success = true
+    }else{
+      this.data.signOut.success = false
+      this.data.hintMessage = res.ErrorMsg
+    }
+    this.data.signOut.flag = 'signOut'
+    this.trigger(this.data)
+  },
+  onSignOutFailed(res){
     HttpErrorCallBack(res)
   },
 })
