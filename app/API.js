@@ -29,6 +29,8 @@ const API = {
     ReceiveBindingSms: URL + 'User.ReceiveBindingSms',
 
     ChangePassword: URL + 'User.ChangePassword',
+
+    UserCurrent: URL + 'User.Current',
   },
 }
 

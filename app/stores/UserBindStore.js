@@ -25,6 +25,11 @@ const UserBindStore = Reflux.createStore({
         success: '',
         flag:'',
       },
+
+      userCurrent: {
+        success: '',
+        flag: '',
+      },
       hintMessage: '',
     }
   },
@@ -86,6 +91,21 @@ const UserBindStore = Reflux.createStore({
     this.trigger(this.data)
   },
   onChangePasswordFailed(res){
+    HttpErrorCallBack(res)
+  },
+
+  onUserCurrentCompleted(res){
+    console.log(res)
+    if(res.Success){
+      this.data.userCurrent.success = true
+    }else{
+      this.data.userCurrent.success = false
+      this.data.hintMessage = res.ErrorMsg
+    }
+    this.data.userCurrent.flag = 'userCurrent'
+    this.trigger(this.data)
+  },
+  onUserCurrentFailed(res){
     HttpErrorCallBack(res)
   },
 })

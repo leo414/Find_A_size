@@ -1,5 +1,6 @@
 import React from 'react'
 import BindPhoneLayout from '../layout/BindPhoneLayout'
+import UserCurrentContainer from './UserCurrentContainer'
 import { hashHistory } from 'react-router'
 
 import Reflux from 'reflux'
@@ -77,13 +78,16 @@ class BindPhoneContainer extends React.Component {
     const { isClickGetCode } = this.state
     self = this
     return (
-      <BindPhoneLayout
-        pathname={this.props.location.pathname}
-        getCode={this.getCode}
-        onResetPssword={this.onResetPssword}
-        isClickGetCode={isClickGetCode}
-        loading={this.state.loading}
-      />
+      <div>
+        <UserCurrentContainer />
+        <BindPhoneLayout
+          pathname={this.props.location.pathname}
+          getCode={this.getCode}
+          onResetPssword={this.onResetPssword}
+          isClickGetCode={isClickGetCode}
+          loading={this.state.loading}
+        />
+      </div>
     )
   }
 }
