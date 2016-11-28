@@ -1,5 +1,6 @@
 import React from 'react'
 import BindMailLayout from '../layout/BindMailLayout'
+import UserCurrentContainer from './UserCurrentContainer'
 import { hashHistory } from 'react-router'
 
 import Reflux from 'reflux'
@@ -45,11 +46,14 @@ class BindMailContainer extends React.Component {
   render() {
     self = this
     return (
-      <BindMailLayout
-        pathname={this.props.location.pathname}
-        onSubmit={this.onSubmit}
-        loading={this.state.loading}
-      />
+      <div>
+        <UserCurrentContainer />
+        <BindMailLayout
+          pathname={this.props.location.pathname}
+          onSubmit={this.onSubmit}
+          loading={this.state.loading}
+        />
+      </div>
     )
   }
 }

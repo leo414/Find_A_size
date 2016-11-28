@@ -4,6 +4,8 @@ import API from '../API'
 const { USER } = API
 
 const UserBindAction = Reflux.createActions({
+  UserCurrent: {asyncResult: true},
+
   SendBindingMail: {asyncResult: true},
   SendBindingSms: {asyncResult: true},
   ReceiveBindingSms: {asyncResult: true},
@@ -11,7 +13,13 @@ const UserBindAction = Reflux.createActions({
   ChangePassword: {asyncResult: true},
 })
 
-UserAction.SendBindingMail.listen(function(Email){
+UserBindAction.UserCurrent.listen(function(){
+  let data = {}
+
+  HttpFactory.fetch(USER.SendBindingMail, data, this.completed, this.failed)
+})
+
+UserBindAction.SendBindingMail.listen(function(Email){
   let data = {
     Email,
   }
@@ -19,7 +27,7 @@ UserAction.SendBindingMail.listen(function(Email){
   HttpFactory.fetch(USER.SendBindingMail, data, this.completed, this.failed)
 })
 
-UserAction.SendBindingSms.listen(function(Phone){
+UserBindAction.SendBindingSms.listen(function(Phone){
   let data = {
     Prefix: 86,
     Phone,
@@ -28,7 +36,7 @@ UserAction.SendBindingSms.listen(function(Phone){
   HttpFactory.fetch(USER.SendBindingSms, data, this.completed, this.failed)
 })
 
-UserAction.ReceiveBindingSms.listen(function(Phone, Code){
+UserBindAction.ReceiveBindingSms.listen(function(Phone, Code){
   let data = {
     Phone,
     Code,
@@ -37,7 +45,7 @@ UserAction.ReceiveBindingSms.listen(function(Phone, Code){
   HttpFactory.fetch(USER.ReceiveBindingSms, data, this.completed, this.failed)
 })
 
-UserAction.ChangePassword.listen(function(RawPassword, NewPassword){
+UserBindAction.ChangePassword.listen(function(RawPassword, NewPassword){
   let data = {
     RawPassword,
     NewPassword,
