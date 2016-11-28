@@ -1,6 +1,6 @@
 import React from 'react'
 import { hashHistory } from 'react-router'
-import Nav from '../Layout/Nav'
+import NavContainer from '../Layout/NavContainer'
 import Footer from '../Layout/Footer'
 import ProductList from '../Layout/ProductList'
 
@@ -9,17 +9,10 @@ import Search from '../Search'
 import EmailSignUp from './EmailSignUp'
 
 class Home extends React.Component {
-  // constructor(props) {
-  //   super(props)
-  // }
   render() {
-    let isLogin = false
-    if(localStorage.isLogin === 'true') {
-      isLogin = true
-    }
     return (
       <div>
-        <Nav isLogin={isLogin} />
+        <NavContainer/>
         <Search />
 
         <hr style={{height: '1px', border: 'none', borderTop: '1px solid #ccc', margin: '50px 0'}} />

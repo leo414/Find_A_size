@@ -5,6 +5,7 @@ const { USER } = API
 
 const UserBindAction = Reflux.createActions({
   UserCurrent: {asyncResult: true},
+  SignOut: {asyncResult: true},
 
   SendBindingMail: {asyncResult: true},
   SendBindingSms: {asyncResult: true},
@@ -16,7 +17,13 @@ const UserBindAction = Reflux.createActions({
 UserBindAction.UserCurrent.listen(function(){
   let data = {}
 
-  HttpFactory.fetch(USER.SendBindingMail, data, this.completed, this.failed)
+  HttpFactory.fetch(USER.UserCurrent, data, this.completed, this.failed)
+})
+
+UserBindAction.SignOut.listen(function(){
+  let data = {}
+
+  HttpFactory.fetch(USER.SignOut, data, this.completed, this.failed)
 })
 
 UserBindAction.SendBindingMail.listen(function(Email){

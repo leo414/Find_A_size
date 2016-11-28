@@ -31,6 +31,7 @@ const API = {
     ChangePassword: URL + 'User.ChangePassword',
 
     UserCurrent: URL + 'User.Current',
+    SignOut: URL + 'User.SignOut',
   },
 }
 

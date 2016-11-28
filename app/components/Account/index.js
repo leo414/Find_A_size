@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Nav from '../Layout/Nav'
+import NavContainer from '../Layout/NavContainer'
 import Footer from '../Layout/Footer'
 import ProductList from '../Layout/ProductList'
 
