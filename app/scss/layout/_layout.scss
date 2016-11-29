@@ -58,7 +58,10 @@ $nav_fsize: 20px;
     font-size: $nav_fsize;
     color: #fff;
 
-    a { color: inherit; }
+    a {
+      color: inherit;
+      cursor: point;
+     }
   }
 
   .my_list {

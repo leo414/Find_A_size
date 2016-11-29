@@ -10,10 +10,15 @@ import UserBindAction from '../../actions/UserBindAction'
 class NavContainer extends React.Component {
   constructor(props){
     super(props)
-    let isLogin = localStorage.isLogin === 'true'
     this.state = ({
-      isLogin: isLogin
+      isLogin: localStorage.isLogin === 'true'
     })
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.isLogin){
+      this.setState({isLogin: true})
+    }
   }
 
   onUserStoreChange(data){
@@ -35,6 +40,9 @@ class NavContainer extends React.Component {
   }
 
   render() {
+    // this.setState({
+    //   isLogin: localStorage.isLogin === 'true'
+    // })
     return <NavLayout isLogin={this.state.isLogin} onSignOut={this.onSignOut} />
   }
 }

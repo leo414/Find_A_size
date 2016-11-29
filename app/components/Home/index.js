@@ -12,7 +12,7 @@ class Home extends React.Component {
   render() {
     return (
       <div>
-        <NavContainer/>
+        <NavContainer isLogin={this.props.isLogin}/>
         <Search />
 
         <hr style={{height: '1px', border: 'none', borderTop: '1px solid #ccc', margin: '50px 0'}} />

@@ -19,30 +19,30 @@ const Strategies = {
   },
 }
 
-const Validator = function() {
+const Validator = function(){
   this.cache = []
 }
 
-Validator.prototype.add = function(value, rules) {
-  const Self = this
+Validator.prototype.add = function(dom, rules) {
+  const self = this
 
-  for(let i = 0, rule; rule = rules[i++];) {
+  for(let i = 0, rule; rule = rules[ i++ ]){
     (function(rule) {
-      let strategyAry = rule.strategyAry.split(':')
+      let strategyAry = rule.strategy.split(':')
       let errorMsg = rule.errorMsg
 
-      Self.cache.push(() => {
+      self.cache.push(function() {
         let strategy = strategyAry.shift()
-        strategyAry.unshift(value)
+        strategyAry.unshift(dom.value)
         strategyAry.push(errorMsg)
-        return strategies[strategy].apply(value, strategyAry)
+        return strategies[strategy].apply(null, strategyAry)
       })
     })(rule)
   }
 }
 
-Validator.prototype.start = function() {
-  for(let i = 0, validatorFunc; validatorFunc = this.cache[i++]) {
+Validator.prototype.start = function(){
+  for(let i = 0, validatorFunc; validatorFunc = this.cache[i++]){
     let errorMsg = validatorFunc()
     if(errorMsg) return errorMsg
   }
