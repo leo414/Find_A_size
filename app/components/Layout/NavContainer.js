@@ -6,6 +6,7 @@ import Reflux from 'reflux'
 import ReactMixin from 'react-mixin'
 import UserBindStore from '../../stores/UserBindStore'
 import UserBindAction from '../../actions/UserBindAction'
+import { message } from 'antd'
 
 class NavContainer extends React.Component {
   constructor(props){
@@ -25,11 +26,13 @@ class NavContainer extends React.Component {
     console.log(data)
     if(data.signOut.flag !== 'signOut') return
     if(data.signOut.success === true) {
+
       localStorage.isLogin = false
       this.setState({
         isLogin: false
       })
-      hashHistory.push('/')
+      message.success('Log Out success!')
+      setTimeout(() => hashHistory.push('/'), 1500)
     } else if (data.signOut.success === false){
 
     }

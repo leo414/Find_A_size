@@ -30,7 +30,7 @@ class ChangePasswordContaienr extends React.Component {
       setTimeout(() => hashHistory.push('/account'), 2000)
     } else if(data.changePassword.success === false) {
       this.setState({loading: false})
-      message.error('phone does not exist', 2.5)
+      message.error('unknown user name or bad password', 2.5)
     }
   }
 
