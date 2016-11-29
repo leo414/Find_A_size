@@ -24,25 +24,23 @@ class SignupPhoneContainer extends React.Component {
   }
   onUserStoreChange(data) {
     console.log(data)
-    if(data.phoneSignup.flag === 'phoneSignup') {
-      if(data.phoneSignup.phoneSignupSuccess === true) {
-        localStorage.isLogin = true
-        message.success('Signup success')
-        this.setState({loading: false})
-        setTimeout(() => hashHistory.push('/'), 2000)
-        return
-      } else if (data.phoneSignup.phoneSignupSuccess === 'signFail') {
-        this.setState({loading: false})
-        message.error('Verification Code Error!', 2.5)
-        return
-      }
-    }
-
     if(data.sendSmsCode.flag === 'sendSms'){
       if(data.sendSmsCode.sendSmsSuccess === true) {
         message.success('Send sms code success!')
       } else if(data.sendSmsCode.sendSmsSuccess === 'sendFail') {
         message.error('Phone Number Already Exists', 2.5)
+      }
+    }
+
+    if(data.phoneSignup.flag === 'phoneSignup') {
+      if(data.phoneSignup.phoneSignupSuccess === true) {
+        localStorage.isLogin = true
+        message.success('Signup success')
+        this.setState({loading: false})
+        setTimeout(() => hashHistory.push({pathname: '/', query: null, state: {isLogin: true}}), 2000)
+      } else if (data.phoneSignup.phoneSignupSuccess === 'signFail') {
+        this.setState({loading: false})
+        message.error('Verification Code Error!', 2.5)
       }
     }
   }

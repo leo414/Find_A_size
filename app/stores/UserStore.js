@@ -126,6 +126,7 @@ const UserStore = Reflux.createStore({
       this.data.hintMessage = res.ErrorMsg
     }
     this.data.phoneSignup.flag = 'phoneSignup'
+    this.data.sendSmsCode.flag = ''
     this.trigger(this.data)
   },
   onReceiveSignUpSmsFailed(res){
