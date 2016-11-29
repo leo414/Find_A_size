@@ -38,7 +38,7 @@ class SignupContainer extends React.Component {
       if(data.openUserLogin.googleLoginSuccess || data.openUserLogin.facebookLoginSuccess) {
         localStorage.isLogin = true
         message.success('Signup success')
-        setTimeout(() => hashHistory.push('/'), 2000)
+        setTimeout(() => hashHistory.push({pathname: '/', query: null, state: {isLogin: true}}), 2000)
       }
     }
   }

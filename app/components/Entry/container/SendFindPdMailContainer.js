@@ -26,8 +26,9 @@ class SendFindPdMailContainer extends React.Component {
     if(data.receiveMailPassword.flag !== 'resetPassword') return
     if(data.receiveMailPassword.resetPasswordSuccess === true) {
       this.setState({loading: false})
+      localStorage.isLogin = true
       message.success('Reset password success!')
-      setTimeout(() => hashHistory.push('/accout'), 2000)
+      setTimeout(() => hashHistory.push({pathname: '/', query: null, state: {isLogin: true}}), 2000)
     } else if(data.mailResetPassword.resetPasswordSuccess === 'resetFail') {
       this.setState({loading: false})
       message.error('Email address does not exist', 2.5)

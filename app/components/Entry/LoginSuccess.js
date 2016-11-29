@@ -10,7 +10,7 @@ const LoginSuccess = () => {
   const redirection = () => {
     message.success('signup success', 2)
     localStorage.isLogin = true
-    setTimeout(() => hashHistory.push('/'), 2000)
+    setTimeout(() => hashHistory.push({pathname: '/', query: null, state: {isLogin: true}}), 2000)
   }
   return (
     <div className="login_redirect">

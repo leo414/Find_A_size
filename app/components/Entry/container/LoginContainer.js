@@ -30,8 +30,7 @@ class LoginContainer extends React.Component {
       if(data.openUserLogin.googleLoginSuccess || data.openUserLogin.facebookLoginSuccess) {
         localStorage.isLogin = true
         message.success('Login success')
-        // setTimeout(() => hashHistory.push({pathname: '/', query: null, state: {isLogin: true}}), 2000)
-        setTimeout(() => hashHistory.push('/'), 2000)
+        setTimeout(() => hashHistory.push({pathname: '/', query: null, state: {isLogin: true}}), 2000)
       }
     }
 
@@ -40,8 +39,7 @@ class LoginContainer extends React.Component {
         localStorage.isLogin = true
         message.success('Login success')
         this.setState({loading: false})
-        // setTimeout(() => hashHistory.push({pathname: '/', query: null, state: {isLogin: true}}), 2000)
-        setTimeout(() => hashHistory.push('/'), 2000)
+        setTimeout(() => hashHistory.push({pathname: '/', query: null, state: {isLogin: true}}), 2000)
       } else if(data.userLogin.loginSuccess === 'loginFail') {
         message.error('Unknown user name or bad password!', 2)
         this.setState({loading: false})

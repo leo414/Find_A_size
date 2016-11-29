@@ -29,7 +29,7 @@ class ResetPdPhoneContainer extends React.Component {
         localStorage.isLogin = true
         message.success('Reset password success')
         this.setState({loading: false})
-        setTimeout(() => hashHistory.push('/account'), 2000)
+        setTimeout(() => hashHistory.push({pathname: '/', query: null, state: {isLogin: true}}), 2000)
         return
       } else if (data.phoneResetPassword.resetPasswordSuccess === 'resetFail'){
         this.setState({loading: false})
