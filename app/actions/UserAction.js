@@ -48,7 +48,7 @@ UserAction.SendResetPasswordMail.listen(function(Email){
 
   HttpFactory.fetch(USER.SendResetPasswordMail, data, this.completed, this.failed)
 })
-UserAction.ReceiveResetPasswordMail.listen(function(Email){
+UserAction.ReceiveResetPasswordMail.listen(function(Email, Code, Password){
   let data = {
     Email,
     Code,

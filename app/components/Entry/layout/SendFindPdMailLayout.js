@@ -38,7 +38,7 @@ const SendFindPdMailLayout = ({pathname, onSubmit, loading}) => {
 
           <div className="input_box">
             <span className="fl color_blueness" onClick={event => $(event.target).next('input').focus()}>Confirm Password</span>
-            <input type="passwordRepeat" className="fr" onChange={event => passwordRepeat = event.target.value.trim()} /> <br/>
+            <input type="password" className="fr" onChange={event => passwordRepeat = event.target.value.trim()} /> <br/>
           </div>
         </form>
 

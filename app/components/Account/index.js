@@ -11,7 +11,7 @@ import PriceWatchList from './PriceWatchList'
 const Account = () => {
   return (
     <div>
-      <Nav />
+      <NavContainer />
       <PriceWatchList />
       <AccountSetting />
       <ProductList type="A">Popular Products</ProductList>

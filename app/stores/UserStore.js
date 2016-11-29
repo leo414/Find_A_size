@@ -185,7 +185,7 @@ const UserStore = Reflux.createStore({
       this.data.receiveMailPassword.resetPasswordSuccess = 'resetFail'
       this.data.hintMessage = res.ErrorMsg
     }
-    this.data.mailResetPassword.flag = 'resetPassword'
+    this.data.receiveMailPassword.flag = 'resetPassword'
     this.trigger(this.data)
   },
   onReceiveResetPasswordMailFailed(res){
