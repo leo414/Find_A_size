@@ -26,11 +26,11 @@ class BindMailContainer extends React.Component {
     if(data.sendBindMail.flag !== 'sendMail') return
     if(data.sendBindMail.success === true) {
       this.setState({loading: false})
-      message.success('Send email success!')
+      message.success('Connect email success!')
       setTimeout(() => hashHistory.push('/'), 2000)
     } else if(data.sendBindMail.success === false) {
       this.setState({loading: false})
-      message.error('Email address does not exist', 2.5)
+      message.error('Mail Address Already Exists', 2.5)
     }
   }
 
