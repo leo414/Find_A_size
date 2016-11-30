@@ -1,5 +1,5 @@
 import React from 'react'
-import { Rate, Select,  Input, Col, Slider } from 'antd'
+import { Select,  Input, Col, Slider } from 'antd'
 
 const Option = Select.Option;
 const InputGroup = Input.Group;
@@ -60,9 +60,6 @@ class SearchFilter extends React.Component {
           <div className="fr">
             Price Range:&nbsp;&nbsp;
             <Slider range min={0} max={1000} defaultValue={[0, 1000]} onChange={this.rangeHandleChange} />
-            <br/>
-
-            Ratings:&nbsp;&nbsp; <Rate onChange={this.rateHandleChange} />
           </div>
         </section>
 

@@ -33,6 +33,11 @@ const API = {
     UserCurrent: URL + 'User.Current',
     SignOut: URL + 'User.SignOut',
   },
+
+  PRODUCT: {
+    ProductSuggest: URL + 'Product.Suggest',
+    ProductRelated: URL + 'Product.Related',
+  },
 }
 
 export default API

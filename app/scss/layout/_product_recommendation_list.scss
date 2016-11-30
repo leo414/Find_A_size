@@ -37,7 +37,6 @@
       float  : left;
       margin-right: 10px;
       padding: 8px;
-      padding-top: 20px;
       width: 210px;
       height: 355px;
       border: 1px #ccc solid;
@@ -48,8 +47,14 @@
 
   .product {
     img {
-      width: 100%;
-      margin-bottom: 20px;
+      height: 176px;
+      width: 200px;
+      margin-bottom: 5px;
+    }
+
+    .product_title {
+      @include text_multiLine_ellipsis(3, 20px);
+      text-align: left;
     }
 
     .price {
@@ -62,7 +67,6 @@
   }
 
   .wrap {
-    width   : 3500px;
     position: absolute;
     z-index: $zindex_base;
     top     : 0;
