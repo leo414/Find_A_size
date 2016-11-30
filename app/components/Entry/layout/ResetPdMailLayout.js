@@ -26,8 +26,8 @@ const ResetPdMailLayout = ({pathname, onSubmit, loading}) => {
   return (
     <div className={cls}>
       <Mask pathname="/send_pd_mail" />
-      <RouteTransition { ...presets.pop } className="find_password" pathname="/send_pd_mail">
-        <p className="h1 color_green">Reset your Password</p>
+      <RouteTransition { ...presets.pop } className="find_password" pathname="/send_pd_mail" style={{height: '360px'}}>
+        <p className="h1 color_green">FORGOT YOUR PASSWORD?</p>
         <Link className="fz_middle" to="reset_pd_phone">Retrieve password via mobile phone</Link>
 
         <form>

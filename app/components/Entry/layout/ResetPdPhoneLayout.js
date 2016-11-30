@@ -40,9 +40,9 @@ const ResetPdPhoneLayout = props => {
   return (
     <div className={cls}>
       <Mask pathname="/reset_pd_phone" />
-      <RouteTransition { ...presets.pop } className="sign_up_phone" style={{height: '500px', top: '12%'}} pathname="/reset_pd_phone">
+      <RouteTransition { ...presets.pop } className="sign_up_phone" style={{height: '520px', top: '12%'}} pathname="/reset_pd_phone">
         <p className="h1 color_green">FORGOT YOUR PASSWORD?</p>
-        <Link className="fz_middle" to="reset_pd_mail">Retrieve password via mail</Link>
+        <Link className="fz_middle" to="send_pd_mail">Retrieve password via mail</Link>
         <hr style={{height: '1px', border: 'none', borderTop: '1px solid #eee', marginTop: '40px'}} />
         <form>
           <div className="input_box phone_number">
