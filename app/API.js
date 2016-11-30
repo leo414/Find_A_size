@@ -11,7 +11,7 @@ const API = {
     ReceiveResetPasswordSms: URL + 'User.ReceiveResetPasswordSms',
 
     SendResetPasswordMail: URL + 'User.SendResetPasswordMail',
-    ReceiveResetPasswordMail: URL + 'ReceiveResetPasswordMail',
+    ReceiveResetPasswordMail: URL + 'User.ReceiveResetPasswordMail',
 
     SendSignUpSms: URL + 'User.SendSignUpSms',
     ReceiveSignUpSms: URL + 'User.ReceiveSignUpSms',
