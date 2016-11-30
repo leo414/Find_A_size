@@ -91,7 +91,7 @@ class ProductListContainer extends React.Component {
     } else if (this.props.type === 'B') {
       data = this.state.ProductRelated.Result
     }
-    
+
     return (
       <ProductListLayout
         title={this.props.children}

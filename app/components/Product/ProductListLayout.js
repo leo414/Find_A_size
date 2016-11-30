@@ -1,9 +1,64 @@
 import React from 'react'
 import { Link } from 'react-router'
 import Button from '../Common/Button.js'
+import { Spin } from 'antd'
 
 const ProductListLayout = props => {
   const { title, type, data } = props
+  const loadingStyle={
+    width: '1100px',
+    height: '350px',
+    background: 'rgba(0,0,0,0.05)',
+    textAlign: 'center',
+    paddingTop: '160px',
+  }
+  const renderProductList = () => {
+    if(!data.length) {
+      return (
+        <div style={loadingStyle}>
+          <Spin size="large" /><br/>
+          loading...
+        </div>
+      )
+    }
+
+    return data.map((product, index) => (
+      <li className="product" key={index}>
+        {/* product */}
+        <a href="javascript:void(0)">
+          <img src={product.ImageUrl} alt="product" />
+        </a>
+        <a href="javascript:void(0)" className="product_title">{product.Title}</a>
+
+        <hr style={{height: '1px', border: 'none', borderTop: '1px dashed #ccc'}} />
+        <hr style={{height: '1px', border: 'none', opacity: 0}} />
+        <hr style={{height: '1px', border: 'none', borderTop: '1px solid #ccc'}} />
+
+        <p className="price">${product.Price}</p>
+
+        <div className="submit">
+          <Button
+
+            className="yellow fl"
+            handleSubmit={() => onSignup()}
+          />
+
+          <a className="btn yellow fl" style={{width: "46%", height: "30px", lineHeight: '30px', fontSize: "14px"}} href={product.LinkUrl} target="_blank">
+            BUY NOW!
+          </a>
+
+          <Button
+            width="46%"
+            height="30px"
+            fontSize="14px"
+            className="green fr"
+            handleSubmit={() => onSignup()}
+            value="Add to list"
+          />
+        </div>
+      </li>
+    ))
+  }
   return (
     <section className="product_list">
       <div className="container">
@@ -18,43 +73,7 @@ const ProductListLayout = props => {
           <div className="box">
             <div className={`wrap wrap-${type}`} style={{width: Math.ceil(data.length/5) * 1100 + 'px'}}>
               <ul>
-                {
-                  data.map((product, index) => (
-                    <li className="product" key={index}>
-                      {/* product */}
-                      <a href={product.LinkUrl}>
-                        <img src={product.ImageUrl} alt="product" />
-                      </a>
-                      <a href={product.LinkUrl} className="product_title">{product.Title}</a>
-
-                      <hr style={{height: '1px', border: 'none', borderTop: '1px dashed #ccc'}} />
-                      <hr style={{height: '1px', border: 'none', opacity: 0}} />
-                      <hr style={{height: '1px', border: 'none', borderTop: '1px solid #ccc'}} />
-
-                      <p className="price">${product.Price}</p>
-
-                      <div className="submit">
-                        <Button
-                          width="46%"
-                          height="30px"
-                          fontSize="14px"
-                          className="yellow fl"
-                          handleSubmit={() => onSignup()}
-                          value="BUY NOW!"
-                        />
-
-                        <Button
-                          width="46%"
-                          height="30px"
-                          fontSize="14px"
-                          className="green fr"
-                          handleSubmit={() => onSignup()}
-                          value="Add to list"
-                        />
-                      </div>
-                    </li>
-                  ))
-                }
+                {renderProductList()}
               </ul>
             </div>
           </div>
