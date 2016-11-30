@@ -2,7 +2,7 @@ import React from 'react'
 import { hashHistory } from 'react-router'
 import NavContainer from '../Layout/NavContainer'
 import Footer from '../Layout/Footer'
-import ProductList from '../Layout/ProductList'
+import ProductListContainer from '../Product/ProductListContainer'
 
 import Mask from '../Common/Mask'
 import Search from '../Search'
@@ -17,8 +17,8 @@ class Home extends React.Component {
 
         <hr style={{height: '1px', border: 'none', borderTop: '1px solid #ccc', margin: '50px 0'}} />
 
-        <ProductList type="A">Popular Products</ProductList>
-        <ProductList type="B">You may interetsed in these…</ProductList>
+        <ProductListContainer type="A">Popular Products</ProductListContainer>
+        <ProductListContainer type="B">You may interetsed in these…</ProductListContainer>
 
         <hr style={{height: '1px', border: 'none', borderTop: '1px solid #ccc', margin: '50px 0'}} />
 
