@@ -10,7 +10,7 @@ const GetProductAction = Reflux.createActions({
 
 GetProductAction.ProductSuggest.listen(function(PageIndex, PageSize){
   let data = {
-    Fields: 'Title,ImageUrl,LinkUrl,Price',
+    Fields: 'Title,ImageUrl,LinkUrl,Price,Id',
     PageIndex,
     PageSize,
   }
@@ -20,7 +20,7 @@ GetProductAction.ProductSuggest.listen(function(PageIndex, PageSize){
 
 GetProductAction.ProductRelated.listen(function(PageIndex, PageSize){
   let data = {
-    Fields: 'Title,ImageUrl,LinkUrl,Price',
+    Fields: 'Title,ImageUrl,LinkUrl,Price,Id',
     PageIndex,
     PageSize,
   }

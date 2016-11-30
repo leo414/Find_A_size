@@ -5,9 +5,14 @@ import Reflux from 'reflux'
 import ReactMixin from 'react-mixin'
 import GetProductStore from '../../stores/GetProductStore'
 import GetProductAction from '../../actions/GetProductAction'
+import ProductManageStore from '../../stores/ProductManageStore'
+import ProductManageAction from '../../actions/ProductManageAction'
+
+import { message } from 'antd'
 
 import $ from 'jquery'
 
+let self;
 class ProductListContainer extends React.Component {
   constructor(props) {
     super(props)
@@ -30,6 +35,7 @@ class ProductListContainer extends React.Component {
         Result: [],
         flag: '',
       },
+      loading: false,
     })
   }
   componentDidMount() {
@@ -84,7 +90,26 @@ class ProductListContainer extends React.Component {
     }
   }
 
+  onProductManageStoreChange(data){
+    if(data.productWatch.flag !== 'productWatch') return
+    if(data.productWatch.success === true) {
+      message.success('add list success')
+      this.setState({loading: false})
+    } else if (data.productWatch.success === false) {
+      message.error('add list false, please try again')
+      this.setState({loading: false})
+    }
+  }
+
+  addList(productId, watchValue){
+    self.setState({
+      loading: true,
+    })
+    ProductManageAction.ProductWatch(productId, watchValue)
+  }
+
   render() {
+    self = this
     let data
     if(this.props.type === 'A') {
       data = this.state.productSuggest.Result
@@ -97,10 +122,13 @@ class ProductListContainer extends React.Component {
         title={this.props.children}
         type={this.props.type}
         data={data}
+        addList={this.addList}
+        loading={this.state.loading}
        />
     )
   }
 }
 
 ReactMixin.onClass(ProductListContainer, Reflux.listenTo(GetProductStore, 'onProductStoreChange'))
+ReactMixin.onClass(ProductListContainer, Reflux.listenTo(ProductManageStore, 'onProductManageStoreChange'))
 export default ProductListContainer

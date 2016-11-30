@@ -37,6 +37,7 @@ const API = {
   PRODUCT: {
     ProductSuggest: URL + 'Product.Suggest',
     ProductRelated: URL + 'Product.Related',
+    ProductWatch: URL + 'ProductWatch.Add',
   },
 }
 

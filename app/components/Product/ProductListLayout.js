@@ -1,10 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router'
-import Button from '../Common/Button.js'
-import { Spin } from 'antd'
+import { Button, Spin } from 'antd'
 
 const ProductListLayout = props => {
-  const { title, type, data } = props
+  const { title, type, data, addList, loading } = props
+
   const loadingStyle={
     width: '1100px',
     height: '350px',
@@ -12,6 +12,16 @@ const ProductListLayout = props => {
     textAlign: 'center',
     paddingTop: '160px',
   }
+
+  const buttonStyle = {
+    width: '46%',
+    height: '30px',
+    fontSize: "14px",
+    backgroundColor: '#146eb4',
+    float: 'right',
+    padding: 0,
+  }
+
   const renderProductList = () => {
     if(!data.length) {
       return (
@@ -37,24 +47,13 @@ const ProductListLayout = props => {
         <p className="price">${product.Price}</p>
 
         <div className="submit">
-          <Button
-
-            className="yellow fl"
-            handleSubmit={() => onSignup()}
-          />
-
           <a className="btn yellow fl" style={{width: "46%", height: "30px", lineHeight: '30px', fontSize: "14px"}} href={product.LinkUrl} target="_blank">
             BUY NOW!
           </a>
 
-          <Button
-            width="46%"
-            height="30px"
-            fontSize="14px"
-            className="green fr"
-            handleSubmit={() => onSignup()}
-            value="Add to list"
-          />
+          <Button onClick={() => addList(product.Id, product.Price)} type="primary" loading={loading} style={buttonStyle}>
+            Add to list
+          </Button>
         </div>
       </li>
     ))
@@ -77,7 +76,6 @@ const ProductListLayout = props => {
               </ul>
             </div>
           </div>
-
 
         </div>
       </div>
