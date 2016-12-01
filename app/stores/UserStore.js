@@ -200,6 +200,7 @@ const UserStore = Reflux.createStore({
       this.data.hintMessage = res.ErrorMsg
     }
     this.data.userTicket.flag = 'getTicket'
+    this.data.userLogin.loginSuccess = false
     this.trigger(this.data)
   },
   onGetTicketFailed(res){

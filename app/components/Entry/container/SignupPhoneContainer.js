@@ -7,7 +7,7 @@ import ReactMixin from 'react-mixin'
 import UserStore from '../../../stores/UserStore'
 import UserAction from '../../../actions/UserAction'
 
-import { message } from 'antd'
+import { Modal } from 'antd'
 
 let timeOut;
 class SignupPhoneContainer extends React.Component {
@@ -28,21 +28,21 @@ class SignupPhoneContainer extends React.Component {
     console.log(data)
     if(data.sendSmsCode.flag === 'sendSms'){
       if(data.sendSmsCode.sendSmsSuccess === true) {
-        message.success('Send sms code success!')
+        this.success('Send sms code success!')
       } else if(data.sendSmsCode.sendSmsSuccess === 'sendFail') {
-        message.error('Phone Number Already Exists', 2.5)
+        this.error('Phone Number Already Exists')
       }
     }
 
     if(data.phoneSignup.flag === 'phoneSignup') {
       if(data.phoneSignup.phoneSignupSuccess === true) {
         localStorage.isLogin = true
-        message.success('Signup success')
+        this.success('Signup success')
         this.setState({loading: false})
         setTimeout(() => hashHistory.push({pathname: '/', query: null, state: {isLogin: true}}), 2000)
       } else if (data.phoneSignup.phoneSignupSuccess === 'signFail') {
         this.setState({loading: false})
-        message.error('Verification Code Error!', 2.5)
+        this.error('Verification Code Error!')
       }
     }
   }
@@ -80,6 +80,22 @@ class SignupPhoneContainer extends React.Component {
   componentWillUnmount(){
     timeOut && clearInterval(timeOut)
     timeOut = false
+  }
+
+  success(content) {
+    Modal.success({
+      title: 'Success',
+      content,
+      okText: 'OK',
+    })
+  }
+
+  error(content) {
+    Modal.error({
+      title: 'Error',
+      content,
+      okText: 'OK',
+    })
   }
 
   render() {

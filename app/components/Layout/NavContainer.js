@@ -6,7 +6,7 @@ import Reflux from 'reflux'
 import ReactMixin from 'react-mixin'
 import UserBindStore from '../../stores/UserBindStore'
 import UserBindAction from '../../actions/UserBindAction'
-import { message } from 'antd'
+import { Modal } from 'antd'
 
 class NavContainer extends React.Component {
   constructor(props){
@@ -31,19 +31,35 @@ class NavContainer extends React.Component {
       this.setState({
         isLogin: false
       })
-      message.success('Log Out success!')
+      this.success('Log Out success!')
       setTimeout(() => hashHistory.push('/'), 1500)
     } else if (data.signOut.success === false){
       localStorage.isLogin = false
       this.setState({
         isLogin: false
       })
-      message.success('Log Out success!')
+      this.success('Log Out success!')
     }
   }
 
   onSignOut(){
     UserBindAction.SignOut()
+  }
+
+  success(content) {
+    Modal.success({
+      title: 'Success',
+      content,
+      okText: 'OK',
+    })
+  }
+
+  error(content) {
+    Modal.error({
+      title: 'Error',
+      content,
+      okText: 'OK',
+    })
   }
 
   render() {

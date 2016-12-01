@@ -7,7 +7,7 @@ import UserStore from '../../../stores/UserStore'
 import UserAction from '../../../actions/UserAction'
 
 import { hashHistory } from 'react-router'
-import { message } from 'antd'
+import { Modal } from 'antd'
 
 class SignupContainer extends React.Component {
   constructor(props){
@@ -27,18 +27,18 @@ class SignupContainer extends React.Component {
     if(data.mailSignup.flag === 'sendMail'){
       if(data.mailSignup.sendMailSuccess === true) {
         this.setState({loading: false})
-        message.success('Send email success!')
+        this.success('Send email success!')
         setTimeout(() => hashHistory.push('/'), 2000)
       } else if(data.mailSignup.sendMailSuccess === 'sendFail') {
         this.setState({loading: false})
-        message.error('Mail Address Already Exists', 2.5)
+        this.error('Mail Address Already Exists')
       }
     }
 
     if(data.openUserLogin.flag === 'openUserLogin') {
       if(data.openUserLogin.googleLoginSuccess || data.openUserLogin.facebookLoginSuccess) {
         localStorage.isLogin = true
-        message.success('Signup success')
+        this.success('Signup success')
         setTimeout(() => hashHistory.push({pathname: '/', query: null, state: {isLogin: true}}), 2000)
       }
     }
@@ -65,6 +65,22 @@ class SignupContainer extends React.Component {
 
   onGoogleSignup(accessToken){
     UserAction.GoogleSignIn(accessToken)
+  }
+
+  success(content) {
+    Modal.success({
+      title: 'Success',
+      content,
+      okText: 'OK',
+    })
+  }
+
+  error(content) {
+    Modal.error({
+      title: 'Error',
+      content,
+      okText: 'OK',
+    })
   }
 
   render() {

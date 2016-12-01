@@ -1,12 +1,24 @@
 import React from 'react'
 import { hashHistory } from 'react-router'
-import { message } from 'antd'
+import { Modal } from 'antd'
 
 const LoginFail = () => {
   const redirection = () => {
-    message.error('signup success', 2)
-    setTimeout(() => hashHistory.push('/sign_up'), 2000)
+    error('signup success')
   }
+
+  const error = (content) => {
+    Modal.error({
+      title: 'Error',
+      content,
+      okText: 'OK',
+      onOk(){
+        hashHistory.push('/sign_up')
+        localStorage.isLogin = false
+      }
+    })
+  }
+
   return (
     <div className="login_redirect">
       Signup fail! 3S Later

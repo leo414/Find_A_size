@@ -1,16 +1,23 @@
 import React from 'react'
 import { hashHistory } from 'react-router'
-import { message } from 'antd'
-
-message.config({
-  top: 200,
-});
+import { Modal } from 'antd'
 
 const LoginSuccess = () => {
+
+  const success = (content) => {
+    Modal.success({
+      title: 'Success',
+      content,
+      okText: 'OK',
+      onOk(){
+        hashHistory.push({pathname: '/', query: null, state: {isLogin: true}})
+        localStorage.isLogin = true
+      }
+    })
+  }
+
   const redirection = () => {
-    message.success('signup success', 2)
-    localStorage.isLogin = true
-    setTimeout(() => hashHistory.push({pathname: '/', query: null, state: {isLogin: true}}), 2000)
+    success('signup success')
   }
   return (
     <div className="login_redirect">

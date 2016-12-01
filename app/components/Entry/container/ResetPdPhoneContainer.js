@@ -7,7 +7,7 @@ import ReactMixin from 'react-mixin'
 import UserStore from '../../../stores/UserStore'
 import UserAction from '../../../actions/UserAction'
 
-import { message } from 'antd'
+import { Modal } from 'antd'
 
 let timeOut;
 class ResetPdPhoneContainer extends React.Component {
@@ -29,22 +29,22 @@ class ResetPdPhoneContainer extends React.Component {
     if(data.phoneResetPassword.flag === 'resetPassword') {
       if(data.phoneResetPassword.resetPasswordSuccess === true) {
         localStorage.isLogin = true
-        message.success('Reset password success')
+        this.success('Reset password success')
         this.setState({loading: false})
         setTimeout(() => hashHistory.push({pathname: '/', query: null, state: {isLogin: true}}), 2000)
         return
       } else if (data.phoneResetPassword.resetPasswordSuccess === 'resetFail'){
         this.setState({loading: false})
-        message.error('Verification Code Error!', 2.5)
+        this.error('Verification Code Error!')
         return
       }
     }
 
     if(data.sendResetSmsCode.flag === 'sendSms'){
       if(data.sendResetSmsCode.sendSmsSuccess === true) {
-        message.success('Send sms code success!')
+        this.success('Send sms code success!')
       } else if(data.sendResetSmsCode.sendSmsSuccess === 'sendFail') {
-        message.error('Phone Number Already Exists', 2.5)
+        this.error('Phone Number Already Exists')
       }
 
     }
@@ -82,6 +82,22 @@ class ResetPdPhoneContainer extends React.Component {
   componentWillUnmount(){
     timeOut && clearInterval(timeOut)
     timeOut = false
+  }
+
+  success(content) {
+    Modal.success({
+      title: 'Success',
+      content,
+      okText: 'OK',
+    })
+  }
+
+  error(content) {
+    Modal.error({
+      title: 'Error',
+      content,
+      okText: 'OK',
+    })
   }
 
   render() {
