@@ -17,7 +17,17 @@ const GetProductStore = Reflux.createStore({
         flag: '',
       },
 
-      ProductRelated: {
+      productRelated: {
+        Count: '',
+        PageCount: '',
+        PageIndex: '',
+        PageSize: '',
+        Total: '',
+        Result: [],
+        flag: '',
+      },
+
+      productWatchSearch: {
         Count: '',
         PageCount: '',
         PageIndex: '',
@@ -55,7 +65,7 @@ const GetProductStore = Reflux.createStore({
   onProductRelatedCompleted(res){
     if(res.Success){
       const { Count, PageCount, PageIndex, PageSize, Total, Result } = res
-      this.data.ProductRelated = {
+      this.data.productRelated = {
         Count,
         PageCount,
         PageIndex,
@@ -66,10 +76,31 @@ const GetProductStore = Reflux.createStore({
     }else{
       this.data.hintMessage = res.ErrorMsg
     }
-    this.data.ProductRelated.flag = 'productRelated'
+    this.data.productRelated.flag = 'productRelated'
     this.trigger(this.data)
   },
   onProductRelatedFailed(res){
+    HttpErrorCallBack(res)
+  },
+
+  onProductWatchSearchCompleted(res){
+    if(res.Success){
+      const { Count, PageCount, PageIndex, PageSize, Total, Result } = res
+      this.data.productWatchSearch = {
+        Count,
+        PageCount,
+        PageIndex,
+        PageSize,
+        Total,
+        Result,
+      }
+    }else{
+      this.data.hintMessage = res.ErrorMsg
+    }
+    this.data.productWatchSearch.flag = 'productWatchSearch'
+    this.trigger(this.data)
+  },
+  onProductWatchSearchFailed(res){
     HttpErrorCallBack(res)
   },
 

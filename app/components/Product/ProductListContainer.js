@@ -9,12 +9,11 @@ import GetProductAction from '../../actions/GetProductAction'
 import ProductManageStore from '../../stores/ProductManageStore'
 import ProductManageAction from '../../actions/ProductManageAction'
 
-import { message, Modal } from 'antd'
+import { Modal, InputNumber } from 'antd'
 const confirm = Modal.confirm
 
 import $ from 'jquery'
 
-let self;
 class ProductListContainer extends React.Component {
   constructor(props) {
     super(props)
@@ -28,7 +27,7 @@ class ProductListContainer extends React.Component {
         Result: [],
         flag: '',
       },
-      ProductRelated: {
+      productRelated: {
         Count: '',
         PageCount: '',
         PageIndex: '',
@@ -37,12 +36,17 @@ class ProductListContainer extends React.Component {
         Result: [],
         flag: '',
       },
-      loading: {
-        state: false,
-        id: '',
-      },
       pageIndex: 0,
+      visible: false,
+      productId: '',
+      price: '',
     })
+
+    this.addList = this.addList.bind(this)
+    this.fetchData = this.fetchData.bind(this)
+    this.handleCancel = this.handleCancel.bind(this)
+    this.handleOk = this.handleOk.bind(this)
+    this.onPriceChange = this.onPriceChange.bind(this)
   }
   componentDidMount() {
     /* Carousel figure controler */
@@ -84,8 +88,7 @@ class ProductListContainer extends React.Component {
   }
 
   fetchData(type){
-    let that = this || self
-    type = type || that.props.type
+    type = type || this.props.type
     const initData = {
       Count: '',
       PageCount: '',
@@ -95,23 +98,23 @@ class ProductListContainer extends React.Component {
       Result: [],
       flag: '',
     }
-    let pageIndex = that.state.pageIndex + 1
+    let pageIndex = this.state.pageIndex + 1
 
-    if(that.props.type === 'A') {
-      that.setState({ productSuggest: initData })
+    if(this.props.type === 'A') {
+      this.setState({ productSuggest: initData })
       GetProductAction.ProductSuggest(pageIndex, 30)
-    } else if(that.props.type === 'B') {
-      that.setState({ ProductRelated: initData })
+    } else if(this.props.type === 'B') {
+      this.setState({ productRelated: initData })
       GetProductAction.ProductRelated(pageIndex, 30)
     }
-    that.setState({pageIndex})
+    this.setState({pageIndex})
   }
 
   onProductStoreChange(data){
-    if(data.productSuggest.flag === 'productSuggest' || data.ProductRelated.flag === 'productRelated') {
+    if(data.productSuggest.flag === 'productSuggest' || data.productRelated.flag === 'productRelated') {
       this.setState({
         productSuggest: { ...data.productSuggest },
-        ProductRelated: { ...data.ProductRelated },
+        productRelated: { ...data.productRelated },
       })
     }
   }
@@ -120,76 +123,108 @@ class ProductListContainer extends React.Component {
     console.log(data)
     if(data.productWatch.flag !== 'productWatch') return
     if(data.productWatch.success === true) {
-      message.success('add list success')
+      this.success('add list success')
       this.setState({
-        loading: {
-          state: false,
-          id: '',
-        }
+        productId: '',
+        price: '',
       })
     } else if (data.productWatch.success === false) {
       this.setState({
-        loading: {
-          state: false,
-          id: '',
-        }
+        productId: '',
+        price: '',
       })
-      confirm({
-        title: 'Want to delete these items?',
-        content: 'When clicked the OK button, this dialog will be closed after 1 second',
-        okText: 'OK',
-        cancelText: 'Cancel',
-        onOk() {
-          hashHistory.push('/login')
-        },
-        onCancel() {},
-      })
+      this.error('please login')
     }
   }
 
-  addList(productId, watchValue){
-    if(!localStorage.isLogin) {
-      confirm({
-        title: 'Want to delete these items?',
-        content: 'When clicked the OK button, this dialog will be closed after 1 second',
-        okText: 'OK',
-        cancelText: 'Cancel',
-        onOk() {
-          hashHistory.push('/login')
-        },
-        onCancel() {},
-      })
-
+  addList(productId){
+    if(localStorage.isLogin === 'false') {
+      console.log(1)
+      this.error('please login in')
       return false
     }
-
-    self.setState({
-      loading: {
-        state: true,
-        id: productId,
-      },
+    this.setState({
+      visible: true,
+      productId,
     })
-    ProductManageAction.ProductWatch(productId, watchValue)
+  }
+
+  onPriceChange(price){
+    this.setState({price})
+  }
+
+  handleOk() {
+    if(!this.state.price) {
+      this.formError('no price,place repeat')
+      return
+    }
+    this.setState({visible: false})
+    if(!this.state.productId) console.error('no productId')
+    ProductManageAction.ProductWatch(this.state.productId, this.state.price)
+  }
+
+  handleCancel(e) {
+    this.setState({
+      visible: false,
+    })
+  }
+
+  success(content) {
+    Modal.success({
+      title: 'Success',
+      content,
+      okText: 'OK',
+    })
+  }
+
+  error(content) {
+    Modal.error({
+      title: 'Error',
+      content,
+      okText: 'OK',
+      onOk(){
+        hashHistory.push('/login')
+      }
+    })
+  }
+
+  formError(content) {
+    Modal.error({
+      title: 'Error',
+      content,
+      okText: 'OK',
+    })
   }
 
   render() {
-    self = this
     let data
     if(this.props.type === 'A') {
       data = this.state.productSuggest.Result
     } else if (this.props.type === 'B') {
-      data = this.state.ProductRelated.Result
+      data = this.state.productRelated.Result
     }
 
     return (
-      <ProductListLayout
-        title={this.props.children}
-        type={this.props.type}
-        data={data}
-        addList={this.addList}
-        loading={this.state.loading}
-        fetchData={this.fetchData}
-       />
+      <div>
+        <Modal
+          title="Price Watch"
+          visible={this.state.visible}
+          onOk={this.handleOk}
+          onCancel={this.handleCancel}
+          okText="OK"
+          cancelText="Cancel"
+        >
+          <InputNumber defaultValue={0} size="large" onChange={this.onPriceChange} /> &nbsp;$
+        </Modal>
+
+        <ProductListLayout
+          title={this.props.children}
+          type={this.props.type}
+          data={data}
+          addList={this.addList}
+          fetchData={this.fetchData}
+         />
+      </div>
     )
   }
 }
