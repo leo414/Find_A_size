@@ -9,7 +9,6 @@ import UserAction from '../../../actions/UserAction'
 
 import { message } from 'antd'
 
-let self;
 let timeOut;
 class ResetPdPhoneContainer extends React.Component {
   constructor(props){
@@ -21,6 +20,9 @@ class ResetPdPhoneContainer extends React.Component {
       passwordRepeat: '',
       loading: false,
     })
+
+    this.getCode = this.getCode.bind(this)
+    this.onResetPssword = this.onResetPssword.bind(this)
   }
   onUserStoreChange(data) {
     console.log(data)
@@ -50,29 +52,29 @@ class ResetPdPhoneContainer extends React.Component {
 
   getCode(phone, password, passwordRepeat){
     console.log(phone)
-    if(!phone && !self.state.phone) return
-    self.setState({
+    if(!phone && !this.state.phone) return
+    this.setState({
       isClickGetCode: true,
       phone,
       password,
       passwordRepeat,
     })
-    timeOut = setTimeout(() => self.setState({isClickGetCode: false}), 60000)
-    UserAction.SendResetPasswordSms(phone || self.state.phone)
+    timeOut = setTimeout(() => this.setState({isClickGetCode: false}), 60000)
+    UserAction.SendResetPasswordSms(phone || this.state.phone)
   }
 
   onResetPssword(phone, code, password, passwordRepeat) {
     console.log(phone, code, password, passwordRepeat)
-    self.setState({
+    this.setState({
       phone,
       code,
       password,
       passwordRepeat,
       loading: true,
     })
-    phone = phone || self.state.phone
-    password = password || self.state.password
-    passwordRepeat = passwordRepeat || self.state.passwordRepeat
+    phone = phone || this.state.phone
+    password = password || this.state.password
+    passwordRepeat = passwordRepeat || this.state.passwordRepeat
     console.log(phone, password, passwordRepeat)
     UserAction.ReceiveResetPasswordSms(phone, code, password)
   }
@@ -84,7 +86,6 @@ class ResetPdPhoneContainer extends React.Component {
 
   render() {
     const { isClickGetCode } = this.state
-    self = this
     return (
       <ResetPdPhoneLayout
         pathname={this.props.location.pathname}

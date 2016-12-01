@@ -9,8 +9,6 @@ import UserAction from '../../../actions/UserAction'
 
 import { message } from 'antd'
 
-let self;
-
 class ResetPdMailContainer extends React.Component {
   constructor(props){
     super(props)
@@ -18,6 +16,7 @@ class ResetPdMailContainer extends React.Component {
       email: '',
       loading: false,
     })
+    this.onSubmit = this.onSubmit.bind(this)
   }
 
   onUserStoreChange(data){
@@ -35,15 +34,14 @@ class ResetPdMailContainer extends React.Component {
 
   onSubmit(email){
     console.log(email)
-    self.setState({
+    this.setState({
       email,
       loading: true,
     })
-    UserAction.SendResetPasswordMail(email || self.state.email)
+    UserAction.SendResetPasswordMail(email || this.state.email)
   }
 
   render() {
-    self = this
     return (
       <ResetPdMailLayout
         pathname={this.props.location.pathname}

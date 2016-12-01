@@ -10,8 +10,6 @@ import UserBindAction from '../../../actions/UserBindAction'
 
 import { message } from 'antd'
 
-let self;
-
 class BindMailContainer extends React.Component {
   constructor(props){
     super(props)
@@ -19,6 +17,8 @@ class BindMailContainer extends React.Component {
       email: '',
       loading: false,
     })
+
+    this.onSubmit = this.onSubmit.bind(this)
   }
 
   onUserStoreChange(data){
@@ -36,15 +36,14 @@ class BindMailContainer extends React.Component {
 
   onSubmit(email){
     console.log(email)
-    self.setState({
+    this.setState({
       email,
       loading: true,
     })
-    UserBindAction.SendBindingMail(email || self.state.email)
+    UserBindAction.SendBindingMail(email || this.state.email)
   }
 
   render() {
-    self = this
     return (
       <div>
         <UserCurrentContainer />

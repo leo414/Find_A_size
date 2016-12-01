@@ -12,7 +12,6 @@ import getNowFormatDate from '../../../tools/getNowFormatDate'
 
 import { message } from 'antd'
 
-let self
 let loginOnce = false
 class LoginContainer extends React.Component {
   constructor(props){
@@ -22,6 +21,8 @@ class LoginContainer extends React.Component {
       password: '',
       loading: false,
     })
+
+    this.onLogin = this.onLogin.bind(this)
   }
 
   onGetUserInfo(data) {
@@ -70,17 +71,16 @@ class LoginContainer extends React.Component {
 
   onLogin(userName, password){
     console.log(userName, password)
-    self.setState({
+    this.setState({
       userName,
       password,
       loading: true,
     })
     loginOnce = true
-    UserAction.GetTicket(userName || self.state.userName)
+    UserAction.GetTicket(userName || this.state.userName)
   }
 
   render() {
-    self = this
     return (
       <LoginLayout
        pathname={this.props.location.pathname}
