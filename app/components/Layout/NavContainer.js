@@ -32,13 +32,14 @@ class NavContainer extends React.Component {
         isLogin: false
       })
       this.success('Log Out success!')
-      setTimeout(() => hashHistory.push('/'), 1500)
+      hashHistory.push('/')
     } else if (data.signOut.success === false){
       localStorage.isLogin = false
       this.setState({
         isLogin: false
       })
       this.success('Log Out success!')
+      hashHistory.push('/')
     }
   }
 
