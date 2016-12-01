@@ -1,4 +1,5 @@
 import React from 'react'
+import { hashHistory } from 'react-router'
 import ProductListLayout from './ProductListLayout'
 
 import Reflux from 'reflux'
@@ -8,7 +9,8 @@ import GetProductAction from '../../actions/GetProductAction'
 import ProductManageStore from '../../stores/ProductManageStore'
 import ProductManageAction from '../../actions/ProductManageAction'
 
-import { message } from 'antd'
+import { message, Modal } from 'antd'
+const confirm = Modal.confirm
 
 import $ from 'jquery'
 
@@ -35,7 +37,11 @@ class ProductListContainer extends React.Component {
         Result: [],
         flag: '',
       },
-      loading: false,
+      loading: {
+        state: false,
+        id: '',
+      },
+      pageIndex: 0,
     })
   }
   componentDidMount() {
@@ -74,11 +80,31 @@ class ProductListContainer extends React.Component {
       })
     })
 
-    if(this.props.type === 'A') {
-      GetProductAction.ProductSuggest(1, 30)
-    } else if(this.props.type === 'B') {
-      GetProductAction.ProductRelated(1, 30)
+    this.fetchData()
+  }
+
+  fetchData(type){
+    let that = this || self
+    type = type || that.props.type
+    const initData = {
+      Count: '',
+      PageCount: '',
+      PageIndex: '',
+      PageSize: '',
+      Total: '',
+      Result: [],
+      flag: '',
     }
+    let pageIndex = that.state.pageIndex + 1
+
+    if(that.props.type === 'A') {
+      that.setState({ productSuggest: initData })
+      GetProductAction.ProductSuggest(pageIndex, 30)
+    } else if(that.props.type === 'B') {
+      that.setState({ ProductRelated: initData })
+      GetProductAction.ProductRelated(pageIndex, 30)
+    }
+    that.setState({pageIndex})
   }
 
   onProductStoreChange(data){
@@ -91,19 +117,57 @@ class ProductListContainer extends React.Component {
   }
 
   onProductManageStoreChange(data){
+    console.log(data)
     if(data.productWatch.flag !== 'productWatch') return
     if(data.productWatch.success === true) {
       message.success('add list success')
-      this.setState({loading: false})
+      this.setState({
+        loading: {
+          state: false,
+          id: '',
+        }
+      })
     } else if (data.productWatch.success === false) {
-      message.error('add list false, please try again')
-      this.setState({loading: false})
+      this.setState({
+        loading: {
+          state: false,
+          id: '',
+        }
+      })
+      confirm({
+        title: 'Want to delete these items?',
+        content: 'When clicked the OK button, this dialog will be closed after 1 second',
+        okText: 'OK',
+        cancelText: 'Cancel',
+        onOk() {
+          hashHistory.push('/login')
+        },
+        onCancel() {},
+      })
     }
   }
 
   addList(productId, watchValue){
+    if(!localStorage.isLogin) {
+      confirm({
+        title: 'Want to delete these items?',
+        content: 'When clicked the OK button, this dialog will be closed after 1 second',
+        okText: 'OK',
+        cancelText: 'Cancel',
+        onOk() {
+          hashHistory.push('/login')
+        },
+        onCancel() {},
+      })
+
+      return false
+    }
+
     self.setState({
-      loading: true,
+      loading: {
+        state: true,
+        id: productId,
+      },
     })
     ProductManageAction.ProductWatch(productId, watchValue)
   }
@@ -124,6 +188,7 @@ class ProductListContainer extends React.Component {
         data={data}
         addList={this.addList}
         loading={this.state.loading}
+        fetchData={this.fetchData}
        />
     )
   }

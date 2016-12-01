@@ -3,7 +3,7 @@ import { Link } from 'react-router'
 import { Button, Spin } from 'antd'
 
 const ProductListLayout = props => {
-  const { title, type, data, addList, loading } = props
+  const { title, type, data, addList, loading, fetchData } = props
 
   const loadingStyle={
     width: '1100px',
@@ -51,7 +51,12 @@ const ProductListLayout = props => {
             BUY NOW!
           </a>
 
-          <Button onClick={() => addList(product.Id, product.Price)} type="primary" loading={loading} style={buttonStyle}>
+          <Button
+            onClick={() => addList(product.Id, product.Price)}
+            type="primary"
+            loading={loading.id === product.Id ? loading.state : false}
+            style={buttonStyle}
+          >
             Add to list
           </Button>
         </div>
@@ -62,6 +67,7 @@ const ProductListLayout = props => {
     <section className="product_list">
       <div className="container">
         <p className="h1">{title}</p>
+        <a onClick={() => fetchData(type)} href="javascript:void(0)">Refresh</a>
 
         { /* Carousel figure */ }
         { /* A line shows five products  */}
