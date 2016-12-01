@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Spin } from 'antd'
 
 const ProductListLayout = props => {
-  const { title, type, data, addList, loading, fetchData } = props
+  const { title, type, data, addList, fetchData } = props
 
   const loadingStyle={
     width: '1100px',

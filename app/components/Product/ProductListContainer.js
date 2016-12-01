@@ -9,7 +9,7 @@ import GetProductAction from '../../actions/GetProductAction'
 import ProductManageStore from '../../stores/ProductManageStore'
 import ProductManageAction from '../../actions/ProductManageAction'
 
-import { Modal } from 'antd'
+import { Modal, InputNumber } from 'antd'
 const confirm = Modal.confirm
 
 import $ from 'jquery'
@@ -37,10 +37,16 @@ class ProductListContainer extends React.Component {
         flag: '',
       },
       pageIndex: 0,
+      visible: false,
+      productId: '',
+      price: '',
     })
 
     this.addList = this.addList.bind(this)
     this.fetchData = this.fetchData.bind(this)
+    this.handleCancel = this.handleCancel.bind(this)
+    this.handleOk = this.handleOk.bind(this)
+    this.onPriceChange = this.onPriceChange.bind(this)
   }
   componentDidMount() {
     /* Carousel figure controler */
@@ -119,30 +125,48 @@ class ProductListContainer extends React.Component {
     if(data.productWatch.success === true) {
       this.success('add list success')
       this.setState({
-        loading: {
-          state: false,
-          id: '',
-        }
+        productId: '',
+        price: '',
       })
     } else if (data.productWatch.success === false) {
       this.setState({
-        loading: {
-          state: false,
-          id: '',
-        }
+        productId: '',
+        price: '',
       })
       this.error('please login')
     }
   }
 
   addList(productId){
-    console.log(localStorage.isLogin)
     if(localStorage.isLogin === 'false') {
       console.log(1)
       this.error('please login in')
       return false
     }
-    // ProductManageAction.ProductWatch(productId, watchValue)
+    this.setState({
+      visible: true,
+      productId,
+    })
+  }
+
+  onPriceChange(price){
+    this.setState({price})
+  }
+
+  handleOk() {
+    if(!this.state.price) {
+      this.formError('no price,place repeat')
+      return
+    }
+    this.setState({visible: false})
+    if(!this.state.productId) console.error('no productId')
+    ProductManageAction.ProductWatch(this.state.productId, this.state.price)
+  }
+
+  handleCancel(e) {
+    this.setState({
+      visible: false,
+    })
   }
 
   success(content) {
@@ -164,6 +188,14 @@ class ProductListContainer extends React.Component {
     })
   }
 
+  formError(content) {
+    Modal.error({
+      title: 'Error',
+      content,
+      okText: 'OK',
+    })
+  }
+
   render() {
     let data
     if(this.props.type === 'A') {
@@ -173,13 +205,26 @@ class ProductListContainer extends React.Component {
     }
 
     return (
-      <ProductListLayout
-        title={this.props.children}
-        type={this.props.type}
-        data={data}
-        addList={this.addList}
-        fetchData={this.fetchData}
-       />
+      <div>
+        <Modal
+          title="Price Watch"
+          visible={this.state.visible}
+          onOk={this.handleOk}
+          onCancel={this.handleCancel}
+          okText="OK"
+          cancelText="Cancel"
+        >
+          <InputNumber defaultValue={0} size="large" onChange={this.onPriceChange} /> &nbsp;$
+        </Modal>
+
+        <ProductListLayout
+          title={this.props.children}
+          type={this.props.type}
+          data={data}
+          addList={this.addList}
+          fetchData={this.fetchData}
+         />
+      </div>
     )
   }
 }
