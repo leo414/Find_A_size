@@ -10,8 +10,6 @@ import UserAction from '../../../actions/UserAction'
 import { message } from 'antd'
 import decode64 from '../../../tools/decode64'
 
-let self;
-
 class SendFindPdMailContainer extends React.Component {
   constructor(props){
     super(props)
@@ -20,6 +18,8 @@ class SendFindPdMailContainer extends React.Component {
       passwordRepeat: '',
       loading: false,
     })
+
+    this.onSubmit = this.onSubmit.bind(this)
   }
 
   onUserStoreChange(data){
@@ -38,25 +38,24 @@ class SendFindPdMailContainer extends React.Component {
 
   onSubmit(password, passwordRepeat){
     console.log(password, passwordRepeat)
-    self.setState({
+    this.setState({
       password,
       passwordRepeat,
       loading: true,
     })
     try {
-      console.log(self.props.location.query.code)
-      console.log(self.props.location.query.mail)
+      console.log(this.props.location.query.code)
+      console.log(this.props.location.query.mail)
     } catch(error) {
       message.error('Email address does not exist', 2.5)
       return
     }
-    const code = decode64(self.props.location.query.code)
-    const mail = decode64(self.props.location.query.mail)
-    UserAction.ReceiveResetPasswordMail(mail, code, password || self.state.password)
+    const code = decode64(this.props.location.query.code)
+    const mail = decode64(this.props.location.query.mail)
+    UserAction.ReceiveResetPasswordMail(mail, code, password || this.state.password)
   }
 
   render() {
-    self = this
     return (
       <SendFindPdMailLayout
         pathname={this.props.location.pathname}

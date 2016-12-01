@@ -9,8 +9,6 @@ import UserBindAction from '../../../actions/UserBindAction'
 
 import { message } from 'antd'
 
-let self;
-
 class ChangePasswordContaienr extends React.Component {
   constructor(props){
     super(props)
@@ -19,6 +17,8 @@ class ChangePasswordContaienr extends React.Component {
       newPassword: '',
       loading: false,
     })
+
+    this.onSubmit = this.onSubmit.bind(this)
   }
 
   onUserStoreChange(data){
@@ -36,16 +36,15 @@ class ChangePasswordContaienr extends React.Component {
 
   onSubmit(rawPassword, newPassword){
     console.log(rawPassword, newPassword)
-    self.setState({
+    this.setState({
       rawPassword,
       newPassword,
       loading: true,
     })
-    UserBindAction.ChangePassword(rawPassword || self.state.rawPassword, newPassword || self.state.newPassword,)
+    UserBindAction.ChangePassword(rawPassword || this.state.rawPassword, newPassword || this.state.newPassword,)
   }
 
   render() {
-    self = this
     return (
       <ChangePasswordLayout
         pathname={this.props.location.pathname}

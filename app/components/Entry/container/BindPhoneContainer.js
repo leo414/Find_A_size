@@ -10,7 +10,6 @@ import UserBindAction from '../../../actions/UserBindAction'
 
 import { message } from 'antd'
 
-let self;
 let timeOut;
 class BindPhoneContainer extends React.Component {
   constructor(props){
@@ -20,6 +19,9 @@ class BindPhoneContainer extends React.Component {
       phone: '',
       loading: false,
     })
+
+    this.getCode = this.getCode.bind(this)
+    this.onResetPssword = this.getCode.bind(this)
   }
   onUserStoreChange(data) {
     console.log(data)
@@ -48,23 +50,23 @@ class BindPhoneContainer extends React.Component {
 
   getCode(phone){
     console.log(phone)
-    if(!phone && !self.state.phone) return
-    self.setState({
+    if(!phone && !this.state.phone) return
+    this.setState({
       isClickGetCode: true,
       phone,
     })
-    timeOut = setTimeout(() => self.setState({isClickGetCode: false}), 60000)
-    UserBindAction.SendBindingSms(phone || self.state.phone)
+    timeOut = setTimeout(() => this.setState({isClickGetCode: false}), 60000)
+    UserBindAction.SendBindingSms(phone || this.state.phone)
   }
 
   onResetPssword(phone, code) {
     console.log(phone, code)
-    self.setState({
+    this.setState({
       phone,
       code,
       loading: true,
     })
-    phone = phone || self.state.phone
+    phone = phone || this.state.phone
     console.log(phone)
     UserBindAction.ReceiveBindingSms(phone, code)
   }
@@ -76,7 +78,6 @@ class BindPhoneContainer extends React.Component {
 
   render() {
     const { isClickGetCode } = this.state
-    self = this
     return (
       <div>
         <UserCurrentContainer />
