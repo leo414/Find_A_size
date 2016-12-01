@@ -9,7 +9,6 @@ import UserAction from '../../../actions/UserAction'
 import { hashHistory } from 'react-router'
 import { message } from 'antd'
 
-let self;
 class SignupContainer extends React.Component {
   constructor(props){
     super(props)
@@ -19,6 +18,8 @@ class SignupContainer extends React.Component {
       passwordRepeat: '',
       loading: false,
     })
+
+    this.onSignup = this.onSignup.bind(this)
   }
 
   onGetUserInfo(data) {
@@ -45,29 +46,28 @@ class SignupContainer extends React.Component {
 
   onSignup(email, password, passwordRepeat){
     console.log(email, password, passwordRepeat)
-    self.setState({
+    this.setState({
       email,
       password,
       passwordRepeat,
       loading: true,
     })
 
-    email = email || self.state.email
-    password = password || self.state.password
-    passwordRepeat = passwordRepeat || self.state.passwordRepeat
+    email = email || this.state.email
+    password = password || this.state.password
+    passwordRepeat = passwordRepeat || this.state.passwordRepeat
     UserAction.SendSignUpMail(email, password)
   }
 
   onFacebookSignup(accessToken){
-    // UserAction.FacebookSignIn(accessToken)
+    UserAction.FacebookSignIn(accessToken)
   }
 
   onGoogleSignup(accessToken){
-    // UserAction.GoogleSignIn(accessToken)
+    UserAction.GoogleSignIn(accessToken)
   }
 
   render() {
-    self = this
     return (
       <SignupLayout
         pathname={this.props.location.pathname}
