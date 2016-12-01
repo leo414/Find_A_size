@@ -31,7 +31,9 @@ GetProductAction.ProductRelated.listen(function(PageIndex, PageSize){
 
 GetProductAction.ProductWatchSearch.listen(function(PageIndex, PageSize){
   let data = {
-    Fields: 'Title,ImageUrl,LinkUrl,Price,Id,Description',
+    Fields: 'Notified,ProductId,OriginalPrice,WatchValue,Product.Id,Product.Title,' +
+    'Product.ImageUrl,Product.LinkUrl,Product.Description,Product.Color,Product.Material,' +
+    'Product.Length,Product.Weight,Product.Width,Product.Height,',
     PageIndex,
     PageSize,
   }
