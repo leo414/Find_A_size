@@ -9,7 +9,7 @@ import GetProductAction from '../../actions/GetProductAction'
 import ProductManageStore from '../../stores/ProductManageStore'
 import ProductManageAction from '../../actions/ProductManageAction'
 
-import { message, Modal } from 'antd'
+import { Modal } from 'antd'
 const confirm = Modal.confirm
 
 import $ from 'jquery'
@@ -117,7 +117,7 @@ class ProductListContainer extends React.Component {
     console.log(data)
     if(data.productWatch.flag !== 'productWatch') return
     if(data.productWatch.success === true) {
-      message.success('add list success')
+      this.success('add list success')
       this.setState({
         loading: {
           state: false,
@@ -131,36 +131,37 @@ class ProductListContainer extends React.Component {
           id: '',
         }
       })
-      confirm({
-        title: 'Want to delete these items?',
-        content: 'When clicked the OK button, this dialog will be closed after 1 second',
-        okText: 'OK',
-        cancelText: 'Cancel',
-        onOk() {
-          hashHistory.push('/login')
-        },
-        onCancel() {},
-      })
+      this.error('please login')
     }
   }
 
   addList(productId){
-    if(!localStorage.isLogin) {
-      confirm({
-        title: 'Want to delete these items?',
-        content: 'When clicked the OK button, this dialog will be closed after 1 second',
-        okText: 'OK',
-        cancelText: 'Cancel',
-        onOk() {
-          hashHistory.push('/login')
-        },
-        onCancel() {},
-      })
-
+    console.log(localStorage.isLogin)
+    if(localStorage.isLogin === 'false') {
+      console.log(1)
+      this.error('please login in')
       return false
     }
-
     // ProductManageAction.ProductWatch(productId, watchValue)
+  }
+
+  success(content) {
+    Modal.success({
+      title: 'Success',
+      content,
+      okText: 'OK',
+    })
+  }
+
+  error(content) {
+    Modal.error({
+      title: 'Error',
+      content,
+      okText: 'OK',
+      onOk(){
+        hashHistory.push('/login')
+      }
+    })
   }
 
   render() {
