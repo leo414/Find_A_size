@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { InputNumber, Rate } from 'antd'
+import { InputNumber } from 'antd'
 import Button from '../Common/Button'
 
 const SearchResult = () => {
@@ -24,8 +24,8 @@ const SearchResult = () => {
             <strong>
               Dimensions: 24*2418 inches <br/>
               Material: Wood/Metal <br/>
+              Weight: xxx <br/>
               Color: brown <br/>
-              Rating: <Rate disabled defaultValue={2} />
             </strong>
           </div>
         </section>

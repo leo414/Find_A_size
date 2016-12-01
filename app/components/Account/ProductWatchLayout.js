@@ -83,14 +83,9 @@ const ProductWatchLayout = props => {
                 {item.OriginalPrice - item.WatchValue ? '+' : <span><i className="down fz-18 color_yellow" />-</span>}
                 ${Math.abs(item.OriginalPrice - item.WatchValue).toFixed(2)}
               </span>
-              <Button
-                width="88px"
-                height="24px"
-                fontSize="12px"
-                className="yellow"
-                handleSubmit={() => onSignup()}
-                value="BUY NOW!"
-              />
+              <a className="btn yellow" style={{width: "88px", height: "24px", lineHeight: '24px', fontSize: "12px"}} href={item.Product.LinkUrl} target="_blank">
+                BUY NOW!
+              </a>
             </div>
           </section>
 
