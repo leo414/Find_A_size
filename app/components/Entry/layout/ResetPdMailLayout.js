@@ -7,7 +7,6 @@ import { Button } from 'antd'
 import Mask from '../Mask'
 
 import $ from 'jquery'
-import { message } from 'antd'
 
 const ResetPdMailLayout = ({pathname, onSubmit, loading}) => {
   const cls = classnames({

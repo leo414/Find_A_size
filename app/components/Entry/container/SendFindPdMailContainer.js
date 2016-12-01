@@ -7,7 +7,7 @@ import ReactMixin from 'react-mixin'
 import UserStore from '../../../stores/UserStore'
 import UserAction from '../../../actions/UserAction'
 
-import { message } from 'antd'
+import { Modal } from 'antd'
 import decode64 from '../../../tools/decode64'
 
 class SendFindPdMailContainer extends React.Component {
@@ -28,11 +28,11 @@ class SendFindPdMailContainer extends React.Component {
     if(data.receiveMailPassword.resetPasswordSuccess === true) {
       this.setState({loading: false})
       localStorage.isLogin = true
-      message.success('Reset password success!')
+      this.success('Reset password success!')
       setTimeout(() => hashHistory.push({pathname: '/', query: null, state: {isLogin: true}}), 2000)
     } else if(data.receiveMailPassword.resetPasswordSuccess === 'resetFail') {
       this.setState({loading: false})
-      message.error('Invalid Request', 2.5)
+      this.error('Invalid Request')
     }
   }
 
@@ -47,12 +47,28 @@ class SendFindPdMailContainer extends React.Component {
       console.log(this.props.location.query.code)
       console.log(this.props.location.query.mail)
     } catch(error) {
-      message.error('Email address does not exist', 2.5)
+      this.error('Email address does not exist')
       return
     }
     const code = decode64(this.props.location.query.code)
     const mail = decode64(this.props.location.query.mail)
     UserAction.ReceiveResetPasswordMail(mail, code, password || this.state.password)
+  }
+
+  success(content) {
+    Modal.success({
+      title: 'Success',
+      content,
+      okText: 'OK',
+    })
+  }
+
+  error(content) {
+    Modal.error({
+      title: 'Error',
+      content,
+      okText: 'OK',
+    })
   }
 
   render() {

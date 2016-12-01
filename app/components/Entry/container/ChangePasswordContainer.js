@@ -7,7 +7,7 @@ import ReactMixin from 'react-mixin'
 import UserBindStore from '../../../stores/UserBindStore'
 import UserBindAction from '../../../actions/UserBindAction'
 
-import { message } from 'antd'
+import { Modal } from 'antd'
 
 class ChangePasswordContaienr extends React.Component {
   constructor(props){
@@ -26,11 +26,11 @@ class ChangePasswordContaienr extends React.Component {
     if(data.changePassword.flag !== 'changePassword') return
     if(data.changePassword.success === true) {
       this.setState({loading: false})
-      message.success('Change password success!')
+      this.success('Change password success!')
       setTimeout(() => hashHistory.push('/account'), 2000)
     } else if(data.changePassword.success === false) {
       this.setState({loading: false})
-      message.error('unknown user name or bad password', 2.5)
+      this.error('unknown user name or bad password')
     }
   }
 
@@ -42,6 +42,22 @@ class ChangePasswordContaienr extends React.Component {
       loading: true,
     })
     UserBindAction.ChangePassword(rawPassword || this.state.rawPassword, newPassword || this.state.newPassword,)
+  }
+
+  success(content) {
+    Modal.success({
+      title: 'Success',
+      content,
+      okText: 'OK',
+    })
+  }
+
+  error(content) {
+    Modal.error({
+      title: 'Error',
+      content,
+      okText: 'OK',
+    })
   }
 
   render() {

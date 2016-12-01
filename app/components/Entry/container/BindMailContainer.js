@@ -8,7 +8,7 @@ import ReactMixin from 'react-mixin'
 import UserBindStore from '../../../stores/UserBindStore'
 import UserBindAction from '../../../actions/UserBindAction'
 
-import { message } from 'antd'
+import { Modal } from 'antd'
 
 class BindMailContainer extends React.Component {
   constructor(props){
@@ -26,11 +26,11 @@ class BindMailContainer extends React.Component {
     if(data.sendBindMail.flag !== 'sendMail') return
     if(data.sendBindMail.success === true) {
       this.setState({loading: false})
-      message.success('Connect email success!')
+      this.success('Connect email success!')
       setTimeout(() => hashHistory.push('/'), 2000)
     } else if(data.sendBindMail.success === false) {
       this.setState({loading: false})
-      message.error('Mail Address Already Exists', 2.5)
+      this.error('Mail Address Already Exists')
     }
   }
 
@@ -41,6 +41,22 @@ class BindMailContainer extends React.Component {
       loading: true,
     })
     UserBindAction.SendBindingMail(email || this.state.email)
+  }
+
+  success(content) {
+    Modal.success({
+      title: 'Success',
+      content,
+      okText: 'OK',
+    })
+  }
+
+  error(content) {
+    Modal.error({
+      title: 'Error',
+      content,
+      okText: 'OK',
+    })
   }
 
   render() {

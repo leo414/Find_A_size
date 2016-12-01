@@ -10,7 +10,7 @@ import UserAction from '../../../actions/UserAction'
 import pbkdf2 from 'pbkdf2-sha256'
 import getNowFormatDate from '../../../tools/getNowFormatDate'
 
-import { message } from 'antd'
+import { Modal } from 'antd'
 
 let loginOnce = false
 class LoginContainer extends React.Component {
@@ -30,7 +30,7 @@ class LoginContainer extends React.Component {
     if(data.openUserLogin.flag === 'openUserLogin') {
       if(data.openUserLogin.googleLoginSuccess || data.openUserLogin.facebookLoginSuccess) {
         localStorage.isLogin = true
-        message.success('Login success')
+        this.success('Login success')
         setTimeout(() => hashHistory.push({pathname: '/', query: null, state: {isLogin: true}}), 2000)
       }
     }
@@ -38,11 +38,11 @@ class LoginContainer extends React.Component {
     if(data.userLogin.flag === 'userLogin') {
       if(data.userLogin.loginSuccess === true) {
         localStorage.isLogin = true
-        message.success('Login success')
+        this.success('Login success')
         this.setState({loading: false})
         setTimeout(() => hashHistory.push({pathname: '/', query: null, state: {isLogin: true}}), 2000)
       } else if(data.userLogin.loginSuccess === 'loginFail') {
-        message.error('Unknown user name or bad password!', 2)
+        this.error('Unknown user name or bad password!', 2)
         this.setState({loading: false})
       }
     }
@@ -78,6 +78,22 @@ class LoginContainer extends React.Component {
     })
     loginOnce = true
     UserAction.GetTicket(userName || this.state.userName)
+  }
+
+  success(content) {
+    Modal.success({
+      title: 'Success',
+      content,
+      okText: 'OK',
+    })
+  }
+
+  error(content) {
+    Modal.error({
+      title: 'Error',
+      content,
+      okText: 'OK',
+    })
   }
 
   render() {

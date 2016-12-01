@@ -7,7 +7,7 @@ import ReactMixin from 'react-mixin'
 import UserStore from '../../../stores/UserStore'
 import UserAction from '../../../actions/UserAction'
 
-import { message } from 'antd'
+import { Modal } from 'antd'
 
 class ResetPdMailContainer extends React.Component {
   constructor(props){
@@ -24,11 +24,11 @@ class ResetPdMailContainer extends React.Component {
     if(data.mailResetPassword.flag !== 'resetPassword') return
     if(data.mailResetPassword.sendMilSuccess === true) {
       this.setState({loading: false})
-      message.success('Send email success!')
+      this.success('Send email success!')
       setTimeout(() => hashHistory.push('/'), 2000)
     } else if(data.mailResetPassword.sendMilSuccess === 'resetFail') {
       this.setState({loading: false})
-      message.error('Email address does not exist', 2.5)
+      this.error('Email address does not exist')
     }
   }
 
@@ -39,6 +39,22 @@ class ResetPdMailContainer extends React.Component {
       loading: true,
     })
     UserAction.SendResetPasswordMail(email || this.state.email)
+  }
+
+  success(content) {
+    Modal.success({
+      title: 'Success',
+      content,
+      okText: 'OK',
+    })
+  }
+
+  error(content) {
+    Modal.error({
+      title: 'Error',
+      content,
+      okText: 'OK',
+    })
   }
 
   render() {

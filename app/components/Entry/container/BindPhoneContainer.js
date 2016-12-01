@@ -8,7 +8,7 @@ import ReactMixin from 'react-mixin'
 import UserBindStore from '../../../stores/UserBindStore'
 import UserBindAction from '../../../actions/UserBindAction'
 
-import { message } from 'antd'
+import { Modal } from 'antd'
 
 let timeOut;
 class BindPhoneContainer extends React.Component {
@@ -27,22 +27,22 @@ class BindPhoneContainer extends React.Component {
     console.log(data)
     if(data.receiveSms.flag === 'receiveSms') {
       if(data.receiveSms.success === true) {
-        message.success('Bind phone success')
+        this.success('Bind phone success')
         this.setState({loading: false})
         setTimeout(() => hashHistory.push('/account'), 2000)
         return
       } else if (data.receiveSms.success === false){
         this.setState({loading: false})
-        message.error('Verification Code Error!', 2.5)
+        this.error('Verification Code Error!')
         return
       }
     }
 
     if(data.sendBindSms.flag === 'sendBindSms'){
       if(data.sendBindSms.success === true) {
-        message.success('Send sms code success!')
+        this.success('Send sms code success!')
       } else if(data.sendBindSms.success === false) {
-        message.error('Phone Number Already Exists', 2.5)
+        this.error('Phone Number Already Exists')
       }
 
     }
@@ -74,6 +74,22 @@ class BindPhoneContainer extends React.Component {
   componentWillUnmount(){
     timeOut && clearInterval(timeOut)
     timeOut = false
+  }
+
+  success(content) {
+    Modal.success({
+      title: 'Success',
+      content,
+      okText: 'OK',
+    })
+  }
+
+  error(content) {
+    Modal.error({
+      title: 'Error',
+      content,
+      okText: 'OK',
+    })
   }
 
   render() {

@@ -6,7 +6,7 @@ import ReactMixin from 'react-mixin'
 import UserBindStore from '../../../stores/UserBindStore'
 import UserBindAction from '../../../actions/UserBindAction'
 
-import { message } from 'antd'
+import { Modal } from 'antd'
 
 
 class UserCurrentContainer extends React.Component {
@@ -20,9 +20,25 @@ class UserCurrentContainer extends React.Component {
     if(data.userCurrent.success === true) {
       console.log(data.userCurrent)
     } else if (data.userCurrent.success === false) {
-      message.error('place go to login', 2.5)
+      this.error('place go to login')
       setTimeout(() => hashHistory.push('/login'), 2000)
     }
+  }
+
+  success(content) {
+    Modal.success({
+      title: 'Success',
+      content,
+      okText: 'OK',
+    })
+  }
+
+  error(content) {
+    Modal.error({
+      title: 'Error',
+      content,
+      okText: 'OK',
+    })
   }
 
   render() {

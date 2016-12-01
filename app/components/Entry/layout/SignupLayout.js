@@ -12,9 +12,6 @@ import Mask from '../Mask'
 
 import $ from 'jquery'
 
-
-import { message } from 'antd'
-
 const SignupLayout = ({pathname, onSignup, onFacebookSignup, onGoogleSignup, loading}) => {
   const cls = classnames({
     hidden: pathname !== '/sign_up'
@@ -89,7 +86,7 @@ const SignupLayout = ({pathname, onSignup, onFacebookSignup, onGoogleSignup, loa
             <input type="password" className="fr" onChange={event => passwordRepeat = event.target.value.trim()} />
           </div>
         </form>
-        
+
         <Button onClick={() => onSignup(email, password, passwordRepeat)} type="primary" loading={loading} style={buttonStyle}>
           Sign up
         </Button>
