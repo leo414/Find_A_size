@@ -14,7 +14,6 @@ const confirm = Modal.confirm
 
 import $ from 'jquery'
 
-let self;
 class ProductListContainer extends React.Component {
   constructor(props) {
     super(props)
@@ -28,7 +27,7 @@ class ProductListContainer extends React.Component {
         Result: [],
         flag: '',
       },
-      ProductRelated: {
+      productRelated: {
         Count: '',
         PageCount: '',
         PageIndex: '',
@@ -37,12 +36,11 @@ class ProductListContainer extends React.Component {
         Result: [],
         flag: '',
       },
-      loading: {
-        state: false,
-        id: '',
-      },
       pageIndex: 0,
     })
+
+    this.addList = this.addList.bind(this)
+    this.fetchData = this.fetchData.bind(this)
   }
   componentDidMount() {
     /* Carousel figure controler */
@@ -84,8 +82,7 @@ class ProductListContainer extends React.Component {
   }
 
   fetchData(type){
-    let that = this || self
-    type = type || that.props.type
+    type = type || this.props.type
     const initData = {
       Count: '',
       PageCount: '',
@@ -95,23 +92,23 @@ class ProductListContainer extends React.Component {
       Result: [],
       flag: '',
     }
-    let pageIndex = that.state.pageIndex + 1
+    let pageIndex = this.state.pageIndex + 1
 
-    if(that.props.type === 'A') {
-      that.setState({ productSuggest: initData })
+    if(this.props.type === 'A') {
+      this.setState({ productSuggest: initData })
       GetProductAction.ProductSuggest(pageIndex, 30)
-    } else if(that.props.type === 'B') {
-      that.setState({ ProductRelated: initData })
+    } else if(this.props.type === 'B') {
+      this.setState({ productRelated: initData })
       GetProductAction.ProductRelated(pageIndex, 30)
     }
-    that.setState({pageIndex})
+    this.setState({pageIndex})
   }
 
   onProductStoreChange(data){
-    if(data.productSuggest.flag === 'productSuggest' || data.ProductRelated.flag === 'productRelated') {
+    if(data.productSuggest.flag === 'productSuggest' || data.productRelated.flag === 'productRelated') {
       this.setState({
         productSuggest: { ...data.productSuggest },
-        ProductRelated: { ...data.ProductRelated },
+        productRelated: { ...data.productRelated },
       })
     }
   }
@@ -147,7 +144,7 @@ class ProductListContainer extends React.Component {
     }
   }
 
-  addList(productId, watchValue){
+  addList(productId){
     if(!localStorage.isLogin) {
       confirm({
         title: 'Want to delete these items?',
@@ -163,22 +160,15 @@ class ProductListContainer extends React.Component {
       return false
     }
 
-    self.setState({
-      loading: {
-        state: true,
-        id: productId,
-      },
-    })
-    ProductManageAction.ProductWatch(productId, watchValue)
+    // ProductManageAction.ProductWatch(productId, watchValue)
   }
 
   render() {
-    self = this
     let data
     if(this.props.type === 'A') {
       data = this.state.productSuggest.Result
     } else if (this.props.type === 'B') {
-      data = this.state.ProductRelated.Result
+      data = this.state.productRelated.Result
     }
 
     return (
@@ -187,7 +177,6 @@ class ProductListContainer extends React.Component {
         type={this.props.type}
         data={data}
         addList={this.addList}
-        loading={this.state.loading}
         fetchData={this.fetchData}
        />
     )
