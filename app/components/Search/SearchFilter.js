@@ -70,16 +70,7 @@ class SearchFilter extends React.Component {
             <span>Relevence</span>
              &nbsp;| &nbsp;
              Price &nbsp;
-             <div className="triangle in_block">
-               <span className="triangle_top"></span>
-               <span className="triangle_bottom active"></span>
-             </div>
-             &nbsp;&nbsp;| &nbsp;
-             Rating &nbsp;
-             <div className="triangle in_block">
-               <span className="triangle_top active"></span>
-               <span className="triangle_bottom"></span>
-             </div>
+             <i className="sort_up" />
           </div>
         </section>
       </article>

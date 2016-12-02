@@ -92,25 +92,4 @@
   h1 { font-weight: 400; }
   span { color: $green; }
   .sorted { font-size: 20px; }
-
-  .triangle {
-    width: 12px;
-    height: 16px;
-    vertical-align: middle;
-    position: relative;
-
-    .triangle_top {
-      @include triangle(12px, 7px, top, #000, #000);
-      position: absolute;
-      z-index: $zindex_base;
-      top: 0;
-    }
-
-    .triangle_bottom {
-      @include triangle(12px, 7px, bottom, #000, #000);
-      position: absolute;
-      z-index: $zindex_base;
-      bottom: 0;
-    }
-  }
 }
