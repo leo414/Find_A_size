@@ -30,6 +30,7 @@ class ProductWatchContainer extends React.Component {
       productId: '',
       price: '',
       deleteProductId: '',
+      isDataEmpty: false,
     })
 
     this.onSelectPage = this.onSelectPage.bind(this)
@@ -59,13 +60,23 @@ class ProductWatchContainer extends React.Component {
         //   price: '',
         // })
       }
-    } else if(data.productWatchDel.flag === 'productWatchDel'){
+    }
+
+    if(data.productWatchDel.flag === 'productWatchDel'){
       if(data.productWatchDel.success === true) {
         let Result = this.state.productWatchSearch.Result.filter(item => item.Product.Id !== this.state.deleteProductId)
-        let productWatchSearch = this.state.productWatchSearch
-        this.setState({
-          productWatchSearch: {...productWatchSearch, Result}
-        })
+        if(Result.length){
+          let productWatchSearch = this.state.productWatchSearch
+          this.setState({
+            productWatchSearch: {...productWatchSearch, Result}
+          })
+        } else {
+          console.log(1)
+          this.setState({
+            isDataEmpty: true
+          })
+        }
+
       }
     }
   }
@@ -134,9 +145,16 @@ class ProductWatchContainer extends React.Component {
   onProductStoreChange(data){
     console.log(data)
     if(data.productWatchSearch.flag === 'productWatchSearch') {
-      this.setState({
-        productWatchSearch: { ...data.productWatchSearch },
-      })
+      if(data.productWatchSearch.Result.length){
+        this.setState({
+          productWatchSearch: { ...data.productWatchSearch },
+        })
+      } else {
+        this.setState({
+          isDataEmpty: true
+        })
+      }
+
     }
   }
 
@@ -166,6 +184,7 @@ class ProductWatchContainer extends React.Component {
           newPrice={this.state.price}
           productId={this.state.productId}
           deleteWatch={this.deleteWatch}
+          isDataEmpty={this.state.isDataEmpty}
         />
       </div>
     )

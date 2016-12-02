@@ -13,6 +13,7 @@ const ProductWatchLayout = props => {
     newPrice,
     productId,
     deleteWatch,
+    isDataEmpty,
   } = props
 
   const loadingStyle={
@@ -33,7 +34,11 @@ const ProductWatchLayout = props => {
   }
 
   const renderProductList = () => {
-    if(!data.length) {
+    if(isDataEmpty){
+      return <div>No add list place go to add list</div>
+    }
+
+    if(!data.length && !isDataEmpty) {
       return (
         <div style={loadingStyle}>
           <Spin size="large" /><br/>
