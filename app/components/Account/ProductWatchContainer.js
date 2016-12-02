@@ -29,10 +29,12 @@ class ProductWatchContainer extends React.Component {
       visible: false,
       productId: '',
       price: '',
+      deleteProductId: '',
     })
 
     this.onSelectPage = this.onSelectPage.bind(this)
     this.addList = this.addList.bind(this)
+    this.deleteWatch = this.deleteWatch.bind(this)
     this.handleCancel = this.handleCancel.bind(this)
     this.handleOk = this.handleOk.bind(this)
     this.onPriceChange = this.onPriceChange.bind(this)
@@ -44,23 +46,31 @@ class ProductWatchContainer extends React.Component {
 
   onProductManageStoreChange(data){
     console.log(data)
-    if(data.productWatch.flag !== 'productWatch') return
-    if(data.productWatch.success === true) {
-      // this.success('add list success')
-      // this.setState({
-      //   productId: '',
-      //   price: '',
-      // })
-    } else if (data.productWatch.success === false) {
-      // this.setState({
-      //   productId: '',
-      //   price: '',
-      // })
+    if(data.productWatch.flag === 'productWatch'){
+      if(data.productWatch.success === true) {
+        // this.success('add list success')
+        // this.setState({
+        //   productId: '',
+        //   price: '',
+        // })
+      } else if (data.productWatch.success === false) {
+        // this.setState({
+        //   productId: '',
+        //   price: '',
+        // })
+      }
+    } else if(data.productWatchDel.flag === 'productWatchDel'){
+      if(data.productWatchDel.success === true) {
+        let Result = this.state.productWatchSearch.Result.filter(item => item.Product.Id !== this.state.deleteProductId)
+        let productWatchSearch = this.state.productWatchSearch
+        this.setState({
+          productWatchSearch: {...productWatchSearch, Result}
+        })
+      }
     }
   }
 
   addList(productId){
-    console.log(this)
     this.setState({
       visible: true,
       productId,
@@ -103,6 +113,23 @@ class ProductWatchContainer extends React.Component {
     })
   }
 
+  deleteWatch(productId){
+    const self = this
+    confirm({
+      title: 'Want to delete these items?',
+      content: 'When clicked the OK button, this dialog will be closed after 1 second',
+      okText: 'OK',
+      cancelText: 'Cancel',
+      onOk() {
+        self.setState({
+          deleteProductId: productId,
+        })
+        ProductManageAction.ProductWatchDel(productId)
+      },
+      onCancel() {},
+    })
+  }
+
 
   onProductStoreChange(data){
     console.log(data)
@@ -138,6 +165,7 @@ class ProductWatchContainer extends React.Component {
           addList={this.addList}
           newPrice={this.state.price}
           productId={this.state.productId}
+          deleteWatch={this.deleteWatch}
         />
       </div>
     )

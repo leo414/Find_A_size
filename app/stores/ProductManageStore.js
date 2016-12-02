@@ -12,6 +12,11 @@ const ProductManageStore = Reflux.createStore({
         flag: '',
       },
 
+      productWatchDel: {
+        success: '',
+        flag: '',
+      },
+
       hintMessage: '',
     }
   },
@@ -27,6 +32,20 @@ const ProductManageStore = Reflux.createStore({
     this.trigger(this.data)
   },
   onProductWatchFailed(res){
+    HttpErrorCallBack(res)
+  },
+
+  onProductWatchDelCompleted(res){
+    if(res.Success){
+      this.data.productWatchDel.success = true
+    }else{
+      this.data.productWatchDel.success = false
+      this.data.hintMessage = res.ErrorMsg
+    }
+    this.data.productWatchDel.flag = 'productWatchDel'
+    this.trigger(this.data)
+  },
+  onProductWatchDelFailed(res){
     HttpErrorCallBack(res)
   },
 

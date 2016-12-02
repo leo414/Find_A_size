@@ -12,6 +12,7 @@ const ProductWatchLayout = props => {
     addList,
     newPrice,
     productId,
+    deleteWatch,
   } = props
 
   const loadingStyle={
@@ -70,7 +71,7 @@ const ProductWatchLayout = props => {
                 height="24px"
                 fontSize="12px"
                 className="green"
-                handleSubmit={() => onSignup()}
+                handleSubmit={() => deleteWatch(item.Product.Id)}
                 value="Delete"
               />
             </div>

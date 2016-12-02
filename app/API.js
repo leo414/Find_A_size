@@ -38,6 +38,7 @@ const API = {
     ProductSuggest: URL + 'Product.Suggest',
     ProductRelated: URL + 'Product.Related',
     ProductWatch: URL + 'ProductWatch.Add',
+    ProductWatchDel: URL + 'ProductWatch.Delete',
     ProductWatchSearch: URL + 'ProductWatch.Search',
   },
 }
