@@ -1,15 +1,13 @@
 import React from 'react'
 
-import SearchInput from './SearchInput'
 import SearchFilter from './SearchFilter'
-import SearchResult from './SearchResult'
+import SearchResultContainer from './SearchResultContainer'
 
 const Search = () => {
   return (
     <section>
-      <SearchInput />
       <SearchFilter />
-      <SearchResult />
+      <SearchResultContainer />
     </section>
   )
 }
