@@ -1,6 +1,5 @@
 import React from 'react'
 
-import { InputNumber, Rate } from 'antd'
 import Button from '../Common/Button'
 import { Spin, Pagination } from 'antd'
 

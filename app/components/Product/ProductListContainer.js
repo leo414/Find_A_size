@@ -214,7 +214,7 @@ class ProductListContainer extends React.Component {
           okText="OK"
           cancelText="Cancel"
         >
-          $&nbsp;<InputNumber defaultValue={0} size="large" onChange={this.onPriceChange} />
+          $&nbsp;<InputNumber min={1} size="large" onChange={this.onPriceChange} />
         </Modal>
 
         <ProductListLayout

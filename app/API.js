@@ -42,6 +42,7 @@ const API = {
     ProductWatch: URL + 'ProductWatch.Add',
     ProductWatchDel: URL + 'ProductWatch.Delete',
     ProductWatchSearch: URL + 'ProductWatch.Search',
+    ProductSearch: URL + 'Product.Search',
   },
 }
 

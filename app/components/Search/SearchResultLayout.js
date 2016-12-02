@@ -1,17 +1,30 @@
 import React from 'react'
 
-import { InputNumber } from 'antd'
+import { InputNumber, Spin } from 'antd'
 import Button from '../Common/Button'
 
-const SearchResult = () => {
+const SearchResultLayout = () => {
   const onChange = value => {
     console.log('changed', value)
   }
 
-  return (
-    <article className="search_result container">
-      <div className="product_list_search">
+  const loadingStyle = {
 
+  }
+
+  const renderProductList = () => {
+    const data = []
+    if(!data.length) {
+      return (
+        <div style={loadingStyle}>
+          <Spin size="large" /><br/>
+          loading...
+        </div>
+      )
+    }
+
+    return data.map((product, index) => (
+      <div className="product_list_search">
         <section className="product_info in_block">
           <div className="media_hd fl">
             <img src="http://ww2.sinaimg.cn/large/801b780agw1f8t61u4ig4j20im0rsq3x.jpg" alt="Product"/>
@@ -50,7 +63,7 @@ const SearchResult = () => {
             <em className="fl">Price Watch:</em>
 
             <div className="fr">
-              <InputNumber min={0.1} step={0.1} onChange={onChange} />
+              <InputNumber min={1} onChange={onChange} />
               <strong>$</strong>
               <br/>
               <Button
@@ -64,10 +77,15 @@ const SearchResult = () => {
             </div>
           </div>
         </section>
-
       </div>
+    ))
+  }
+
+  return (
+    <article className="search_result container">
+      {renderProductList()}
     </article>
   )
 }
 
-export default SearchResult
+export default SearchResultLayout
