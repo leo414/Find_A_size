@@ -7,6 +7,8 @@ import ReactMixin from 'react-mixin'
 import NotificationStore from '../../stores/NotificationStore'
 import NotificationAction from '../../actions/NotificationAction'
 
+import { Modal } from 'antd'
+
 class AccountSettingContainer extends React.Component {
   constructor(props) {
     super(props)
@@ -22,8 +24,12 @@ class AccountSettingContainer extends React.Component {
   }
   onNotificationStoreChange(data){
     if(data.changeNotification.flag !== 'changeNotification') return
-    if(data.changeNotification.success = true){
-      //xxx
+    if(data.changeNotification.success === true){
+      this.setState({loading: false})
+      this.success('Submit success')
+    } else if(data.changeNotification.success === false){
+      this.setState({loading: false})
+      this.error('please try again')
     }
   }
 
@@ -36,6 +42,7 @@ class AccountSettingContainer extends React.Component {
   }
 
   onSubmit(){
+    this.setState({loading: true})
     const { emailNotification, phoneNotification } = this.state
     const { IsEmailNotification, IsPhoneNotification } = this.props.data
     let newEmailNotification = (emailNotification === '') ? IsEmailNotification : emailNotification
@@ -45,6 +52,22 @@ class AccountSettingContainer extends React.Component {
       return
     }
     NotificationAction.ChangeNotification(newEmailNotification, newPhoneNotification)
+  }
+
+  success(content) {
+    Modal.success({
+      title: 'Success',
+      content,
+      okText: 'OK',
+    })
+  }
+
+  error(content) {
+    Modal.error({
+      title: 'Error',
+      content,
+      okText: 'OK',
+    })
   }
 
   render() {
