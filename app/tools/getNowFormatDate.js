@@ -20,9 +20,14 @@ function getNowFormatDate() {
     hour = "0" + hour;
   }
 
+  let second = date.getSeconds()
+  if(second >= 0 && second <= 9) {
+    second = "0" + second;
+  }
+
   var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate +
     " " + hour + seperator2 + minutes +
-    seperator2 + date.getSeconds();
+    seperator2 + second;
   return currentdate;
 }
 

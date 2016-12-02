@@ -32,6 +32,8 @@ const API = {
 
     UserCurrent: URL + 'User.Current',
     SignOut: URL + 'User.SignOut',
+
+    ChangeNotification: URL + 'User.ChangeNotification',
   },
 
   PRODUCT: {

@@ -106,11 +106,11 @@ const UserBindStore = Reflux.createStore({
   onUserCurrentCompleted(res){
     console.log(res)
     if(res.Success){
-      const { Email, Phone, IsPhoneVerified, IsEmailNotification } = res
+      const { Email, Phone, IsPhoneNotification, IsEmailNotification } = res
       this.data.userCurrent = {
         Email,
         Phone,
-        IsPhoneVerified,
+        IsPhoneNotification,
         IsEmailNotification,
         success: true,
       }

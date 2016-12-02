@@ -29,12 +29,12 @@ class Account extends React.Component {
     console.log(data)
     if(data.userCurrent.flag !== 'userCurrent') return
     if(data.userCurrent.success === true) {
-      const { Email, Phone, IsPhoneVerified, IsEmailNotification } = data.userCurrent
+      const { Email, Phone, IsPhoneNotification, IsEmailNotification } = data.userCurrent
       this.setState({
         userInfo: {
           Email,
           Phone,
-          IsPhoneVerified,
+          IsPhoneNotification,
           IsEmailNotification,
         }
       })
