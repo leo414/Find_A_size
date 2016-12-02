@@ -123,7 +123,7 @@ class ProductListContainer extends React.Component {
     console.log(data)
     if(data.productWatch.flag !== 'productWatch') return
     if(data.productWatch.success === true) {
-      this.success('add list success')
+      // this.success('add list success')
       this.setState({
         productId: '',
         price: '',
@@ -214,7 +214,7 @@ class ProductListContainer extends React.Component {
           okText="OK"
           cancelText="Cancel"
         >
-          <InputNumber defaultValue={0} size="large" onChange={this.onPriceChange} /> &nbsp;$
+          $&nbsp;<InputNumber defaultValue={0} size="large" onChange={this.onPriceChange} />
         </Modal>
 
         <ProductListLayout

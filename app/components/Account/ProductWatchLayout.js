@@ -9,6 +9,9 @@ const ProductWatchLayout = props => {
     data,
     total,
     onSelectPage,
+    addList,
+    newPrice,
+    productId,
   } = props
 
   const loadingStyle={
@@ -63,18 +66,28 @@ const ProductWatchLayout = props => {
               <em>Current Price:</em>
               <span className="price">${item.OriginalPrice}</span>
               <Button
-                width="88px"
+                width="80px"
                 height="24px"
                 fontSize="12px"
                 className="green"
                 handleSubmit={() => onSignup()}
-                value="Change"
+                value="Delete"
               />
             </div>
 
             <div className="price_container">
               <em>Price Watch:</em>
-              <span className="price">${item.WatchValue}</span>
+              <span className="price">$
+                { (item.Product.Id === productId && newPrice) ? newPrice : item.WatchValue }
+              </span>
+              <Button
+                width="88px"
+                height="24px"
+                fontSize="12px"
+                className="yellow"
+                handleSubmit={() => addList(item.Product.Id)}
+                value="Change"
+              />
             </div>
 
             <div className="price_container">

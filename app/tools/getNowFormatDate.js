@@ -15,8 +15,13 @@ function getNowFormatDate() {
     minutes = "0" + minutes;
   }
 
+  let hour = date.getHours()
+  if(hour >= 0 && hour <= 9) {
+    hour = "0" + hour;
+  }
+
   var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate +
-    " " + date.getHours() + seperator2 + minutes +
+    " " + hour + seperator2 + minutes +
     seperator2 + date.getSeconds();
   return currentdate;
 }

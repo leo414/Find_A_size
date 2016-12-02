@@ -14,7 +14,7 @@ const SearchResult = () => {
 
         <section className="product_info in_block">
           <div className="media_hd fl">
-            <img src="http://ww2.sinaimg.cn/large/801b780agw1f8t61u4ig4j20im0rsq3x.jpg" alt=""/>
+            <img src="http://ww2.sinaimg.cn/large/801b780agw1f8t61u4ig4j20im0rsq3x.jpg" alt="Product"/>
           </div>
           <div className="media_bd fr">
             <h4 className="media_title">Wood and metal industrial vintage chair</h4>
