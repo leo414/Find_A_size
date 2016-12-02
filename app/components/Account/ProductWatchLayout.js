@@ -115,7 +115,7 @@ const ProductWatchLayout = props => {
 
   return (
     <article className="my_account">
-      <p className="h1">My Account</p>
+      <p className="h1 color_green">My Account</p>
       <p className="subtitle">My Price Watch List</p>
       {renderProductList()}
       <Pagination

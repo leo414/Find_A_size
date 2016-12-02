@@ -22,6 +22,10 @@ const UserBindStore = Reflux.createStore({
       },
 
       changePassword: {
+        Email: '',
+        Phone: '',
+        IsEmailNotification: '',
+        IsPhoneNotification: '',
         success: '',
         flag:'',
       },
@@ -102,7 +106,14 @@ const UserBindStore = Reflux.createStore({
   onUserCurrentCompleted(res){
     console.log(res)
     if(res.Success){
-      this.data.userCurrent.success = true
+      const { Email, Phone, IsPhoneVerified, IsEmailNotification } = res
+      this.data.userCurrent = {
+        Email,
+        Phone,
+        IsPhoneVerified,
+        IsEmailNotification,
+        success: true,
+      }
     }else{
       this.data.userCurrent.success = false
       this.data.hintMessage = res.ErrorMsg
