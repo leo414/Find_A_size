@@ -1,6 +1,8 @@
 import React from 'react'
-import { Select,  Input, Col, Slider } from 'antd'
 
+import ProductSearchAction from '../../actions//ProductSearchAction'
+
+import { Select,  Input, Col, Slider } from 'antd'
 const Option = Select.Option;
 const InputGroup = Input.Group;
 
@@ -9,6 +11,10 @@ class SearchFilter extends React.Component {
   //   super(props)
   //   this.rateHandleChange = this.rateHandleChange.bind(this)
   // }
+
+  componentDidMount(){
+    ProductSearchAction.ProductSearch()
+  }
 
   rateHandleChange(value) {
     console.log(`selected ${value}`);

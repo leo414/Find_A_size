@@ -102,10 +102,10 @@ class ProductListContainer extends React.Component {
 
     if(this.props.type === 'A') {
       this.setState({ productSuggest: initData })
-      GetProductAction.ProductSuggest(pageIndex, 30)
+      // GetProductAction.ProductSuggest(pageIndex, 30)
     } else if(this.props.type === 'B') {
       this.setState({ productRelated: initData })
-      GetProductAction.ProductRelated(pageIndex, 30)
+      // GetProductAction.ProductRelated(pageIndex, 30)
     }
     this.setState({pageIndex})
   }
