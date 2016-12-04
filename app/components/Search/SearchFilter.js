@@ -1,10 +1,11 @@
 import React from 'react'
 
-import ProductSearchAction from '../../actions//ProductSearchAction'
+import ProductSearchAction from '../../actions/ProductSearchAction'
 
-import { Select,  Input, Col, Slider } from 'antd'
-const Option = Select.Option;
-const InputGroup = Input.Group;
+import { Select, Input, Col, Slider } from 'antd'
+const Option = Select.Option
+
+import './slide.scss'
 
 class SearchFilter extends React.Component {
   // constructor(props) {
@@ -32,6 +33,10 @@ class SearchFilter extends React.Component {
 
   }
 
+  formatter(value) {
+    return `$${value}`;
+  }
+
   render() {
     return (
       <article>
@@ -51,6 +56,25 @@ class SearchFilter extends React.Component {
         <section className="search_filter container">
           <div className="fl">
             <h3><em>Refine by:</em></h3>
+            Dimensions(inches):<br/>
+            <div className="slide_box_dimensions">
+              Height
+              <Slider tipFormatter={this.formatter} range min={0} max={1000} defaultValue={[150, 800]} onChange={this.rangeHandleChange} />
+            </div>
+
+            <div className="slide_box_dimensions">
+              Length
+              <Slider tipFormatter={this.formatter} range min={0} max={1000} defaultValue={[150, 800]} onChange={this.rangeHandleChange} />
+            </div>
+
+            <div className="slide_box_dimensions">
+              Width
+              <Slider tipFormatter={this.formatter} range min={0} max={1000} defaultValue={[150, 800]} onChange={this.rangeHandleChange} />
+            </div>
+
+          </div>
+
+          <div className="fr">
             Funiture Material:&nbsp;&nbsp;
             <Select size="large" defaultValue="wood" style={{ width: 120 }} onChange={this.materialHandleChange}>
               <Option value="jack">Jack</Option>
@@ -60,25 +84,14 @@ class SearchFilter extends React.Component {
             <br/>
 
             Color:&nbsp;&nbsp;
-            <Select size="large" defaultValue="lucy" style={{ width: 120 }} onChange={this.colorHandleChange}>
-              <Option value="jack">Jack</Option>
-              <Option value="lucy">Lucy</Option>
-              <Option value="yiminghe">yiminghe</Option>
-            </Select>
+            <Input placeholder="example: white" style={{width: 120}} />
             <br/>
 
-            Dimensions:&nbsp;&nbsp;
-            <Input placeholder="Height" style={{width: 60}} />
-            &nbsp; x &nbsp;
-            <Input placeholder="Length" style={{width: 60}} />
-            &nbsp; x &nbsp;
-            <Input placeholder="Width" style={{width: 60}} />
-            &nbsp;inches
-          </div>
+            <div className="slide_box">
+              Price Range:&nbsp;&nbsp;
+              <Slider tipFormatter={this.formatter} range min={0} max={1000} defaultValue={[150, 800]} onChange={this.rangeHandleChange} />
+            </div>
 
-          <div className="fr">
-            Price Range:&nbsp;&nbsp;
-            <Slider range min={0} max={1000} defaultValue={[0, 1000]} onChange={this.rangeHandleChange} />
           </div>
         </section>
 
