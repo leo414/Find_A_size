@@ -8,29 +8,102 @@ const Option = Select.Option
 import './slide.scss'
 
 class SearchFilter extends React.Component {
-  // constructor(props) {
-  //   super(props)
-  //   this.rateHandleChange = this.rateHandleChange.bind(this)
-  // }
-
-  componentDidMount(){
-    ProductSearchAction.ProductSearch()
+  constructor(props) {
+    super(props)
+    this.state = ({
+      pageSize: 1,
+      key: '',
+      material: '',
+      color: '',
+      price: ['', ''],
+      length: ['', ''],
+      width: ['', ''],
+      height: ['', ''],
+      priceAsc: false,
+      salesAsc: false,
+    })
+    this.onMaterialChange = this.onMaterialChange.bind(this)
+    this.onPriceChange = this.onPriceChange.bind(this)
+    this.onColorChange = this.onColorChange.bind(this)
+    this.onHeightChange = this.onHeightChange.bind(this)
+    this.onLengthChange = this.onLengthChange.bind(this)
+    this.onWidthChange = this.onWidthChange.bind(this)
+    this.onSearchChange = this.onSearchChange.bind(this)
+    this.onSubmit = this.onSubmit.bind(this)
   }
 
-  rateHandleChange(value) {
-    console.log(`selected ${value}`);
+  onSearchChange(key){
+    key = key.target.value.trim()
+    this.setState({key})
   }
 
-  materialHandleChange(value) {
-    console.log(`selected ${value}`);
+  onMaterialChange(material) {
+    this.setState({material})
   }
 
-  colorHandleChange(value) {
-    console.log(`selected ${value}`);
+  onPriceChange(price) {
+    this.setState({price})
   }
 
-  rangeHandleChange(value) {
+  onColorChange(color){
+    color = color.target.value.trim()
+    this.setState({color})
+  }
 
+  onHeightChange(height){
+    this.setState({height})
+  }
+
+  onLengthChange(length){
+    this.setState({length})
+  }
+
+  onWidthChange(width){
+    this.setState({width})
+  }
+
+  onSubmit(){
+    const {
+      pageSize,
+      key,
+      material,
+      color,
+      price,
+      length,
+      height,
+      width,
+      priceAsc,
+      salesAsc,
+    } = this.state
+
+
+    let priceStart = price[0],
+        priceEnd = price[1],
+        lengthStart = length[0],
+        lengthEnd = length[1],
+        widthStart = width[0],
+        widthEnd = width[1],
+        heightStart = height[0],
+        heightEnd = height [1];
+
+    let searchData = {
+      pageSize,
+      key,
+      color,
+      material,
+      lengthStart,
+      lengthEnd,
+      widthStart,
+      widthEnd,
+      heightStart,
+      heightEnd,
+      priceStart,
+      priceEnd,
+      priceAsc,
+      salesAsc,
+    }
+    console.log(searchData)
+    ProductSearchAction.ProductSearch(searchData)
   }
 
   formatter(value) {
@@ -47,8 +120,8 @@ class SearchFilter extends React.Component {
           </div>
 
           <div className="search">
-            <input className="in_block" type="text" placeholder="Search" />
-            <span className="search_icon in_block"><i className="sousuo" /></span>
+            <input className="in_block" type="text" onChange={this.onSearchChange} placeholder="Search" />
+            <span onClick={this.onSubmit} className="search_icon in_block"><i className="sousuo" /></span>
           </div>
           <small className="small">Example: industrial coffee table</small>
         </section>
@@ -59,37 +132,44 @@ class SearchFilter extends React.Component {
             Dimensions(inches):<br/>
             <div className="slide_box_dimensions">
               Height
-              <Slider tipFormatter={this.formatter} range min={0} max={1000} defaultValue={[150, 800]} onChange={this.rangeHandleChange} />
+              <Slider range min={0} max={1000} defaultValue={[150, 800]} onChange={this.onHeightChange} />
             </div>
 
             <div className="slide_box_dimensions">
               Length
-              <Slider tipFormatter={this.formatter} range min={0} max={1000} defaultValue={[150, 800]} onChange={this.rangeHandleChange} />
+              <Slider range min={0} max={1000} defaultValue={[150, 800]} onChange={this.onLengthChange} />
             </div>
 
             <div className="slide_box_dimensions">
               Width
-              <Slider tipFormatter={this.formatter} range min={0} max={1000} defaultValue={[150, 800]} onChange={this.rangeHandleChange} />
+              <Slider range min={0} max={1000} defaultValue={[150, 800]} onChange={this.onWidthChange} />
             </div>
 
           </div>
 
           <div className="fr">
             Funiture Material:&nbsp;&nbsp;
-            <Select size="large" defaultValue="wood" style={{ width: 120 }} onChange={this.materialHandleChange}>
-              <Option value="jack">Jack</Option>
-              <Option value="lucy">Lucy</Option>
-              <Option value="yiminghe">yiminghe</Option>
+            <Select size="large" defaultValue="Wood" style={{ width: 120 }} onChange={this.onMaterialChange}>
+              <Option value="jack">Wood</Option>
+              <Option value="lucy">Metal</Option>
+              <Option value="Leather">Leather</Option>
+              <Option value="Fabric">Fabric</Option>
+              <Option value="Vinyl">Vinyl</Option>
+              <Option value="Polyurethane">Polyurethane</Option>
+              <Option value="Plastic">Plastic</Option>
+              <Option value="Glass">Glass</Option>
+              <Option value="Bamboo">Bamboo</Option>
+              <Option value="Suede">Suede</Option>
             </Select>
             <br/>
 
             Color:&nbsp;&nbsp;
-            <Input placeholder="example: white" style={{width: 120}} />
+            <Input placeholder="example: white" onChange={this.onColorChange} style={{width: 120}} />
             <br/>
 
             <div className="slide_box">
               Price Range:&nbsp;&nbsp;
-              <Slider tipFormatter={this.formatter} range min={0} max={1000} defaultValue={[150, 800]} onChange={this.rangeHandleChange} />
+              <Slider tipFormatter={this.formatter} range min={0} max={1000} defaultValue={[150, 800]} onChange={this.onPriceChange} />
             </div>
 
           </div>

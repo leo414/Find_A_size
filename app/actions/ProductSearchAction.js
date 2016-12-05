@@ -7,11 +7,11 @@ const ProductSearchAction = Reflux.createActions({
   ProductSearch: {asyncResult: true},
 })
 
-ProductSearchAction.ProductSearch.listen(function(Wood, Metal){
+ProductSearchAction.ProductSearch.listen(function(search = {}){
+  console.log(search)
   let data = {
-    pageIndex: 1,
-    pageSize: 3,
-    key: 'tv',
+    ...search,
+    pageSize: 10,
     Fields: 'Title,Description,ImageUrl,LinkUrl,Price,Id,Color,Material,Length,Width,Height,Weight',
   }
 

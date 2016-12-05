@@ -1,5 +1,6 @@
 import React from 'react'
 import SearchResultLayout from './SearchResultLayout'
+import { hashHistory } from 'react-router'
 
 import Reflux from 'reflux'
 import ReactMixin from 'react-mixin'
