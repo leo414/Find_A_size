@@ -8,8 +8,7 @@ const confirm = Modal.confirm
 class Mask extends React.Component {
   showConfirm() {
     confirm({
-      title: 'Want to delete these items?',
-      content: 'When clicked the OK button, this dialog will be closed after 1 second',
+      title: 'Sure to leave the current page?',
       okText: 'OK',
       cancelText: 'Cancel',
       onOk() {
