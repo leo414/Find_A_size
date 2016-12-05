@@ -30,7 +30,20 @@ class SearchFilter extends React.Component {
     this.onWidthChange = this.onWidthChange.bind(this)
     this.onSearchChange = this.onSearchChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
+    this.onSalesAsc = this.onSalesAsc.bind(this)
+    this.onPriceAsc = this.onPriceAsc.bind(this)
   }
+
+  onSalesAsc(){
+    this.setState({salesAsc: !this.state.salesAsc})
+    this.onSubmit()
+  }
+
+  onPriceAsc(){
+    this.setState({priceAsc: !this.state.priceAsc})
+    this.onSubmit()
+  }
+
 
   onSearchChange(key){
     key = key.target.value.trim()
@@ -169,7 +182,7 @@ class SearchFilter extends React.Component {
 
             <div className="slide_box">
               Price Range:&nbsp;&nbsp;
-              <Slider tipFormatter={this.formatter} range min={0} max={1000} defaultValue={[150, 800]} onChange={this.onPriceChange} />
+              <Slider tipFormatter={this.formatter} range min={0} max={5000} defaultValue={[150, 800]} onChange={this.onPriceChange} />
             </div>
 
           </div>
@@ -182,7 +195,11 @@ class SearchFilter extends React.Component {
             <span>Relevence</span>
              &nbsp;| &nbsp;
              Price &nbsp;
-             <i className="sort_up" />
+             <i onClick={this.onPriceAsc} style={{corsor: 'pointer'}} className="sort_up" />
+
+             &nbsp;| &nbsp;
+             Sales &nbsp;
+             <i onClick={this.onSalesAsc} style={{corsor: 'pointer'}} className="sort_up" />
           </div>
         </section>
       </article>

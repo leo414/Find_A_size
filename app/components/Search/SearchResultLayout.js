@@ -1,12 +1,14 @@
 import React from 'react'
 
-import { InputNumber, Spin, Button } from 'antd'
+import { InputNumber, Spin, Button, Pagination } from 'antd'
+import SynchronizeAction from '../../actions/SynchronizeAction'
 
 const SearchResultLayout = props => {
-  const { data, loading, addList } = props
+  const { data, loading, addList, total } = props
 
-  const onChange = value => {
-    console.log('changed', value)
+  const onSelectPage = index => {
+    console.log(index)
+    SynchronizeAction.ProductSearchPageIndex(index)
   }
 
   const buttonStyle = {
@@ -66,10 +68,10 @@ const SearchResultLayout = props => {
               <em className="fl">Price Watch:</em>
 
               <div className="fr">
-                <InputNumber min={1} onChange={value => price = value} />
+                <InputNumber min={1} onPriceChange={value => price = value} />
                 <strong>$</strong>
                 <br/>
-                <Button onClick={() => addList(price, product.Id)} type="primary" loading={loading} style={buttonStyle}>
+                <Button onClick={() => addList(price, product.Id)} type="primary" loading={loading.id === product.Id ? loading.state : false} style={buttonStyle}>
                   Add to list
                 </Button>
               </div>
@@ -83,6 +85,12 @@ const SearchResultLayout = props => {
   return (
     <article className="search_result container">
       {renderProductList()}
+      <Pagination
+        defaultCurrent={1}
+        total={total}
+        onChange={onSelectPage}
+        showSizeChanger={false}
+      />
     </article>
   )
 }

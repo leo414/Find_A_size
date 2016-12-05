@@ -9,7 +9,7 @@ import ProductSearchStore from '../../stores/ProductSearchStore'
 import ProductManageStore from '../../stores/ProductManageStore'
 import ProductManageAction from '../../actions/ProductManageAction'
 
-import { Modal } from 'antd'
+import { Modal, } from 'antd'
 
 class SearchResultContainer extends React.Component {
   constructor(props) {
@@ -20,11 +20,14 @@ class SearchResultContainer extends React.Component {
         PageCount: '',
         PageIndex: '',
         PageSize: '',
-        Total: '',
+        Total: 10000,
         Result: [],
         flag: '',
       },
-      loading: false,
+      loading: {
+        state: false,
+        id: '',
+      },
     })
 
     this.addList = this.addList.bind(this)
@@ -44,10 +47,20 @@ class SearchResultContainer extends React.Component {
     if(data.productWatch.flag !== 'productWatch') return
     if(data.productWatch.success === true) {
       this.success('add list success')
-      this.setState({loading: false})
+      this.setState({
+        loading: {
+          state: false,
+          id: '',
+        }
+      })
     } else if (data.productWatch.success === false) {
-      this.error('please login')
-      this.setState({loading: false})
+      this.setState({
+        loading: {
+          state: false,
+          id: '',
+        }
+      })
+      hashHistory.push('/login')
     }
   }
 
@@ -55,10 +68,15 @@ class SearchResultContainer extends React.Component {
     console.log(arguments)
     if(!price) return
     if(localStorage.isLogin === 'false') {
-      this.error('please login')
+      hashHistory.push('/login')
       return
     }
-    this.setState({loading: true})
+    this.setState({
+      loading: {
+        state: true,
+        id: productId,
+      }
+    })
     ProductManageAction.ProductWatch(productId, price)
   }
 
@@ -70,21 +88,11 @@ class SearchResultContainer extends React.Component {
     })
   }
 
-  error(content) {
-    Modal.error({
-      title: 'Error',
-      content,
-      okText: 'OK',
-      onOk(){
-        hashHistory.push('/login')
-      }
-    })
-  }
-
   render(){
     return (
       <SearchResultLayout
         data={this.state.productSearch.Result}
+        total={this.state.productSearch.Total / 10}
         addList={this.addList}
         loading={this.state.loading}
       />
