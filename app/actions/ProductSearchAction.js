@@ -8,7 +8,6 @@ const ProductSearchAction = Reflux.createActions({
 })
 
 ProductSearchAction.ProductSearch.listen(function(search = {}){
-  console.log(search)
   let data = {
     ...search,
     pageSize: 10,
