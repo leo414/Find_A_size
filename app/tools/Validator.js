@@ -1,9 +1,9 @@
 const TelPattern = /^1[34578]\d{9}$/
-const MailPattern = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/
+const MailPattern = /^(\+\d{1,3}[- ]?)?\d{10}$/
 
-const Strategies = {
+const strategies = {
   isNoEmpty(value, errorMsg) {
-    if(value === '') return errorMsg
+    if(value == '') return errorMsg
   },
 
   minLength(value, length, errorMsg) {
@@ -16,36 +16,68 @@ const Strategies = {
 
   isEmail(value, errorMsg) {
     if(!MailPattern.test(value)) return errorMsg
-  },
+  },a
 }
 
 const Validator = function(){
   this.cache = []
 }
 
-Validator.prototype.add = function(dom, rules) {
+Validator.prototype.add = function(value, rules=[]) {
   const self = this
+  rules.forEach(rule => {
+    let strategyAry = rule.strategy.split(':')
+    let errorMsg = rule.errorMsg
 
-  for(let i = 0, rule; rule = rules[ i++ ]){
-    (function(rule) {
-      let strategyAry = rule.strategy.split(':')
-      let errorMsg = rule.errorMsg
-
-      self.cache.push(function() {
-        let strategy = strategyAry.shift()
-        strategyAry.unshift(dom.value)
-        strategyAry.push(errorMsg)
-        return strategies[strategy].apply(null, strategyAry)
-      })
-    })(rule)
-  }
+    self.cache.push(function() {
+      let strategy = strategyAry.shift()
+      strategyAry.unshift(value)
+      strategyAry.push(errorMsg)
+      return strategies[strategy](...strategyAry)
+    })
+  })
 }
 
 Validator.prototype.start = function(){
-  for(let i = 0, validatorFunc; validatorFunc = this.cache[i++]){
-    let errorMsg = validatorFunc()
-    if(errorMsg) return errorMsg
+  for(let i = 0; i < this.cache.length; i++){
+    var errorMsg = this.cache[i]();
+    if ( errorMsg ){
+      return errorMsg;
+    }
   }
 }
 
-export default Validator
+const validataFunc = (registerForm = []) => {
+  var validator = new Validator();
+  registerForm.forEach(item => validator.add(item.value,item.rules))
+
+  var errorMsg = validator.start();
+  return errorMsg;
+}
+
+export default validataFunc
+
+// const registerForm = [
+//   {
+//     value: '',
+//     rules: [
+//       {
+//         strategy: 'isNoEmpty',
+//         errorMsg: 'password '
+//       },{
+//         strategy: 'isNoEmpty',
+//         errorMsg: '',
+//       }
+//     ]
+//   },
+//
+//   {
+//     value: 'adwd',
+//     rules: [
+//       {
+//         strategy: 'minLength:6',
+//         errorMsg: '',
+//       }
+//     ]
+//   }
+// ]

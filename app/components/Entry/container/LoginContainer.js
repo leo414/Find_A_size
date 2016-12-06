@@ -9,8 +9,34 @@ import UserAction from '../../../actions/UserAction'
 
 import pbkdf2 from 'pbkdf2-sha256'
 import getNowFormatDate from '../../../tools/getNowFormatDate'
+import validataFunc from '../../../tools/Validator'
 
-import { Modal } from 'antd'
+import { Modal, message } from 'antd'
+
+const registerForm = (username, password) => [
+  {
+    value: username,
+    rules: [
+      {
+        strategy: 'isNoEmpty',
+        errorMsg: 'The user name can not be empty'
+      }
+    ]
+  },
+
+  {
+    value: password,
+    rules: [
+      {
+        strategy: 'minLength:6',
+        errorMsg: 'The password at least 6 characters',
+      },{
+        strategy: 'isNoEmpty',
+        errorMsg: 'The password can not be empty',
+      }
+    ]
+  }
+]
 
 let loginOnce = false
 class LoginContainer extends React.Component {
@@ -70,14 +96,19 @@ class LoginContainer extends React.Component {
   }
 
   onLogin(userName, password){
-    console.log(userName, password)
+    let errorMsg = validataFunc(registerForm(userName, password));
+    if ( errorMsg ){
+      message.error(errorMsg)
+      return
+    }
+
     this.setState({
       userName,
       password,
       loading: true,
     })
     loginOnce = true
-    UserAction.GetTicket(userName || this.state.userName)
+    // UserAction.GetTicket(userName || this.state.userName)
   }
 
   success(content) {
