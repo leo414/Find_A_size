@@ -1,7 +1,5 @@
 import Reflux from 'reflux'
 
-const SynchronizeAction = Reflux.createActions({
-  ProductSearchPageIndex: {},
-})
+const SynchronizeAction = Reflux.createActions(['productSearchPageIndex'])
 
 export default SynchronizeAction

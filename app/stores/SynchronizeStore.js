@@ -6,16 +6,16 @@ const SynchronizeStore = Reflux.createStore({
 
   init() {
     this.data = {
-      productSearch: {
+      productSearchPageIndex: {
         pageIndex: '',
-        flag: 'pageIndex'
       },
     }
   },
 
-  onProductSearchPageIndexCompleted(res){
-    console.log(res)
-  },
+	productSearchPageIndex(pageIndex) {
+	   this.data.productSearchPageIndex.pageIndex = pageIndex
+     this.trigger(this.data)
+	},
 })
 
 export default SynchronizeStore

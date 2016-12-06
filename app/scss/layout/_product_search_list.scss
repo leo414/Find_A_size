@@ -3,6 +3,11 @@
   width: $product_list_width;
   font-size: 0;
 
+  .ant-pagination {
+    float: right;
+    margin-top: 20px;
+  }
+
   .product_list_search {
     margin-top: -1px;
     width        : 100%;

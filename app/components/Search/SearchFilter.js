@@ -4,14 +4,21 @@ import ProductSearchAction from '../../actions/ProductSearchAction'
 
 import { Select, Input, Col, Slider } from 'antd'
 const Option = Select.Option
-
 import './slide.scss'
+
+import Reflux from 'reflux'
+import ReactMixin from 'react-mixin'
+
+import SynchronizeStore from '../../stores/SynchronizeStore'
+
+let priceAsc = '',
+    salesAsc = ''
 
 class SearchFilter extends React.Component {
   constructor(props) {
     super(props)
     this.state = ({
-      pageSize: 1,
+      pageIndex: 1,
       key: '',
       material: '',
       color: '',
@@ -19,8 +26,7 @@ class SearchFilter extends React.Component {
       length: ['', ''],
       width: ['', ''],
       height: ['', ''],
-      priceAsc: false,
-      salesAsc: false,
+      searchData: {},
     })
     this.onMaterialChange = this.onMaterialChange.bind(this)
     this.onPriceChange = this.onPriceChange.bind(this)
@@ -34,16 +40,32 @@ class SearchFilter extends React.Component {
     this.onPriceAsc = this.onPriceAsc.bind(this)
   }
 
-  onSalesAsc(){
-    this.setState({salesAsc: !this.state.salesAsc})
+  onStoreChange(data){
+    this.setState({pageIndex: data.productSearchPageIndex.pageIndex})
     this.onSubmit()
+  }
+
+  onSalesAsc(){
+    salesAsc = !salesAsc
+    let searchData = {
+      ...this.state.searchData,
+      salesAsc,
+    }
+    this.setState({searchData})
+    console.log(searchData)
+    // ProductSearchAction.ProductSearch(searchData)
   }
 
   onPriceAsc(){
-    this.setState({priceAsc: !this.state.priceAsc})
-    this.onSubmit()
+    priceAsc = !priceAsc
+    let searchData = {
+      ...this.state.searchData,
+      priceAsc,
+    }
+    this.setState({searchData})
+    console.log(searchData)
+    // ProductSearchAction.ProductSearch(searchData)
   }
-
 
   onSearchChange(key){
     key = key.target.value.trim()
@@ -77,7 +99,7 @@ class SearchFilter extends React.Component {
 
   onSubmit(){
     const {
-      pageSize,
+      pageIndex,
       key,
       material,
       color,
@@ -85,10 +107,7 @@ class SearchFilter extends React.Component {
       length,
       height,
       width,
-      priceAsc,
-      salesAsc,
     } = this.state
-
 
     let priceStart = price[0],
         priceEnd = price[1],
@@ -100,7 +119,7 @@ class SearchFilter extends React.Component {
         heightEnd = height [1];
 
     let searchData = {
-      pageSize,
+      pageIndex,
       key,
       color,
       material,
@@ -112,11 +131,12 @@ class SearchFilter extends React.Component {
       heightEnd,
       priceStart,
       priceEnd,
-      priceAsc,
       salesAsc,
+      priceAsc,
     }
     console.log(searchData)
-    ProductSearchAction.ProductSearch(searchData)
+    this.setState({searchData})
+    // ProductSearchAction.ProductSearch(searchData)
   }
 
   formatter(value) {
@@ -195,11 +215,11 @@ class SearchFilter extends React.Component {
             <span>Relevence</span>
              &nbsp;| &nbsp;
              Price &nbsp;
-             <i onClick={this.onPriceAsc} style={{corsor: 'pointer'}} className="sort_up" />
+             <i onClick={this.onPriceAsc} style={{cursor: 'pointer'}} className="sort_up" />
 
              &nbsp;| &nbsp;
              Sales &nbsp;
-             <i onClick={this.onSalesAsc} style={{corsor: 'pointer'}} className="sort_up" />
+             <i onClick={this.onSalesAsc} style={{cursor: 'pointer'}} className="sort_up" />
           </div>
         </section>
       </article>
@@ -207,4 +227,5 @@ class SearchFilter extends React.Component {
   }
 }
 
+ReactMixin.onClass(SearchFilter, Reflux.listenTo(SynchronizeStore, 'onStoreChange'))
 export default SearchFilter

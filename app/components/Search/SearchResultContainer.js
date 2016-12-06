@@ -20,7 +20,7 @@ class SearchResultContainer extends React.Component {
         PageCount: '',
         PageIndex: '',
         PageSize: '',
-        Total: 10000,
+        Total: 100,
         Result: [],
         flag: '',
       },

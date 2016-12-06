@@ -7,8 +7,7 @@ const SearchResultLayout = props => {
   const { data, loading, addList, total } = props
 
   const onSelectPage = index => {
-    console.log(index)
-    SynchronizeAction.ProductSearchPageIndex(index)
+    SynchronizeAction.productSearchPageIndex(index)
   }
 
   const buttonStyle = {
@@ -68,7 +67,7 @@ const SearchResultLayout = props => {
               <em className="fl">Price Watch:</em>
 
               <div className="fr">
-                <InputNumber min={1} onPriceChange={value => price = value} />
+                <InputNumber min={1} onChange={value => price = value} />
                 <strong>$</strong>
                 <br/>
                 <Button onClick={() => addList(price, product.Id)} type="primary" loading={loading.id === product.Id ? loading.state : false} style={buttonStyle}>
