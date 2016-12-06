@@ -10,6 +10,7 @@ import Reflux from 'reflux'
 import ReactMixin from 'react-mixin'
 
 import SynchronizeStore from '../../stores/SynchronizeStore'
+import SearchTextStore from '../../stores/SearchTextStore'
 
 let priceAsc = '',
     salesAsc = ''
@@ -43,6 +44,13 @@ class SearchFilter extends React.Component {
 
   onStoreChange(data){
     this.setState({pageIndex: data.productSearchPageIndex.pageIndex})
+    this.onSubmit()
+  }
+
+  onSearchStoreChange(data){
+    this.setState({
+      key: data.searchText
+    })
     this.onSubmit()
   }
 
@@ -235,4 +243,5 @@ class SearchFilter extends React.Component {
 }
 
 ReactMixin.onClass(SearchFilter, Reflux.listenTo(SynchronizeStore, 'onStoreChange'))
+ReactMixin.onClass(SearchFilter, Reflux.listenTo(SearchTextStore, 'onSearchStoreChange'))
 export default SearchFilter

@@ -65,7 +65,7 @@ const ProductListLayout = props => {
     <section className="product_list">
       <div className="container">
         <p className="h1">{title}</p>
-        <a onClick={() => fetchData(type)} href="javascript:void(0)">Refresh</a>
+        <a onClick={() => fetchData(type)} className="fz_middle" href="javascript:void(0)">Refresh</a>
 
         { /* Carousel figure */ }
         { /* A line shows five products  */}

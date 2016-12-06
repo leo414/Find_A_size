@@ -4,7 +4,7 @@ import { InputNumber, Spin, Button, Pagination } from 'antd'
 import SynchronizeAction from '../../actions/SynchronizeAction'
 
 const SearchResultLayout = props => {
-  const { data, loading, addList, total } = props
+  const { data, loading, addList, total, isSearchEmpty } = props
 
   const onSelectPage = index => {
     SynchronizeAction.productSearchPageIndex(index)
@@ -93,6 +93,11 @@ const SearchResultLayout = props => {
           showSizeChanger={false}
         />
         :  null
+      }
+      {
+        isSearchEmpty ?
+        <h1 style={{fontSize: '20px'}}>Nothing was found.</h1>
+        : null
       }
     </article>
   )

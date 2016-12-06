@@ -6,6 +6,7 @@ import Reflux from 'reflux'
 import ReactMixin from 'react-mixin'
 import UserBindStore from '../../stores/UserBindStore'
 import UserBindAction from '../../actions/UserBindAction'
+import SearchTextAction from '../../actions/SearchTextAction'
 import { Modal } from 'antd'
 
 class NavContainer extends React.Component {
@@ -14,6 +15,7 @@ class NavContainer extends React.Component {
     this.state = ({
       isLogin: localStorage.isLogin === 'true'
     })
+    this.onSearch = this.onSearch.bind(this)
   }
 
   componentWillReceiveProps(nextProps) {
@@ -37,6 +39,10 @@ class NavContainer extends React.Component {
     UserBindAction.SignOut()
   }
 
+  onSearch(searchText){
+    if(searchText && this.props.isHome) SearchTextAction.searchText(searchText)
+  }
+
   success(content) {
     Modal.success({
       title: 'Success',
@@ -54,7 +60,13 @@ class NavContainer extends React.Component {
   }
 
   render() {
-    return <NavLayout isLogin={this.state.isLogin} onSignOut={this.onSignOut} />
+    return (
+      <NavLayout
+        isLogin={this.state.isLogin}
+        onSignOut={this.onSignOut}
+        onSearch={this.onSearch}
+      />
+    )
   }
 }
 

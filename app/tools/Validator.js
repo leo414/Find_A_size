@@ -16,7 +16,7 @@ const strategies = {
 
   isEmail(value, errorMsg) {
     if(!MailPattern.test(value)) return errorMsg
-  },a
+  },
 }
 
 const Validator = function(){

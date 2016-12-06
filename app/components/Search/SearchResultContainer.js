@@ -28,6 +28,7 @@ class SearchResultContainer extends React.Component {
         state: false,
         id: '',
       },
+      searchEmpty: false,
     })
 
     this.addList = this.addList.bind(this)
@@ -36,9 +37,16 @@ class SearchResultContainer extends React.Component {
   onProductStoreChange(data){
     console.log(data)
     if(data.productSearch.flag === 'productSearch') {
-      this.setState({
-        productSearch: { ...data.productSearch },
-      })
+      if(data.productSearch.Result.length){
+        this.setState({
+          productSearch: { ...data.productSearch },
+          searchEmpty: false,
+        })
+      } else {
+        this.setState({
+          searchEmpty: true,
+        })
+      }
     }
   }
 
@@ -95,6 +103,7 @@ class SearchResultContainer extends React.Component {
         total={this.state.productSearch.Total / 10}
         addList={this.addList}
         loading={this.state.loading}
+        isSearchEmpty={this.state.searchEmpty}
       />
     )
   }
