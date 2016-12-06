@@ -1,5 +1,5 @@
 import React from 'react'
-
+import classnames from 'classnames'
 import ProductSearchAction from '../../actions/ProductSearchAction'
 
 import { Select, Input, Col, Slider } from 'antd'
@@ -27,6 +27,7 @@ class SearchFilter extends React.Component {
       width: ['', ''],
       height: ['', ''],
       searchData: {},
+      isSubmit: false,
     })
     this.onMaterialChange = this.onMaterialChange.bind(this)
     this.onPriceChange = this.onPriceChange.bind(this)
@@ -134,7 +135,10 @@ class SearchFilter extends React.Component {
       salesAsc,
       priceAsc,
     }
-    this.setState({searchData})
+    this.setState({
+      searchData,
+      isSubmit: true,
+    })
     ProductSearchAction.ProductSearch(searchData)
   }
 
@@ -143,6 +147,10 @@ class SearchFilter extends React.Component {
   }
 
   render() {
+    const cls = classnames({
+      hidden: !this.state.isSubmit
+    })
+
     return (
       <article>
         <section className="search_input container">
@@ -207,7 +215,7 @@ class SearchFilter extends React.Component {
           </div>
         </section>
 
-        <section className="search_limit container">
+        <section className={`search_limit container ${cls}`}>
           <h1 className="fl">We found these amazing deals for you!</h1>
           <div className="fr sorted">
             <em>Sorted by: &nbsp;</em>

@@ -23,14 +23,14 @@ const SearchResultLayout = props => {
   const loadingStyle = {}
 
   const renderProductList = () => {
-    if(!data.length) {
-      return (
-        <div style={loadingStyle}>
-          <Spin size="large" /><br/>
-          loading...
-        </div>
-      )
-    }
+    // if(!data.length) {
+    //   return (
+    //     <div style={loadingStyle}>
+    //       <Spin size="large" /><br/>
+    //       loading...
+    //     </div>
+    //   )
+    // }
 
     return data.map((product, index) => {
       let price = ''
@@ -84,12 +84,16 @@ const SearchResultLayout = props => {
   return (
     <article className="search_result container">
       {renderProductList()}
-      <Pagination
-        defaultCurrent={1}
-        total={total}
-        onChange={onSelectPage}
-        showSizeChanger={false}
-      />
+      {
+        data.length ?
+        <Pagination
+          defaultCurrent={1}
+          total={total}
+          onChange={onSelectPage}
+          showSizeChanger={false}
+        />
+        :  null
+      }
     </article>
   )
 }
