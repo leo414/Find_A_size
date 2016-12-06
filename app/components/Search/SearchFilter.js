@@ -53,7 +53,7 @@ class SearchFilter extends React.Component {
     }
     this.setState({searchData})
     console.log(searchData)
-    // ProductSearchAction.ProductSearch(searchData)
+    ProductSearchAction.ProductSearch(searchData)
   }
 
   onPriceAsc(){
@@ -64,7 +64,7 @@ class SearchFilter extends React.Component {
     }
     this.setState({searchData})
     console.log(searchData)
-    // ProductSearchAction.ProductSearch(searchData)
+    ProductSearchAction.ProductSearch(searchData)
   }
 
   onSearchChange(key){
@@ -134,9 +134,8 @@ class SearchFilter extends React.Component {
       salesAsc,
       priceAsc,
     }
-    console.log(searchData)
     this.setState({searchData})
-    // ProductSearchAction.ProductSearch(searchData)
+    ProductSearchAction.ProductSearch(searchData)
   }
 
   formatter(value) {
