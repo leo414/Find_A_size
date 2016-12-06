@@ -12,7 +12,7 @@ import Mask from '../Mask'
 
 import $ from 'jquery'
 
-const SignupLayout = ({pathname, onSignup, onFacebookSignup, onGoogleSignup, loading}) => {
+const SignupLayout = ({pathname, onSignup, onFacebookSignup, onGoogleSignup, loading, dafaultEmail}) => {
   const cls = classnames({
     hidden: pathname !== '/sign_up'
   })
@@ -75,7 +75,7 @@ const SignupLayout = ({pathname, onSignup, onFacebookSignup, onGoogleSignup, loa
         <form>
           <div className="input_box">
             <span className="fl color_blueness" onClick={event => $(event.target).next('input').focus()}>Email Address</span>
-            <input type="email" className="fr" onChange={event => email = event.target.value.trim()} /> <br/>
+            <input type="email" className="fr" defaultValue={dafaultEmail} onChange={event => email = event.target.value.trim()} /> <br/>
           </div>
           <div className="input_box">
             <span className="fl color_blueness" onClick={event => $(event.target).next('input').focus()}>Password</span>

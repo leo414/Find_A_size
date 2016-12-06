@@ -102,10 +102,10 @@ class ProductListContainer extends React.Component {
 
     if(this.props.type === 'A') {
       this.setState({ productSuggest: initData })
-      GetProductAction.ProductSuggest(pageIndex, 30)
+      // GetProductAction.ProductSuggest(pageIndex, 30)
     } else if(this.props.type === 'B') {
       this.setState({ productRelated: initData })
-      GetProductAction.ProductRelated(pageIndex, 30)
+      // GetProductAction.ProductRelated(pageIndex, 30)
     }
     this.setState({pageIndex})
   }
@@ -133,13 +133,12 @@ class ProductListContainer extends React.Component {
         productId: '',
         price: '',
       })
-      this.error('please login')
+      hashHistory.push('/login')
     }
   }
 
   addList(productId){
     if(localStorage.isLogin === 'false') {
-      console.log(1)
       this.error('please login in')
       return false
     }
@@ -183,7 +182,7 @@ class ProductListContainer extends React.Component {
       content,
       okText: 'OK',
       onOk(){
-        hashHistory.push('/login')
+
       }
     })
   }

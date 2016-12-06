@@ -7,11 +7,11 @@ const ProductSearchAction = Reflux.createActions({
   ProductSearch: {asyncResult: true},
 })
 
-ProductSearchAction.ProductSearch.listen(function(Wood, Metal){
+ProductSearchAction.ProductSearch.listen(function(search = {}){
   let data = {
-    pageIndex: '',
+    ...search,
     pageSize: 10,
-    Fields: 'Title,ImageUrl,LinkUrl,Price,Id',
+    Fields: 'Title,Description,ImageUrl,LinkUrl,Price,Id,Color,Material,Length,Width,Height,Weight',
   }
 
   HttpFactory.fetch(PRODUCT.ProductSearch, data, this.completed, this.failed)

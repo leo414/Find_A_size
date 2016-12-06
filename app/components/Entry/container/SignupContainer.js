@@ -84,6 +84,12 @@ class SignupContainer extends React.Component {
   }
 
   render() {
+    let defaultEmail = '';
+    try {
+      defaultEmail = this.props.location.state.email
+    } catch(err) {
+      defaultEmail = ''
+    }
     return (
       <SignupLayout
         pathname={this.props.location.pathname}
@@ -91,6 +97,7 @@ class SignupContainer extends React.Component {
         onFacebookSignup={this.onFacebookSignup}
         onGoogleSignup={this.onGoogleSignup}
         loading={this.state.loading}
+        dafaultEmail={defaultEmail}
       />
     )
   }

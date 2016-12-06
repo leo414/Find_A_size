@@ -1,0 +1,22 @@
+.slide_box {
+  position: relative;
+  height: 40px;
+
+  .ant-slider {
+    position: absolute;
+    right: 0;
+    top: 10px;
+    width: 330px;
+  }
+}
+
+
+.slide_box_dimensions {
+  @extend .slide_box;
+  height: 30px;
+
+  .ant-slider {
+    left: 68px;
+    top: 5px;
+  }
+}

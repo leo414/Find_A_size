@@ -1,8 +1,13 @@
 import React from 'react'
 import Button from '../Common/Button'
+import { hashHistory } from 'react-router'
 
 const EmailSignUp = () => {
-  const onSignup = () => console.log('Sign Up')
+  const onSignup = email => {
+    hashHistory.push({pathname: '/sign_up', query: null, state: {email}})
+  }
+
+  let email = ''
 
   return (
     <section className="container email_signup">
@@ -12,14 +17,14 @@ const EmailSignUp = () => {
       </div>
 
       <div className="signup in_block">
-        <input type="text" placeholder="Email Address" />
+        <input type="text" placeholder="Email Address" onChange={event => email = event.target.value.trim()} />
         &nbsp;
         <Button
           width="212px"
           height="50px"
           fontSize="24px"
           className="green"
-          handleSubmit={() => onSignup()}
+          handleSubmit={() => onSignup(email)}
           value="SIGN UP"
         />
       </div>
