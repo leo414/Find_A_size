@@ -108,7 +108,7 @@ class LoginContainer extends React.Component {
       loading: true,
     })
     loginOnce = true
-    // UserAction.GetTicket(userName || this.state.userName)
+    UserAction.GetTicket(userName || this.state.userName)
   }
 
   success(content) {

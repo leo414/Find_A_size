@@ -41,7 +41,7 @@ const SearchResultLayout = props => {
               <img src={product.ImageUrl} alt="Product"/>
             </div>
             <div className="media_bd fr">
-              <h4 className="media_title">{product.Title}</h4>
+              <h4 className="media_title"><a href={product.LinkUrl} target="_blank">{product.Title}</a></h4>
               <p className="media_desc">{product.Description}</p>
               <strong>
                 Dimensions: {product.Length}*{product.Width}*{product.Height} inches <br/>
