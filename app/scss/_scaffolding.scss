@@ -15,7 +15,10 @@ body {
 }
 
 li { list-style: none; }
-a { color: #000; }
+a {
+  color: #000;
+  cursor: pointer !important;
+}
 a:link,
 a:visited,
 a:hover,
@@ -23,9 +26,6 @@ a:active {
   text-decoration: none;
 }
 
-a:hover {
-  cursor: default !important;
-}
 
 
 // @font-face {font-family: 'iconfont';
