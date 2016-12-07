@@ -44,6 +44,7 @@ class SearchResultContainer extends React.Component {
         })
       } else {
         this.setState({
+          productSearch: { ...data.productSearch },
           searchEmpty: true,
         })
       }
