@@ -1,5 +1,6 @@
 import Reflux from 'reflux'
 import ProductSearchAction from '../actions/ProductSearchAction'
+import IsProductingAction from '../actions/IsProductingAction'
 import HttpErrorCallBack from '../tools/HttpErrorCallBack'
 
 const ProductSearchStore = Reflux.createStore({
@@ -21,6 +22,8 @@ const ProductSearchStore = Reflux.createStore({
   },
 
   onProductSearchCompleted(res){
+    IsProductingAction.isSearch(false)
+    console.log(res)
     if(res.Success){
       const { Count, PageCount, PageIndex, PageSize, Total, Result } = res
       this.data.productSearch = {

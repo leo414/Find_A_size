@@ -1,5 +1,8 @@
 import Reflux from 'reflux'
 import HttpFactory from '../tools/HttpFactory'
+
+import IsProductingAction from './IsProductingAction'
+
 import API from '../API'
 const { PRODUCT } = API
 
@@ -8,6 +11,8 @@ const ProductSearchAction = Reflux.createActions({
 })
 
 ProductSearchAction.ProductSearch.listen(function(search = {}){
+  IsProductingAction.isSearch(true)
+
   let data = {
     ...search,
     pageSize: 10,

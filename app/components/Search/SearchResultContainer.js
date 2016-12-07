@@ -5,6 +5,7 @@ import { hashHistory } from 'react-router'
 import Reflux from 'reflux'
 import ReactMixin from 'react-mixin'
 import ProductSearchStore from '../../stores/ProductSearchStore'
+import IsProductingStore from '../../stores/IsProductingStore'
 
 import ProductManageStore from '../../stores/ProductManageStore'
 import ProductManageAction from '../../actions/ProductManageAction'
@@ -29,9 +30,16 @@ class SearchResultContainer extends React.Component {
         id: '',
       },
       searchEmpty: false,
+      isSearch: false,
     })
 
     this.addList = this.addList.bind(this)
+  }
+
+  onIsProductingStoreChange(data){
+    this.setState({
+      isSearch: data.searchState
+    })
   }
 
   onProductStoreChange(data){
@@ -105,6 +113,7 @@ class SearchResultContainer extends React.Component {
         addList={this.addList}
         loading={this.state.loading}
         isSearchEmpty={this.state.searchEmpty}
+        isSearch={this.state.isSearch}
       />
     )
   }
@@ -112,4 +121,5 @@ class SearchResultContainer extends React.Component {
 
 ReactMixin.onClass(SearchResultContainer, Reflux.listenTo(ProductManageStore, 'onProductManageStoreChange'))
 ReactMixin.onClass(SearchResultContainer, Reflux.listenTo(ProductSearchStore, 'onProductStoreChange'))
+ReactMixin.onClass(SearchResultContainer, Reflux.listenTo(IsProductingStore, 'onIsProductingStoreChange'))
 export default SearchResultContainer

@@ -4,7 +4,7 @@ import { InputNumber, Spin, Button, Pagination } from 'antd'
 import SynchronizeAction from '../../actions/SynchronizeAction'
 
 const SearchResultLayout = props => {
-  const { data, loading, addList, total, isSearchEmpty } = props
+  const { data, loading, addList, total, isSearchEmpty, isSearch } = props
 
   const onSelectPage = index => {
     SynchronizeAction.productSearchPageIndex(index)
@@ -20,17 +20,23 @@ const SearchResultLayout = props => {
     backgroundColor: '#146eb4',
   }
 
-  const loadingStyle = {}
+  const loadingStyle={
+    width: '1000px',
+    height: '350px',
+    background: 'rgba(0,0,0,0.05)',
+    textAlign: 'center',
+    paddingTop: '160px',
+  }
 
   const renderProductList = () => {
-    // if(!data.length) {
-    //   return (
-    //     <div style={loadingStyle}>
-    //       <Spin size="large" /><br/>
-    //       loading...
-    //     </div>
-    //   )
-    // }
+    if(isSearch) {
+      return (
+        <div style={loadingStyle}>
+          <Spin size="large" /><br/>
+          loading...
+        </div>
+      )
+    }
 
     return data.map((product, index) => {
       let price = ''
