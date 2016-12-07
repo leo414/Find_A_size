@@ -7,15 +7,33 @@ import UserStore from '../../../stores/UserStore'
 import UserAction from '../../../actions/UserAction'
 
 import { hashHistory } from 'react-router'
-import { Modal } from 'antd'
+import { Modal, message } from 'antd'
+import validataFunc from '../../../tools/Validator'
+
+const registerForm = (email, password) => [
+  {
+    value: email,
+    rules: [
+      {
+        strategy: 'isEmail',
+        errorMsg: 'The email format is incorrect'
+      }
+    ]
+  },{
+    value: password,
+    rules: [
+      {
+        strategy: 'minLength:6',
+        errorMsg: 'The password at least 6 characters',
+      }
+    ]
+  }
+]
 
 class SignupContainer extends React.Component {
   constructor(props){
     super(props)
     this.state = ({
-      email: '',
-      password: '',
-      passwordRepeat: '',
       loading: false,
     })
 
@@ -27,7 +45,7 @@ class SignupContainer extends React.Component {
     if(data.mailSignup.flag === 'sendMail'){
       if(data.mailSignup.sendMailSuccess === true) {
         this.setState({loading: false})
-        this.success('Send email success!')
+        this.success('The message has been sent to your mailbox!')
         setTimeout(() => hashHistory.push('/'), 2000)
       } else if(data.mailSignup.sendMailSuccess === 'sendFail') {
         this.setState({loading: false})
@@ -45,17 +63,18 @@ class SignupContainer extends React.Component {
   }
 
   onSignup(email, password, passwordRepeat){
-    console.log(email, password, passwordRepeat)
+    let errorMsg = validataFunc(registerForm(email, password));
+    if (errorMsg){
+      message.error(errorMsg)
+      return
+    }
+    if(password !== passwordRepeat) {
+      message.error('The two passwords are not the same')
+      return
+    }
     this.setState({
-      email,
-      password,
-      passwordRepeat,
-      loading: true,
+      loading: true
     })
-
-    email = email || this.state.email
-    password = password || this.state.password
-    passwordRepeat = passwordRepeat || this.state.passwordRepeat
     UserAction.SendSignUpMail(email, password)
   }
 
