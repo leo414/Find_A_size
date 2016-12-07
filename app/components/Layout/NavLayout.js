@@ -10,7 +10,9 @@ const NavLayout = ({isLogin, onSignOut, onSearch}) => {
       <div className="container">
         <IndexLink to="/" className="logo in_block">Find-A-Size</IndexLink>
         <div className="search in_block">
-          <Input type="text" placeholder="xx" onChange={event => searchText = event.target.value.trim()}/>
+          <form className="inline" onSubmit={() => { onSearch(searchText); return false }}>
+            <Input type="text" placeholder="xx" onChange={event => searchText = event.target.value.trim()}/>
+          </form>
           <i className="sousuo-small" onClick={() => onSearch(searchText)} />
         </div>
 

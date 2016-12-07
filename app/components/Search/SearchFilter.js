@@ -148,6 +148,7 @@ class SearchFilter extends React.Component {
       isSubmit: true,
     })
     ProductSearchAction.ProductSearch(searchData)
+    return false
   }
 
   formatter(value) {
@@ -168,7 +169,7 @@ class SearchFilter extends React.Component {
           </div>
 
           <div className="search">
-            <input className="in_block" type="text" onChange={this.onSearchChange} placeholder="Search" />
+            <form className="inline" onSubmit={this.onSubmit}><input className="in_block" type="text" onChange={this.onSearchChange} placeholder="Search" /></form>
             <span onClick={this.onSubmit} className="search_icon in_block"><i className="sousuo" /></span>
           </div>
           <small className="small">Example: industrial coffee table</small>
