@@ -36,7 +36,7 @@ const SignupLayout = ({pathname, onSignup, onFacebookSignup, onGoogleSignup, loa
     backgroundColor: '#146eb4',
   }
 
-  let email = '',
+  let email = dafaultEmail,
       password = '',
       passwordRepeat = ''
 
