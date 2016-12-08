@@ -6,7 +6,7 @@ import classnames from 'classnames'
 import FacebookLogin from 'react-facebook-login'
 import GoogleLogin from 'react-google-login'
 
-import { Button } from 'antd'
+import { Button, message } from 'antd'
 import ButtonSelf from '../../Common/Button'
 import Mask from '../Mask'
 
@@ -32,11 +32,6 @@ const SignupWithPhone = props => {
     backgroundColor: '#146eb4',
   }
 
-  let phone = '',
-      code = '',
-      password = '',
-      passwordRepeat = ''
-
   return (
     <div className={cls}>
       <Mask pathname="/sign_up_phone" />
@@ -55,20 +50,20 @@ const SignupWithPhone = props => {
               type="number"
               readOnly={isClickGetCode ? "readOnly" : ''}
               className="fr"
-              onChange={event => phone = event.target.value.trim()}
+              id="sign_phone_ly_phone"
             />
 
             <br/>
             {
               isClickGetCode ?
-              <sapn className="get_code_msg">xxxxxxxxxx</sapn>
+              null
               :
               <ButtonSelf
                 width="70px"
                 height="24px"
                 fontSize="12px"
                 className="green get_code"
-                handleSubmit={() => getCode(phone, password, passwordRepeat)}
+                handleSubmit={() => getCode($('#sign_phone_ly_phone').val().trim())}
                 value="Get code"
               />
             }
@@ -76,19 +71,21 @@ const SignupWithPhone = props => {
 
           <div className="input_box code_number">
             <span className="fl color_blueness" onClick={event => $(event.target).next('input').focus()}>Code</span>
-            <input type="number" className="fr" onChange={event => code = event.target.value.trim()} /> <br/>
+            <input type="number" className="fr" id="sign_phone_ly_code" /> <br/>
           </div>
           <div className="input_box">
             <span className="fl color_blueness" onClick={event => $(event.target).next('input').focus()}>Password</span>
-            <input type="password" className="fr" onChange={event => password = event.target.value.trim()} />
+            <input type="password" className="fr" id="sign_phone_ly_password" />
           </div>
           <div className="input_box">
             <span className="fl color_blueness" onClick={event => $(event.target).next('input').focus()}>Confirm Password</span>
-            <input type="password" className="fr" onChange={event => passwordRepeat = event.target.value.trim()} />
+            <input type="password" className="fr" id="sign_phone_ly_passwordRepeat" />
           </div>
         </form>
 
-        <Button onClick={() => onSubmitSignup(phone, code, password, passwordRepeat)} type="primary" loading={loading} style={buttonStyle}>
+        <Button onClick={() => onSubmitSignup($('#sign_phone_ly_phone').val().trim(), $('#sign_phone_ly_code').val().trim(), $('#sign_phone_ly_password').val().trim(), $('#sign_phone_ly_passwordRepeat').val().trim())}
+                type="primary" loading={loading} style={buttonStyle}
+        >
           Sign up
         </Button>
 

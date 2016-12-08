@@ -44,7 +44,7 @@ const UserBindStore = Reflux.createStore({
   },
 
   onSendBindingMailCompleted(res){
-    console.log(res)
+    
     if(res.Success){
       this.data.sendBindMail.success = true
     }else{
@@ -59,7 +59,7 @@ const UserBindStore = Reflux.createStore({
   },
 
   onSendBindingSmsCompleted(res){
-    console.log(res)
+    
     if(res.Success){
       this.data.sendBindSms.success = true
     }else{
@@ -74,7 +74,7 @@ const UserBindStore = Reflux.createStore({
   },
 
   onReceiveBindingSmsCompleted(res){
-    console.log(res)
+    
     if(res.Success){
       this.data.receiveSms.success = true
     }else{
@@ -89,7 +89,7 @@ const UserBindStore = Reflux.createStore({
   },
 
   onChangePasswordCompleted(res){
-    console.log(res)
+    
     if(res.Success){
       this.data.changePassword.success = true
     }else{
@@ -104,7 +104,7 @@ const UserBindStore = Reflux.createStore({
   },
 
   onUserCurrentCompleted(res){
-    console.log(res)
+    
     if(res.Success){
       const { Email, Phone, IsPhoneNotification, IsEmailNotification } = res
       this.data.userCurrent = {
@@ -126,7 +126,7 @@ const UserBindStore = Reflux.createStore({
   },
 
   onSignOutCompleted(res){
-    console.log(res)
+    
     if(res.Success){
       this.data.signOut.success = true
     }else{

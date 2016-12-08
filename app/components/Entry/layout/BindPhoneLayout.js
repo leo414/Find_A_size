@@ -3,7 +3,8 @@ import { RouteTransition, presets } from 'react-router-transition'
 import { Link } from 'react-router'
 import classnames from 'classnames'
 
-import { Button } from 'antd'
+import { Button, message } from 'antd'
+import ButtonSelf from '../../Common/Button'
 import Mask from '../Mask'
 
 import $ from 'jquery'
@@ -28,9 +29,6 @@ const BindPhoneLayout = props => {
     backgroundColor: '#146eb4',
   }
 
-  let phone = '',
-      code = '';
-
   return (
     <div className={cls}>
       <Mask pathname="/bind_phone" />
@@ -44,20 +42,20 @@ const BindPhoneLayout = props => {
               type="number"
               className="fr"
               readOnly={isClickGetCode ? "readOnly" : ''}
-              onChange={event => phone = event.target.value.trim()}
+              id="bindPhone_ly_phone"
             />
             <br/>
 
             {
               isClickGetCode ?
-              <sapn className="get_code_msg">xxxxxxxxxx</sapn>
+              null
               :
-              <Button
+              <ButtonSelf
                 width="70px"
                 height="24px"
                 fontSize="12px"
                 className="green get_code"
-                handleSubmit={() => getCode(phone, code)}
+                handleSubmit={() => getCode($('#bindPhone_ly_phone').val().trim())}
                 value="Get code"
               />
             }
@@ -65,11 +63,12 @@ const BindPhoneLayout = props => {
 
           <div className="input_box">
             <span className="fl color_blueness" onClick={event => $(event.target).next('input').focus()}>Code</span>
-            <input type="number" className="fr" onChange={event => code = event.target.value.trim()} /> <br/>
+            <input type="number" className="fr" id="bindPhone_ly_code" /> <br/>
           </div>
         </form>
 
-        <Button onClick={() => onSubmit(phone, code)} type="primary" loading={loading} style={buttonStyle}>
+        <Button onClick={() => onSubmit($('#bindPhone_ly_phone').val().trim(), $('#bindPhone_ly_code').val().trim())}
+                type="primary" loading={loading} style={buttonStyle}>
           Connect
         </Button>
       </RouteTransition>

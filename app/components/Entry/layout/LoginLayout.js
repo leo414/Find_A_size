@@ -37,9 +37,6 @@ const LoginLayout = props => {
     backgroundColor: '#146eb4',
   }
 
-  let userName = '',
-      password = ''
-
   return (
     <div className={cls}>
       <Mask pathname="/login" />
@@ -74,15 +71,15 @@ const LoginLayout = props => {
         <form>
           <div className="input_box">
             <span className="fl color_blueness" onClick={event => $(event.target).next('input').focus()}>Email or Phone</span>
-            <input type="text" className="fr" onChange={event => userName = event.target.value.trim()} /> <br/>
+            <input type="text" className="fr" id="login_ly_email" /> <br/>
           </div>
           <div className="input_box">
             <span className="fl color_blueness" onClick={event => $(event.target).next('input').focus()}>Password</span>
-            <input type="password" className="fr" onChange={event => password = event.target.value.trim()} />
+            <input type="password" className="fr" id="login_ly_password" />
           </div>
         </form>
 
-        <Button onClick={() => onLogin(userName, password)} type="primary" loading={loading} style={buttonStyle}>
+        <Button onClick={() => onLogin($('#login_ly_email').val().trim(), $('#login_ly_password').val().trim())} type="primary" loading={loading} style={buttonStyle}>
           LOG IN
         </Button>
 

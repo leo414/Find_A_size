@@ -4,7 +4,6 @@ import NavContainer from '../Layout/NavContainer'
 import Footer from '../Layout/Footer'
 import ProductListContainer from '../Product/ProductListContainer'
 
-import Mask from '../Common/Mask'
 import Search from '../Search'
 import EmailSignUp from './EmailSignUp'
 

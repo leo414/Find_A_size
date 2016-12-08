@@ -1,5 +1,5 @@
-const TelPattern = /^1[34578]\d{9}$/
-const MailPattern = /^(\+\d{1,3}[- ]?)?\d{10}$/
+const MailPattern = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/
+const TelPattern = /^(\+\d{1,3}[- ]?)?\d{10}$/
 
 const strategies = {
   isNoEmpty(value, errorMsg) {

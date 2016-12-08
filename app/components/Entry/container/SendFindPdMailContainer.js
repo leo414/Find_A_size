@@ -7,15 +7,13 @@ import ReactMixin from 'react-mixin'
 import UserStore from '../../../stores/UserStore'
 import UserAction from '../../../actions/UserAction'
 
-import { Modal } from 'antd'
+import { Modal, message } from 'antd'
 import decode64 from '../../../tools/decode64'
 
 class SendFindPdMailContainer extends React.Component {
   constructor(props){
     super(props)
     this.state = ({
-      password: '',
-      passwordRepeat: '',
       loading: false,
     })
 
@@ -23,7 +21,6 @@ class SendFindPdMailContainer extends React.Component {
   }
 
   onUserStoreChange(data){
-    console.log(data)
     if(data.receiveMailPassword.flag !== 'resetPassword') return
     if(data.receiveMailPassword.resetPasswordSuccess === true) {
       this.setState({loading: false})
@@ -37,22 +34,33 @@ class SendFindPdMailContainer extends React.Component {
   }
 
   onSubmit(password, passwordRepeat){
-    console.log(password, passwordRepeat)
+    if(!password) {
+      message.error('password number can not be empty')
+      return
+    }
+    if(password !== passwordRepeat){
+      message.error('The two passwords are not the same')
+      return
+    }
+    if(password.length < 6){
+      message.error('The password at least 6 characters')
+      return
+    }
+
     this.setState({
-      password,
-      passwordRepeat,
       loading: true,
     })
+
+    let code, mail
     try {
-      console.log(this.props.location.query.code)
-      console.log(this.props.location.query.mail)
+      code = decode64(this.props.location.query.code)
+      mail = decode64(this.props.location.query.mail)
     } catch(error) {
       this.error('Email address does not exist')
       return
     }
-    const code = decode64(this.props.location.query.code)
-    const mail = decode64(this.props.location.query.mail)
-    UserAction.ReceiveResetPasswordMail(mail, code, password || this.state.password)
+
+    UserAction.ReceiveResetPasswordMail(mail, code, password)
   }
 
   success(content) {

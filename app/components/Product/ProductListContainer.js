@@ -120,7 +120,7 @@ class ProductListContainer extends React.Component {
   }
 
   onProductManageStoreChange(data){
-    console.log(data)
+
     if(data.productWatch.flag !== 'productWatch') return
     if(data.productWatch.success === true) {
       // this.success('add list success')
@@ -154,7 +154,7 @@ class ProductListContainer extends React.Component {
 
   handleOk() {
     if(!this.state.price) {
-      this.formError('no price,place repeat')
+      this.formError('Please enter a price')
       return
     }
     this.setState({visible: false})

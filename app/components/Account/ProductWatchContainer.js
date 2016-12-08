@@ -46,7 +46,7 @@ class ProductWatchContainer extends React.Component {
   }
 
   onProductManageStoreChange(data){
-    console.log(data)
+
     if(data.productWatch.flag === 'productWatch'){
       if(data.productWatch.success === true) {
         // this.success('add list success')
@@ -71,7 +71,6 @@ class ProductWatchContainer extends React.Component {
             productWatchSearch: {...productWatchSearch, Result}
           })
         } else {
-          console.log(1)
           this.setState({
             isDataEmpty: true
           })
@@ -94,7 +93,7 @@ class ProductWatchContainer extends React.Component {
 
   handleOk() {
     if(!this.state.price) {
-      this.formError('no price,place repeat')
+      this.formError('Please enter a price')
       return
     }
     this.setState({visible: false})
@@ -143,7 +142,7 @@ class ProductWatchContainer extends React.Component {
 
 
   onProductStoreChange(data){
-    console.log(data)
+
     if(data.productWatchSearch.flag === 'productWatchSearch') {
       if(data.productWatchSearch.Result.length){
         this.setState({

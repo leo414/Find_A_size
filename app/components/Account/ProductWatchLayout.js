@@ -34,7 +34,7 @@ const ProductWatchLayout = props => {
 
   const renderProductList = () => {
     if(isDataEmpty){
-      return <div>No add list place go to add list</div>
+      return <div>you don't pay attention to anything</div>
     }
 
     if(!data.length && !isDataEmpty) {
@@ -58,10 +58,25 @@ const ProductWatchLayout = props => {
               <h4 className="media_title">{item.Product.Title}</h4>
               <p className="media_desc">{item.Product.Description}</p>
               <strong>
-                Dimensions: {item.Product.Length}*{item.Product.Width}*{item.Product.Height} inches <br/>
-                Material: {item.Product.Material} <br/>
-                Weight: {item.Product.Weight} <br/>
-                Color: {item.Product.Color} <br/>
+                { item.Product.Length ? <span>L: {item.Product.Length}&nbsp;&nbsp;</span> : null }
+                { item.Product.Width ? <span>W: {item.Product.Width}&nbsp;&nbsp;</span> : null }
+                { item.Product.Height ? <span>H: {item.Product.Height}&nbsp;&nbsp;</span> : null }
+
+                inches <br/>
+
+                {
+                  item.Product.Material == 'None' ? null :
+                  <span>Material: {item.Product.Material} <br/></span>
+                }
+                {
+                  item.Product.Weight == 0 ? null :
+                  <span>Weight: {item.Product.Weight} Pounds<br/></span>
+                }
+                {
+                  item.Product.Color == '' ? null :
+                  <span>Color: {item.Product.Color} <br/></span>
+                }
+
               </strong>
             </div>
           </section>

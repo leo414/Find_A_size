@@ -7,20 +7,31 @@ import ReactMixin from 'react-mixin'
 import UserStore from '../../../stores/UserStore'
 import UserAction from '../../../actions/UserAction'
 
-import { Modal } from 'antd'
+import { Modal, message } from 'antd'
+import validataFunc from '../../../tools/Validator'
+
+const registerForm = (email, password) => [
+  {
+    value: email,
+    rules: [
+      {
+        strategy: 'isEmail',
+        errorMsg: 'The email format is incorrect'
+      }
+    ]
+  }
+]
 
 class ResetPdMailContainer extends React.Component {
   constructor(props){
     super(props)
     this.state = ({
-      email: '',
       loading: false,
     })
     this.onSubmit = this.onSubmit.bind(this)
   }
 
   onUserStoreChange(data){
-    console.log(data)
     if(data.mailResetPassword.flag !== 'resetPassword') return
     if(data.mailResetPassword.sendMilSuccess === true) {
       this.setState({loading: false})
@@ -33,12 +44,15 @@ class ResetPdMailContainer extends React.Component {
   }
 
   onSubmit(email){
-    console.log(email)
+    let errorMsg = validataFunc(registerForm(email));
+    if (errorMsg){
+      message.error(errorMsg)
+      return
+    }
     this.setState({
-      email,
       loading: true,
     })
-    UserAction.SendResetPasswordMail(email || this.state.email)
+    UserAction.SendResetPasswordMail(email)
   }
 
   success(content) {

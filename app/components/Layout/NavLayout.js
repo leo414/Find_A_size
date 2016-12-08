@@ -10,9 +10,11 @@ const NavLayout = ({isLogin, onSignOut, onSearch}) => {
       <div className="container">
         <IndexLink to="/" className="logo in_block">Find-A-Size</IndexLink>
         <div className="search in_block">
-          <form className="inline" onSubmit={() => { onSearch(searchText); return false }}>
-            <Input type="text" placeholder="xx" onChange={event => searchText = event.target.value.trim()}/>
-          </form>
+          <Input
+            type="text"
+            onChange={event => searchText = event.target.value.trim()}
+            onKeyPress={e => e.which == 13 ? onSearch(searchText) : null}
+          />
           <i className="sousuo-small" onClick={() => onSearch(searchText)} />
         </div>
 

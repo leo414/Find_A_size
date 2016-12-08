@@ -23,7 +23,7 @@ const ProductSearchStore = Reflux.createStore({
 
   onProductSearchCompleted(res){
     IsProductingAction.isSearch(false)
-    console.log(res)
+    
     if(res.Success){
       const { Count, PageCount, PageIndex, PageSize, Total, Result } = res
       this.data.productSearch = {

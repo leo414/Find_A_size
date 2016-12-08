@@ -15,11 +15,12 @@ class UserCurrentContainer extends React.Component {
   }
 
   onUserStoreChange(data) {
-    console.log(data)
+
     if(data.userCurrent.flag !== 'userCurrent') return
     if(data.userCurrent.success === true) {
-      console.log(data.userCurrent)
+      
     } else if (data.userCurrent.success === false) {
+      localStorage.isLogin = false
       this.error('place go to login')
       setTimeout(() => hashHistory.push('/login'), 2000)
     }

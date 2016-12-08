@@ -61,7 +61,6 @@ class SearchFilter extends React.Component {
       salesAsc,
     }
     this.setState({searchData})
-    console.log(searchData)
     ProductSearchAction.ProductSearch(searchData)
   }
 
@@ -72,7 +71,6 @@ class SearchFilter extends React.Component {
       priceAsc,
     }
     this.setState({searchData})
-    console.log(searchData)
     ProductSearchAction.ProductSearch(searchData)
   }
 
@@ -169,7 +167,7 @@ class SearchFilter extends React.Component {
           </div>
 
           <div className="search">
-            <form className="inline" onSubmit={this.onSubmit}><input className="in_block" type="text" onChange={this.onSearchChange} placeholder="Search" /></form>
+            <input className="in_block" type="text" onChange={this.onSearchChange} onKeyPress={e => e.which == 13 ? this.onSubmit() : null} placeholder="Search" />
             <span onClick={this.onSubmit} className="search_icon in_block"><i className="sousuo" /></span>
           </div>
           <small className="small">Example: industrial coffee table</small>
@@ -181,17 +179,17 @@ class SearchFilter extends React.Component {
             Dimensions(inches):<br/>
             <div className="slide_box_dimensions">
               Height
-              <Slider range min={0} max={1000} defaultValue={[150, 800]} onChange={this.onHeightChange} />
+              <Slider range min={0} max={300} defaultValue={[1, 100]} onChange={this.onHeightChange} />
             </div>
 
             <div className="slide_box_dimensions">
               Length
-              <Slider range min={0} max={1000} defaultValue={[150, 800]} onChange={this.onLengthChange} />
+              <Slider range min={0} max={300} defaultValue={[1, 100]} onChange={this.onLengthChange} />
             </div>
 
             <div className="slide_box_dimensions">
               Width
-              <Slider range min={0} max={1000} defaultValue={[150, 800]} onChange={this.onWidthChange} />
+              <Slider range min={0} max={300} defaultValue={[1, 100]} onChange={this.onWidthChange} />
             </div>
 
           </div>

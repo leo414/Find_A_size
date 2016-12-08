@@ -36,10 +36,6 @@ const SignupLayout = ({pathname, onSignup, onFacebookSignup, onGoogleSignup, loa
     backgroundColor: '#146eb4',
   }
 
-  let email = dafaultEmail,
-      password = '',
-      passwordRepeat = ''
-
   return (
     <div className={cls}>
       <Mask pathname="/sign_up" />
@@ -75,19 +71,19 @@ const SignupLayout = ({pathname, onSignup, onFacebookSignup, onGoogleSignup, loa
         <form>
           <div className="input_box">
             <span className="fl color_blueness" onClick={event => $(event.target).next('input').focus()}>Email Address</span>
-            <input type="email" className="fr" defaultValue={dafaultEmail} onChange={event => email = event.target.value.trim()} /> <br/>
+            <input type="email" className="fr" defaultValue={dafaultEmail} id="sign_ly_email" /> <br/>
           </div>
           <div className="input_box">
             <span className="fl color_blueness" onClick={event => $(event.target).next('input').focus()}>Password</span>
-            <input type="password" className="fr" onChange={event => password = event.target.value.trim()} />
+            <input type="password" className="fr" id="sign_ly_password" />
           </div>
           <div className="input_box">
             <span className="fl color_blueness" onClick={event => $(event.target).next('input').focus()}>Confirm Password</span>
-            <input type="password" className="fr" onChange={event => passwordRepeat = event.target.value.trim()} />
+            <input type="password" className="fr" id="sign_ly_passwordRepeat" />
           </div>
         </form>
 
-        <Button onClick={() => onSignup(email, password, passwordRepeat)} type="primary" loading={loading} style={buttonStyle}>
+        <Button onClick={() => onSignup($('#sign_ly_email').val().trim(), $('#sign_ly_password').val().trim(), $('#sign_ly_passwordRepeat').val().trim())} type="primary" loading={loading} style={buttonStyle}>
           Sign up
         </Button>
 

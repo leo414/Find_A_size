@@ -20,8 +20,6 @@ const ResetPdMailLayout = ({pathname, onSubmit, loading}) => {
     backgroundColor: '#146eb4',
   }
 
-  let email = ''
-
   return (
     <div className={cls}>
       <Mask pathname="/send_pd_mail" />
@@ -32,11 +30,11 @@ const ResetPdMailLayout = ({pathname, onSubmit, loading}) => {
         <form>
           <div className="input_box">
             <span className="fl color_blueness" onClick={event => $(event.target).next('input').focus()}>Email</span>
-            <input type="email" className="fr" onChange={event => email = event.target.value.trim()} /> <br/>
+            <input type="email" className="fr" id="reset_pd_mail_email" /> <br/>
           </div>
         </form>
 
-        <Button onClick={() => onSubmit(email)} type="primary" loading={loading} style={buttonStyle}>
+        <Button onClick={() => onSubmit($('#reset_pd_mail_email').val().trim())} type="primary" loading={loading} style={buttonStyle}>
           Send Email
         </Button>
 

@@ -20,9 +20,6 @@ const SendFindPdMailLayout = ({pathname, onSubmit, loading}) => {
     backgroundColor: '#146eb4',
   }
 
-  let password = '',
-      passwordRepeat = ''
-
   return (
     <div className={cls}>
       <Mask pathname="/reset_pd_mail" />
@@ -32,16 +29,18 @@ const SendFindPdMailLayout = ({pathname, onSubmit, loading}) => {
         <form>
           <div className="input_box">
             <span className="fl color_blueness" onClick={event => $(event.target).next('input').focus()}>Password</span>
-            <input type="password" className="fr" onChange={event => password = event.target.value.trim()} /> <br/>
+            <input type="password" className="fr" id="send_findpassword_password" /> <br/>
           </div>
 
           <div className="input_box">
             <span className="fl color_blueness" onClick={event => $(event.target).next('input').focus()}>Confirm Password</span>
-            <input type="password" className="fr" onChange={event => passwordRepeat = event.target.value.trim()} /> <br/>
+            <input type="password" className="fr" id="send_findpassword_passwordRepeat" /> <br/>
           </div>
         </form>
 
-        <Button onClick={() => onSubmit(password, passwordRepeat)} type="primary" loading={loading} style={buttonStyle}>
+        <Button onClick={() => onSubmit($('#send_findpassword_password').val().trim(), $('#send_findpassword_passwordRepeat').val().trim())}
+                type="primary" loading={loading} style={buttonStyle}
+        >
           Reset password
         </Button>
       </RouteTransition>

@@ -8,7 +8,40 @@ import ReactMixin from 'react-mixin'
 import UserBindStore from '../../../stores/UserBindStore'
 import UserBindAction from '../../../actions/UserBindAction'
 
-import { Modal } from 'antd'
+import { Modal, message } from 'antd'
+import validataFunc from '../../../tools/Validator'
+
+const registerForm = (phone, code) => [
+  {
+    value: phone,
+    rules: [
+      {
+        strategy: 'isMobile',
+        errorMsg: 'The phone number format is incorrect'
+      }
+    ]
+  },{
+    value: code,
+    rules: [
+      {
+        strategy: 'isNoEmpty',
+        errorMsg: 'The code can not be empty'
+      }
+    ]
+  }
+]
+
+const registerPhoneForm = (phone) => [
+  {
+    value: phone,
+    rules: [
+      {
+        strategy: 'isMobile',
+        errorMsg: 'The phone number format is incorrect'
+      }
+    ]
+  }
+]
 
 let timeOut;
 class BindPhoneContainer extends React.Component {
@@ -16,7 +49,6 @@ class BindPhoneContainer extends React.Component {
     super(props)
     this.state = ({
       isClickGetCode: false,
-      phone: '',
       loading: false,
     })
 
@@ -24,7 +56,7 @@ class BindPhoneContainer extends React.Component {
     this.onResetPssword = this.getCode.bind(this)
   }
   onUserStoreChange(data) {
-    console.log(data)
+    
     if(data.receiveSms.flag === 'receiveSms') {
       if(data.receiveSms.success === true) {
         this.success('Bind phone success')
@@ -49,25 +81,29 @@ class BindPhoneContainer extends React.Component {
   }
 
   getCode(phone){
-    console.log(phone)
-    if(!phone && !this.state.phone) return
+    let errorMsg = validataFunc(registerPhoneForm(phone));
+    if (errorMsg){
+      message.error(errorMsg)
+      return
+    }
     this.setState({
       isClickGetCode: true,
-      phone,
     })
     timeOut = setTimeout(() => this.setState({isClickGetCode: false}), 60000)
-    UserBindAction.SendBindingSms(phone || this.state.phone)
+    message.success('After 60 seconds you can re-obtain SMS verification code', 2.5)
+    UserBindAction.SendBindingSms(phone)
   }
 
   onResetPssword(phone, code) {
-    console.log(phone, code)
+    let errorMsg = validataFunc(registerForm(phone, code));
+    if (errorMsg){
+      message.error(errorMsg)
+      return
+    }
+
     this.setState({
-      phone,
-      code,
       loading: true,
     })
-    phone = phone || this.state.phone
-    console.log(phone)
     UserBindAction.ReceiveBindingSms(phone, code)
   }
 

@@ -7,7 +7,48 @@ import ReactMixin from 'react-mixin'
 import UserStore from '../../../stores/UserStore'
 import UserAction from '../../../actions/UserAction'
 
-import { Modal } from 'antd'
+import { Modal, message } from 'antd'
+import validataFunc from '../../../tools/Validator'
+
+const registerForm = (phone, password, code) => [
+  {
+    value: phone,
+    rules: [
+      {
+        strategy: 'isMobile',
+        errorMsg: 'The phone number format is incorrect'
+      }
+    ]
+  },{
+    value: code,
+    rules: [
+      {
+        strategy: 'isNoEmpty',
+        errorMsg: 'The code can not be empty'
+      }
+    ]
+  },{
+    value: password,
+    rules: [
+      {
+        strategy: 'minLength:6',
+        errorMsg: 'The password at least 6 characters',
+      }
+    ]
+  },
+]
+
+const registerPhoneForm = phone=> [
+  {
+    value: phone,
+    rules: [
+      {
+        strategy: 'isMobile',
+        errorMsg: 'The phone number format is incorrect'
+      }
+    ]
+  }
+]
 
 let timeOut;
 class SignupPhoneContainer extends React.Component {
@@ -15,9 +56,6 @@ class SignupPhoneContainer extends React.Component {
     super(props)
     this.state = ({
       isClickGetCode: false,
-      phone: '',
-      password: '',
-      passwordRepeat: '',
       loading: false,
     })
 
@@ -25,10 +63,10 @@ class SignupPhoneContainer extends React.Component {
     this.onSubmitSignup = this.onSubmitSignup.bind(this)
   }
   onUserStoreChange(data) {
-    console.log(data)
+
     if(data.sendSmsCode.flag === 'sendSms'){
       if(data.sendSmsCode.sendSmsSuccess === true) {
-        this.success('Send sms code success!')
+        message.success('SMS has been sent to your phone')
       } else if(data.sendSmsCode.sendSmsSuccess === 'sendFail') {
         this.error('Phone Number Already Exists')
       }
@@ -47,33 +85,33 @@ class SignupPhoneContainer extends React.Component {
     }
   }
 
-  getCode(phone, password, passwordRepeat){
-    if(!phone && !this.state.phone) return
+  getCode(phone){
+    let errorMsg = validataFunc(registerPhoneForm(phone));
+    if (errorMsg){
+      message.error(errorMsg)
+      return
+    }
     this.setState({
       isClickGetCode: true,
-      phone,
-      password,
-      passwordRepeat,
     })
     timeOut = setTimeout(() => this.setState({isClickGetCode: false}), 60000)
-
-    UserAction.SendSignUpSms(phone || this.state.phone)
+    message.success('After 60 seconds you can re-obtain SMS verification code', 2.5)
+    UserAction.SendSignUpSms(phone)
   }
 
   onSubmitSignup(phone, code, password, passwordRepeat) {
-    console.log(phone, code, password, passwordRepeat)
-    console.log(this.state)
-    this.setState({
-      phone,
-      code,
-      password,
-      passwordRepeat,
-      loading: true,
-    })
-    phone = phone || this.state.phone
-    password = password || this.state.password
-    passwordRepeat = passwordRepeat || this.state.passwordRepeat
-    console.log(phone, password, passwordRepeat)
+    let errorMsg = validataFunc(registerForm(phone, password, code));
+    if (errorMsg){
+      message.error(errorMsg)
+      return
+    }
+
+    if(password !== passwordRepeat) {
+      message.error('The two passwords are not the same')
+      return
+    }
+
+    this.setState({loading: true})
     UserAction.ReceiveSignUpSms(phone, code, password)
   }
 

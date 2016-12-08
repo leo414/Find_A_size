@@ -60,7 +60,7 @@ const UserStore = Reflux.createStore({
   },
 
   onFacebookSignInCompleted(res){
-    console.log(res)
+    
     if(res.Success){
       this.data.openUserLogin.facebookLoginSuccess = true
     }else{
@@ -74,7 +74,7 @@ const UserStore = Reflux.createStore({
   },
 
   onGoogleSignInCompleted(res){
-    console.log(res)
+    
     if(res.Success){
       this.data.openUserLogin.googleLoginSuccess = true
     }else{
@@ -88,7 +88,7 @@ const UserStore = Reflux.createStore({
   },
 
   onSendSignUpMailCompleted(res){
-    console.log(res)
+    
     if(res.Success){
       this.data.mailSignup.sendMailSuccess = true
     }else{
@@ -103,7 +103,7 @@ const UserStore = Reflux.createStore({
   },
 
   onSendSignUpSmsCompleted(res){
-    console.log(res)
+    
     if(res.Success){
       this.data.sendSmsCode.sendSmsSuccess = true
     }else{
@@ -118,7 +118,7 @@ const UserStore = Reflux.createStore({
   },
 
   onReceiveSignUpSmsCompleted(res){
-    console.log(res)
+    
     if(res.Success){
       this.data.phoneSignup.phoneSignupSuccess = true
     }else{
@@ -134,7 +134,7 @@ const UserStore = Reflux.createStore({
   },
 
   onSendResetPasswordSmsCompleted(res){
-    console.log(res)
+    
     if(res.Success){
       this.data.sendResetSmsCode.sendSmsSuccess = true
     }else{
@@ -149,7 +149,7 @@ const UserStore = Reflux.createStore({
   },
 
   onReceiveResetPasswordSmsCompleted(res){
-    console.log(res)
+    
     if(res.Success){
       this.data.phoneResetPassword.resetPasswordSuccess = true
     }else{
@@ -164,7 +164,7 @@ const UserStore = Reflux.createStore({
   },
 
   onSendResetPasswordMailCompleted(res){
-    console.log(res)
+    
     if(res.Success){
       this.data.mailResetPassword.sendMilSuccess = true
     }else{
@@ -178,7 +178,7 @@ const UserStore = Reflux.createStore({
     HttpErrorCallBack(res)
   },
   onReceiveResetPasswordMailCompleted(res){
-    console.log(res)
+    
     if(res.Success){
       this.data.receiveMailPassword.resetPasswordSuccess = true
     }else{
@@ -193,7 +193,7 @@ const UserStore = Reflux.createStore({
   },
 
   onGetTicketCompleted(res){
-    console.log(res)
+    
     if(res.Success){
       this.data.userTicket.salt = res.Salt
     }else{
@@ -208,7 +208,7 @@ const UserStore = Reflux.createStore({
   },
 
   onUserLoginCompleted(res){
-    console.log(res)
+    
     if(res.Success){
       this.data.userLogin.loginSuccess = res.Success
     }else{

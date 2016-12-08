@@ -22,17 +22,12 @@ const registerForm = (username, password) => [
         errorMsg: 'The user name can not be empty'
       }
     ]
-  },
-
-  {
+  },{
     value: password,
     rules: [
       {
         strategy: 'minLength:6',
         errorMsg: 'The password at least 6 characters',
-      },{
-        strategy: 'isNoEmpty',
-        errorMsg: 'The password can not be empty',
       }
     ]
   }
@@ -52,7 +47,7 @@ class LoginContainer extends React.Component {
   }
 
   onGetUserInfo(data) {
-    console.log(data)
+    
     if(data.openUserLogin.flag === 'openUserLogin') {
       if(data.openUserLogin.googleLoginSuccess || data.openUserLogin.facebookLoginSuccess) {
         localStorage.isLogin = true
@@ -80,9 +75,9 @@ class LoginContainer extends React.Component {
         if(!loginOnce) return
         loginOnce = false
         const timestamp = getNowFormatDate()
-        const pbkdf2Password_1 = pbkdf2(password || this.state.password, salt, 1000, 24).toString('hex') + timestamp
+        const pbkdf2Password_1 = pbkdf2(password, salt, 1000, 24).toString('hex') + timestamp
         const pbkdf2Password_2 = pbkdf2(pbkdf2Password_1, salt, 1000, 24).toString('hex')
-        UserAction.UserLogin(userName || this.state.password, pbkdf2Password_2, timestamp)
+        UserAction.UserLogin(userName, pbkdf2Password_2, timestamp)
       }
     }
   }
@@ -108,7 +103,7 @@ class LoginContainer extends React.Component {
       loading: true,
     })
     loginOnce = true
-    UserAction.GetTicket(userName || this.state.userName)
+    UserAction.GetTicket(userName)
   }
 
   success(content) {
@@ -130,11 +125,11 @@ class LoginContainer extends React.Component {
   render() {
     return (
       <LoginLayout
-       pathname={this.props.location.pathname}
-       onFaceBookLogin={this.onFaceBookLogin}
-       onGoogleLogin={this.onGoogleLogin}
-       onLogin={this.onLogin}
-       loading={this.state.loading}
+        pathname={this.props.location.pathname}
+        onFaceBookLogin={this.onFaceBookLogin}
+        onGoogleLogin={this.onGoogleLogin}
+        onLogin={this.onLogin}
+        loading={this.state.loading}
       />
     )
   }

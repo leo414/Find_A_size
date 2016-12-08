@@ -24,7 +24,7 @@ const UserAction = Reflux.createActions({
 
 UserAction.SendResetPasswordSms.listen(function(Phone){
   let data = {
-    Prefix: 86,
+    Prefix: 1,
     Phone,
   }
 
@@ -60,7 +60,7 @@ UserAction.ReceiveResetPasswordMail.listen(function(Email, Code, Password){
 
 UserAction.SendSignUpSms.listen(function(Phone){
   let data = {
-    Prefix: 86,
+    Prefix: 1,
     Phone,
   }
 

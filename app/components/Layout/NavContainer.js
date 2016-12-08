@@ -25,7 +25,7 @@ class NavContainer extends React.Component {
   }
 
   onUserStoreChange(data){
-    console.log(data)
+    
     if(data.signOut.flag !== 'signOut') return
     localStorage.isLogin = false
     this.setState({

@@ -7,14 +7,12 @@ import ReactMixin from 'react-mixin'
 import UserBindStore from '../../../stores/UserBindStore'
 import UserBindAction from '../../../actions/UserBindAction'
 
-import { Modal } from 'antd'
+import { Modal, message } from 'antd'
 
 class ChangePasswordContaienr extends React.Component {
   constructor(props){
     super(props)
     this.state = ({
-      rawPassword: '',
-      newPassword: '',
       loading: false,
     })
 
@@ -22,7 +20,6 @@ class ChangePasswordContaienr extends React.Component {
   }
 
   onUserStoreChange(data){
-    console.log(data)
     if(data.changePassword.flag !== 'changePassword') return
     if(data.changePassword.success === true) {
       this.setState({loading: false})
@@ -30,18 +27,27 @@ class ChangePasswordContaienr extends React.Component {
       setTimeout(() => hashHistory.push('/account'), 2000)
     } else if(data.changePassword.success === false) {
       this.setState({loading: false})
-      this.error('unknown user name or bad password')
+      this.error('Bad password')
     }
   }
 
   onSubmit(rawPassword, newPassword){
-    console.log(rawPassword, newPassword)
+    if(!rawPassword) {
+      message.error('password number can not be empty')
+      return
+    }
+    if(rawPassword !== newPassword){
+      message.error('The two passwords are not the same')
+      return
+    }
+    if(rawPassword.length < 6){
+      message.error('The password at least 6 characters')
+      return
+    }
     this.setState({
-      rawPassword,
-      newPassword,
       loading: true,
     })
-    UserBindAction.ChangePassword(rawPassword || this.state.rawPassword, newPassword || this.state.newPassword,)
+    UserBindAction.ChangePassword(rawPassword, newPassword)
   }
 
   success(content) {

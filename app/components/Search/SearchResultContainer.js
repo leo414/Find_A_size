@@ -10,7 +10,7 @@ import IsProductingStore from '../../stores/IsProductingStore'
 import ProductManageStore from '../../stores/ProductManageStore'
 import ProductManageAction from '../../actions/ProductManageAction'
 
-import { Modal, } from 'antd'
+import { Modal, message} from 'antd'
 
 class SearchResultContainer extends React.Component {
   constructor(props) {
@@ -43,7 +43,7 @@ class SearchResultContainer extends React.Component {
   }
 
   onProductStoreChange(data){
-    console.log(data)
+
     if(data.productSearch.flag === 'productSearch') {
       if(data.productSearch.Result.length){
         this.setState({
@@ -60,7 +60,7 @@ class SearchResultContainer extends React.Component {
   }
 
   onProductManageStoreChange(data){
-    console.log(data)
+
     if(data.productWatch.flag !== 'productWatch') return
     if(data.productWatch.success === true) {
       this.success('add list success')
@@ -82,8 +82,10 @@ class SearchResultContainer extends React.Component {
   }
 
   addList(price, productId){
-    console.log(arguments)
-    if(!price) return
+    if(!price) {
+      message.error('Please enter a price')
+      return
+    }
     if(localStorage.isLogin === 'false') {
       hashHistory.push('/login')
       return
