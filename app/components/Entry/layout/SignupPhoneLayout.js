@@ -56,7 +56,7 @@ const SignupWithPhone = props => {
             <br/>
             {
               isClickGetCode ?
-              message.success('After 60 seconds you can re-obtain SMS verification code', 2.5)
+              null
               :
               <ButtonSelf
                 width="70px"

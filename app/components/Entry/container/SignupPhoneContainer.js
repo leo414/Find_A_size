@@ -38,7 +38,7 @@ const registerForm = (phone, password, code) => [
   },
 ]
 
-const registerPhoneForm = (phone) => [
+const registerPhoneForm = phone=> [
   {
     value: phone,
     rules: [
@@ -95,7 +95,7 @@ class SignupPhoneContainer extends React.Component {
       isClickGetCode: true,
     })
     timeOut = setTimeout(() => this.setState({isClickGetCode: false}), 60000)
-
+    message.success('After 60 seconds you can re-obtain SMS verification code', 2.5)
     UserAction.SendSignUpSms(phone)
   }
 

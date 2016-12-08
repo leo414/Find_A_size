@@ -90,6 +90,7 @@ class BindPhoneContainer extends React.Component {
       isClickGetCode: true,
     })
     timeOut = setTimeout(() => this.setState({isClickGetCode: false}), 60000)
+    message.success('After 60 seconds you can re-obtain SMS verification code', 2.5)
     UserBindAction.SendBindingSms(phone)
   }
 

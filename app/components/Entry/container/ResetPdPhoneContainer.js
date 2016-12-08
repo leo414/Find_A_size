@@ -7,7 +7,48 @@ import ReactMixin from 'react-mixin'
 import UserStore from '../../../stores/UserStore'
 import UserAction from '../../../actions/UserAction'
 
-import { Modal } from 'antd'
+import { Modal,message } from 'antd'
+import validataFunc from '../../../tools/Validator'
+
+const registerForm = (phone, password, code) => [
+  {
+    value: phone,
+    rules: [
+      {
+        strategy: 'isMobile',
+        errorMsg: 'The phone number format is incorrect'
+      }
+    ]
+  },{
+    value: code,
+    rules: [
+      {
+        strategy: 'isNoEmpty',
+        errorMsg: 'The code can not be empty'
+      }
+    ]
+  },{
+    value: password,
+    rules: [
+      {
+        strategy: 'minLength:6',
+        errorMsg: 'The password at least 6 characters',
+      }
+    ]
+  },
+]
+
+const registerPhoneForm = phone => [
+  {
+    value: phone,
+    rules: [
+      {
+        strategy: 'isMobile',
+        errorMsg: 'The phone number format is incorrect'
+      }
+    ]
+  }
+]
 
 let timeOut;
 class ResetPdPhoneContainer extends React.Component {
@@ -15,9 +56,6 @@ class ResetPdPhoneContainer extends React.Component {
     super(props)
     this.state = ({
       isClickGetCode: false,
-      phone: '',
-      password: '',
-      passwordRepeat: '',
       loading: false,
     })
 
@@ -25,7 +63,6 @@ class ResetPdPhoneContainer extends React.Component {
     this.onResetPssword = this.onResetPssword.bind(this)
   }
   onUserStoreChange(data) {
-    console.log(data)
     if(data.phoneResetPassword.flag === 'resetPassword') {
       if(data.phoneResetPassword.resetPasswordSuccess === true) {
         localStorage.isLogin = true
@@ -50,32 +87,33 @@ class ResetPdPhoneContainer extends React.Component {
     }
   }
 
-  getCode(phone, password, passwordRepeat){
-    console.log(phone)
-    if(!phone && !this.state.phone) return
+  getCode(phone){
+    let errorMsg = validataFunc(registerPhoneForm(phone));
+    if (errorMsg){
+      message.error(errorMsg)
+      return
+    }
     this.setState({
       isClickGetCode: true,
-      phone,
-      password,
-      passwordRepeat,
     })
     timeOut = setTimeout(() => this.setState({isClickGetCode: false}), 60000)
-    UserAction.SendResetPasswordSms(phone || this.state.phone)
+    message.success('After 60 seconds you can re-obtain SMS verification code', 2.5)
+    UserAction.SendResetPasswordSms(phone)
   }
 
   onResetPssword(phone, code, password, passwordRepeat) {
-    console.log(phone, code, password, passwordRepeat)
-    this.setState({
-      phone,
-      code,
-      password,
-      passwordRepeat,
-      loading: true,
-    })
-    phone = phone || this.state.phone
-    password = password || this.state.password
-    passwordRepeat = passwordRepeat || this.state.passwordRepeat
-    console.log(phone, password, passwordRepeat)
+    let errorMsg = validataFunc(registerForm(phone, password, code));
+    if (errorMsg){
+      message.error(errorMsg)
+      return
+    }
+
+    if(password !== passwordRepeat) {
+      message.error('The two passwords are not the same')
+      return
+    }
+
+    this.setState({loading: true,})
     UserAction.ReceiveResetPasswordSms(phone, code, password)
   }
 
