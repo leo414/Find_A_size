@@ -36,7 +36,7 @@ UserBindAction.SendBindingMail.listen(function(Email){
 
 UserBindAction.SendBindingSms.listen(function(Phone){
   let data = {
-    Prefix: 86,
+    Prefix: 1,
     Phone,
   }
 
