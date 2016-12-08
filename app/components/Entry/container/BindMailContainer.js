@@ -36,7 +36,7 @@ class BindMailContainer extends React.Component {
   }
 
   onUserStoreChange(data){
-    console.log(data)
+    
     if(data.sendBindMail.flag !== 'sendMail') return
     if(data.sendBindMail.success === true) {
       this.setState({loading: false})

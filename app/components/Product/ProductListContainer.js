@@ -120,7 +120,7 @@ class ProductListContainer extends React.Component {
   }
 
   onProductManageStoreChange(data){
-    console.log(data)
+    
     if(data.productWatch.flag !== 'productWatch') return
     if(data.productWatch.success === true) {
       // this.success('add list success')

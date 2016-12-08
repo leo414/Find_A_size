@@ -16,7 +16,7 @@ const NotificationStore = Reflux.createStore({
   },
 
   onChangeNotificationCompleted(res){
-    console.log(res)
+    
     if(res.Success){
       this.data.changeNotification.success = true
     }else{

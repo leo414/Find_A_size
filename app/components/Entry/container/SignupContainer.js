@@ -41,7 +41,7 @@ class SignupContainer extends React.Component {
   }
 
   onGetUserInfo(data) {
-    console.log(data)
+    
     if(data.mailSignup.flag === 'sendMail'){
       if(data.mailSignup.sendMailSuccess === true) {
         this.setState({loading: false})

@@ -56,7 +56,7 @@ class BindPhoneContainer extends React.Component {
     this.onResetPssword = this.getCode.bind(this)
   }
   onUserStoreChange(data) {
-    console.log(data)
+    
     if(data.receiveSms.flag === 'receiveSms') {
       if(data.receiveSms.success === true) {
         this.success('Bind phone success')

@@ -63,7 +63,7 @@ class SignupPhoneContainer extends React.Component {
     this.onSubmitSignup = this.onSubmitSignup.bind(this)
   }
   onUserStoreChange(data) {
-    console.log(data)
+
     if(data.sendSmsCode.flag === 'sendSms'){
       if(data.sendSmsCode.sendSmsSuccess === true) {
         message.success('SMS has been sent to your phone')

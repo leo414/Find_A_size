@@ -26,7 +26,6 @@ class Account extends React.Component {
   }
 
   onUserStoreChange(data) {
-    console.log(data)
     if(data.userCurrent.flag !== 'userCurrent') return
     if(data.userCurrent.success === true) {
       const { Email, Phone, IsPhoneNotification, IsEmailNotification } = data.userCurrent

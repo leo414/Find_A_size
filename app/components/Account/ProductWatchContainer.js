@@ -46,7 +46,7 @@ class ProductWatchContainer extends React.Component {
   }
 
   onProductManageStoreChange(data){
-    console.log(data)
+    
     if(data.productWatch.flag === 'productWatch'){
       if(data.productWatch.success === true) {
         // this.success('add list success')
@@ -143,7 +143,7 @@ class ProductWatchContainer extends React.Component {
 
 
   onProductStoreChange(data){
-    console.log(data)
+    
     if(data.productWatchSearch.flag === 'productWatchSearch') {
       if(data.productWatchSearch.Result.length){
         this.setState({

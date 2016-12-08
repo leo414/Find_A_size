@@ -47,7 +47,7 @@ class LoginContainer extends React.Component {
   }
 
   onGetUserInfo(data) {
-    console.log(data)
+    
     if(data.openUserLogin.flag === 'openUserLogin') {
       if(data.openUserLogin.googleLoginSuccess || data.openUserLogin.facebookLoginSuccess) {
         localStorage.isLogin = true
