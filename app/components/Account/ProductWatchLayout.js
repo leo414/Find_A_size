@@ -58,9 +58,9 @@ const ProductWatchLayout = props => {
               <h4 className="media_title">{item.Product.Title}</h4>
               <p className="media_desc">{item.Product.Description}</p>
               <strong>
-                Dimensions: {item.Product.Length}*{item.Product.Width}*{item.Product.Height} inches <br/>
+                Dimensions: {item.Product.Length / 100}*{item.Product.Width / 100}*{item.Product.Height / 100} inches <br/>
                 Material: {item.Product.Material} <br/>
-                Weight: {item.Product.Weight} <br/>
+                Weight: {item.Product.Weight} Pounds<br/>
                 Color: {item.Product.Color} <br/>
               </strong>
             </div>

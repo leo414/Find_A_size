@@ -50,9 +50,9 @@ const SearchResultLayout = props => {
               <h4 className="media_title"><a href={product.LinkUrl} target="_blank">{product.Title}</a></h4>
               <p className="media_desc">{product.Description}</p>
               <strong>
-                Dimensions: {product.Length}*{product.Width}*{product.Height} inches <br/>
+                Dimensions: {product.Length/100}*{product.Width/100}*{product.Height/100} inches <br/>
                 Material: {product.Material} <br/>
-                Weight: {product.Weight} <br/>
+                Weight: {product.Weight} Pounds<br/>
                 Color: {product.Color} <br/>
               </strong>
             </div>

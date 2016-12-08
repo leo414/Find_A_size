@@ -20,7 +20,6 @@ class ChangePasswordContaienr extends React.Component {
   }
 
   onUserStoreChange(data){
-    console.log(data)
     if(data.changePassword.flag !== 'changePassword') return
     if(data.changePassword.success === true) {
       this.setState({loading: false})
