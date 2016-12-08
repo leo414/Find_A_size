@@ -32,16 +32,18 @@ const ChangePasswordLayout = ({pathname, onSubmit, loading}) => {
         <form>
           <div className="input_box">
             <span className="fl color_blueness" onClick={event => $(event.target).next('input').focus()}>Raw Password</span>
-            <input type="password" className="fr" onChange={event => rawPassword = event.target.value.trim()} /> <br/>
+            <input type="password" className="fr" id="changepassword_rawPassword" /> <br/>
           </div>
 
           <div className="input_box">
             <span className="fl color_blueness" onClick={event => $(event.target).next('input').focus()}>New Password</span>
-            <input type="password" className="fr" onChange={event => newPassword = event.target.value.trim()} /> <br/>
+            <input type="password" className="fr" id="changepassword_newPassword" /> <br/>
           </div>
         </form>
 
-        <Button onClick={() => onSubmit(rawPassword, newPassword)} type="primary" loading={loading} style={buttonStyle}>
+        <Button onClick={() => onSubmit($('#changepassword_rawPassword').val().trim(), $('#changepassword_newPassword').val().trim())}
+                type="primary" loading={loading} style={buttonStyle}
+        >
           Reset Password
         </Button>
       </RouteTransition>

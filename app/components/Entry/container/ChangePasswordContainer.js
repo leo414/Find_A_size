@@ -13,8 +13,6 @@ class ChangePasswordContaienr extends React.Component {
   constructor(props){
     super(props)
     this.state = ({
-      rawPassword: '',
-      newPassword: '',
       loading: false,
     })
 
@@ -43,12 +41,14 @@ class ChangePasswordContaienr extends React.Component {
       message.error('The two passwords are not the same')
       return
     }
+    if(rawPassword.length < 6){
+      message.error('The password at least 6 characters')
+      return
+    }
     this.setState({
-      rawPassword,
-      newPassword,
       loading: true,
     })
-    UserBindAction.ChangePassword(rawPassword || this.state.rawPassword, newPassword || this.state.newPassword,)
+    UserBindAction.ChangePassword(rawPassword, newPassword)
   }
 
   success(content) {
