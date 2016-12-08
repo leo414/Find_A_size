@@ -8,13 +8,27 @@ import ReactMixin from 'react-mixin'
 import UserBindStore from '../../../stores/UserBindStore'
 import UserBindAction from '../../../actions/UserBindAction'
 
-import { Modal } from 'antd'
+import { Modal, message } from 'antd'
+
+import validataFunc from '../../../tools/Validator'
+
+const registerForm = email => [
+  {
+    value: email,
+    rules: [
+      {
+        strategy: 'isEmail',
+        errorMsg: 'The email format is incorrect'
+      }
+    ]
+  }
+]
+
 
 class BindMailContainer extends React.Component {
   constructor(props){
     super(props)
     this.state = ({
-      email: '',
       loading: false,
     })
 
@@ -35,12 +49,16 @@ class BindMailContainer extends React.Component {
   }
 
   onSubmit(email){
-    console.log(email)
+    let errorMsg = validataFunc(registerForm(email));
+    if (errorMsg){
+      message.error(errorMsg)
+      return
+    }
+
     this.setState({
-      email,
       loading: true,
     })
-    UserBindAction.SendBindingMail(email || this.state.email)
+    UserBindAction.SendBindingMail(email)
   }
 
   success(content) {

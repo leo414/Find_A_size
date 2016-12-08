@@ -26,8 +26,6 @@ const BindMailLayout = props => {
     backgroundColor: '#146eb4',
   }
 
-  let email = ''
-
   return (
     <div className={cls}>
       <Mask pathname="/bind_mail" />
@@ -37,11 +35,11 @@ const BindMailLayout = props => {
         <form>
           <div className="input_box">
             <span className="fl color_blueness" onClick={event => $(event.target).next('input').focus()}>Email Address</span>
-            <input type="email" className="fr" onChange={event => email = event.target.value.trim()} /> <br/>
+            <input type="email" className="fr" id="bind_mail_ly_mail" /> <br/>
           </div>
         </form>
 
-        <Button onClick={() => onSubmit(email)} type="primary" loading={loading} style={buttonStyle}>
+        <Button onClick={() => onSubmit($('#bind_mail_ly_mail').val().trim())} type="primary" loading={loading} style={buttonStyle}>
           Send Email
         </Button>
       </RouteTransition>
