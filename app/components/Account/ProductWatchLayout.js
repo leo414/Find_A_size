@@ -34,7 +34,7 @@ const ProductWatchLayout = props => {
 
   const renderProductList = () => {
     if(isDataEmpty){
-      return <div>No add list place go to add list</div>
+      return <div>you don't pay attention to anything</div>
     }
 
     if(!data.length && !isDataEmpty) {

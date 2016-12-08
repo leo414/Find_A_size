@@ -93,7 +93,7 @@ class ProductWatchContainer extends React.Component {
 
   handleOk() {
     if(!this.state.price) {
-      this.formError('no price,place repeat')
+      this.formError('Please enter a price')
       return
     }
     this.setState({visible: false})

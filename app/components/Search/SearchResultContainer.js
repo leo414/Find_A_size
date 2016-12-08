@@ -10,7 +10,7 @@ import IsProductingStore from '../../stores/IsProductingStore'
 import ProductManageStore from '../../stores/ProductManageStore'
 import ProductManageAction from '../../actions/ProductManageAction'
 
-import { Modal, } from 'antd'
+import { Modal, message} from 'antd'
 
 class SearchResultContainer extends React.Component {
   constructor(props) {
@@ -82,7 +82,10 @@ class SearchResultContainer extends React.Component {
   }
 
   addList(price, productId){
-    if(!price) return
+    if(!price) {
+      message.error('Please enter a price')
+      return
+    }
     if(localStorage.isLogin === 'false') {
       hashHistory.push('/login')
       return
