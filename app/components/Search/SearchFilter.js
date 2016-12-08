@@ -169,7 +169,7 @@ class SearchFilter extends React.Component {
           </div>
 
           <div className="search">
-            <form className="inline" onSubmit={this.onSubmit}><input className="in_block" type="text" onChange={this.onSearchChange} placeholder="Search" /></form>
+            <input className="in_block" type="text" onChange={this.onSearchChange} onKeyPress={e => e.which == 13 ? this.onSubmit() : null} placeholder="Search" />
             <span onClick={this.onSubmit} className="search_icon in_block"><i className="sousuo" /></span>
           </div>
           <small className="small">Example: industrial coffee table</small>
