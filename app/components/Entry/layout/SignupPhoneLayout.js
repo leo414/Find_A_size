@@ -6,7 +6,7 @@ import classnames from 'classnames'
 import FacebookLogin from 'react-facebook-login'
 import GoogleLogin from 'react-google-login'
 
-import { Button } from 'antd'
+import { Button, message } from 'antd'
 import ButtonSelf from '../../Common/Button'
 import Mask from '../Mask'
 
@@ -56,7 +56,7 @@ const SignupWithPhone = props => {
             <br/>
             {
               isClickGetCode ?
-              <sapn className="get_code_msg">After 60 seconds you can re-obtain SMS verification code</sapn>
+              message.success('After 60 seconds you can re-obtain SMS verification code', 2.5)
               :
               <ButtonSelf
                 width="70px"
