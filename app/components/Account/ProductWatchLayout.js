@@ -58,9 +58,9 @@ const ProductWatchLayout = props => {
               <h4 className="media_title">{item.Product.Title}</h4>
               <p className="media_desc">{item.Product.Description}</p>
               <strong>
-                { item.Product.Length ? <span>L: {item.Product.Length/100}&nbsp;&nbsp;</span> : null }
-                { item.Product.Width ? <span>W: {item.Product.Width/100}&nbsp;&nbsp;</span> : null }
-                { item.Product.Height ? <span>H: {item.Product.Height/100}&nbsp;&nbsp;</span> : null }
+                { item.Product.Length ? <span>L: {item.Product.Length}&nbsp;&nbsp;</span> : null }
+                { item.Product.Width ? <span>W: {item.Product.Width}&nbsp;&nbsp;</span> : null }
+                { item.Product.Height ? <span>H: {item.Product.Height}&nbsp;&nbsp;</span> : null }
 
                 inches <br/>
 
