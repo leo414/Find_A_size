@@ -61,7 +61,6 @@ class SearchFilter extends React.Component {
       salesAsc,
     }
     this.setState({searchData})
-    console.log(searchData)
     ProductSearchAction.ProductSearch(searchData)
   }
 
@@ -72,7 +71,6 @@ class SearchFilter extends React.Component {
       priceAsc,
     }
     this.setState({searchData})
-    console.log(searchData)
     ProductSearchAction.ProductSearch(searchData)
   }
 

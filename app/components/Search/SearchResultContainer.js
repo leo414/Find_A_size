@@ -43,7 +43,7 @@ class SearchResultContainer extends React.Component {
   }
 
   onProductStoreChange(data){
-    
+
     if(data.productSearch.flag === 'productSearch') {
       if(data.productSearch.Result.length){
         this.setState({
@@ -60,7 +60,7 @@ class SearchResultContainer extends React.Component {
   }
 
   onProductManageStoreChange(data){
-    
+
     if(data.productWatch.flag !== 'productWatch') return
     if(data.productWatch.success === true) {
       this.success('add list success')
@@ -82,7 +82,6 @@ class SearchResultContainer extends React.Component {
   }
 
   addList(price, productId){
-    console.log(arguments)
     if(!price) return
     if(localStorage.isLogin === 'false') {
       hashHistory.push('/login')

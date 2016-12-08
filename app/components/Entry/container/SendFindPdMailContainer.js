@@ -60,7 +60,6 @@ class SendFindPdMailContainer extends React.Component {
       return
     }
 
-    console.log(password, passwordRepeat)
     UserAction.ReceiveResetPasswordMail(mail, code, password)
   }
 
