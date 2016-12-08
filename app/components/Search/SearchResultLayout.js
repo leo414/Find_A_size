@@ -50,10 +50,26 @@ const SearchResultLayout = props => {
               <h4 className="media_title"><a href={product.LinkUrl} target="_blank">{product.Title}</a></h4>
               <p className="media_desc">{product.Description}</p>
               <strong>
-                Dimensions: {product.Length/100}*{product.Width/100}*{product.Height/100} inches <br/>
-                Material: {product.Material} <br/>
-                Weight: {product.Weight} Pounds<br/>
-                Color: {product.Color} <br/>
+                { product.Length ? <span>L: {product.Length/100}&nbsp;&nbsp;</span> : null }
+                { product.Width ? <span>W: {product.Width/100}&nbsp;&nbsp;</span> : null }
+                { product.Height ? <span>H: {product.Height/100}&nbsp;&nbsp;</span> : null }
+
+                inches <br/>
+
+                {
+                  product.Material == 'None' ? null :
+                  <span>Material: {product.Material} <br/></span>
+                }
+
+                {
+                  product.Weight == 0 ? null :
+                  <span>Weight: {product.Weight} Pounds<br/></span>
+                }
+
+                {
+                  product.Color == '' ? null :
+                  <span>Color: {product.Color} <br/></span>
+                }
               </strong>
             </div>
           </section>
