@@ -1,5 +1,5 @@
-const FACEBOOK_APPID = '1165695376849717'
-const GOOGLE_CLIENTID = '1079426487628-kr12vvcob66p2p5fm8r1n0kf7qqnbi26.apps.googleusercontent.com'
+const FACEBOOK_APPID = '274331262964498'
+const GOOGLE_CLIENTID = '786601869556-smbn7sppb9b8msi562292dm4fq0flgdo.apps.googleusercontent.com'
 
 const URL = 'http://dev.api.yiforme.com/?api='
 
