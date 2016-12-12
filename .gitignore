@@ -3,6 +3,8 @@ node_modules
 .DS_Store
 build
 *.zip
+build-1
+build_v0.2
 .idea
 *.sublime-project
 *.sublime-workspace
