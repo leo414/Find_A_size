@@ -75,5 +75,10 @@ module.exports = {
 			minSizeReduce: 1.5,
 			moveToParents: true
     }),
+    new webpack.DefinePlugin({
+      "process.env": {
+        NODE_ENV: JSON.stringify("production")
+      }
+    })
   ]
 };
